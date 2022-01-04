@@ -1,6 +1,6 @@
 import express , {Request, Response} from 'express'
 import { body } from 'express-validator'
-import { requireAuth, ValidateRequest } from '@kruchuverchu/common'
+import { requireAuth, ValidateRequest } from '@dallasstudio/common'
 import { Ticket} from '../models/ticket'
 
 const router = express.Router();

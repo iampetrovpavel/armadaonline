@@ -1,6 +1,6 @@
 import express, {Request, Response} from 'express';
 import {body} from 'express-validator'
-import {ValidateRequest, BadRequestError} from "@kruchuverchu/common";
+import {ValidateRequest, BadRequestError} from "@dallasstudio/common";
 import {User} from "../models/user";
 import {Password} from "../services/password";
 import jwt from "jsonwebtoken";

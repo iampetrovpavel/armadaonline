@@ -5,7 +5,7 @@ import {currentUserRouter} from "./routes/current-user";
 import {signoutRouter} from "./routes/signout";
 import {signupRouter} from "./routes/signup";
 import {signinRouter} from "./routes/signin";
-import {errorHandler, NotFoundError} from "@kruchuverchu/common";
+import {errorHandler, NotFoundError} from "@dallasstudio/common";
 import cookieSession from 'cookie-session'
 
 const app = express()

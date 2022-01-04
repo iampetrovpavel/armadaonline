@@ -5,7 +5,7 @@ import {
 	NotFoundError,
 	requireAuth,
 	NotAuthorizedError
-} from '@kruchuverchu/common'
+} from '@dallasstudio/common'
 import {Ticket} from '../models/ticket'
 
 const router = express.Router()
