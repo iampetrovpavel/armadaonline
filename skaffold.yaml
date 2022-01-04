@@ -8,16 +8,24 @@ build:
   local:
     push: false
   artifacts:
-    - image: iampetrovpavel/users
-      context: users
+    - image: iampetrovpavel/auth
+      context: auth
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: "*.js"
+          - src: "src/**/*.js"
             dest: .
-    - image: iampetrovpavel/auth
-      context: auth
+    - image: iampetrovpavel/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "**/*.js"
+            dest: .
+    - image: iampetrovpavel/tickets
+      context: tickets
       docker:
         dockerfile: Dockerfile
       sync:

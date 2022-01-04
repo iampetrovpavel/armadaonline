@@ -1,13 +1,23 @@
-import express from 'express'
-import { json } from 'body-parser'
+import mongoose from "mongoose"
+import { app } from './app'
 
-const app = express()
-app.use(json())
+const start = async () => {
+    if(!process.env.JWT_KEY){
+        throw new Error('JWT_KEY undefined')
+    }
+    if(!process.env.MONGO_URI){
+        throw new Error('MONGO_URI undefined')
+    }
+    try {
+        await mongoose.connect(process.env.MONGO_URI);
+        console.log('Connected to MongoDb');
+    } catch (err) {
+        console.error(err);
+    }
 
-app.get('/api/users/currentuser', (req, res)=>{
-    res.send('Hi there!')
-})
+    app.listen(3000, () => {
+        console.log('Listening on port 3000!');
+    });
+};
 
-app.listen(3000, ()=>{
-    console.log('Auth server listening on port 3000!')
-})
+start();
