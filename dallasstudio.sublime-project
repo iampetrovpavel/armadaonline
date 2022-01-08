@@ -1,0 +1,12 @@
+{
+	"folders":
+	[
+		{"path": "./auth"},
+		{"path": "./client"},
+		{"path": "./common"},
+		{"path": "./infra"},
+		{"path": "./orders"},
+		{"path": "./tickets"},
+		{"path": "./tickets"},
+	]
+}
