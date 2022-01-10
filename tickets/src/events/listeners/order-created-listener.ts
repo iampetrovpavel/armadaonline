@@ -2,6 +2,8 @@ import { Message } from 'node-nats-streaming';
 import { Listener, OrderCreatedEvent, Subjects } from '@dallasstudio/common';
 import { queueGroupName } from './queue-group-name';
 import { Ticket } from '../../models/ticket';
+import { TicketUpdatedPublisher } from '../publishers/ticket-updated-publisher'
+
 
 export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
   subject: Subjects.OrderCreated = Subjects.OrderCreated;
@@ -14,6 +16,10 @@ export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
     }
     ticket.set({orderId: data.id})
     await ticket.save()
+    const {id, version, price, orderId, title, userId} = ticket
+    await new TicketUpdatedPublisher(this.client).publish({
+      id, version, price, orderId, title, userId
+    })
     msg.ack()
   }
 }

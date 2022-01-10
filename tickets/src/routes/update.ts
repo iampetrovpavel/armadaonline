@@ -4,7 +4,8 @@ import {
 	ValidateRequest,
 	NotFoundError,
 	requireAuth,
-	NotAuthorizedError
+	NotAuthorizedError,
+	BadRequestError
 } from '@dallasstudio/common'
 import {Ticket} from '../models/ticket'
 import { TicketUpdatedPublisher } from '../events/publishers/ticket-updated-publisher'
@@ -32,6 +33,10 @@ router.put('/api/tickets/:id',
 
 		if (ticket.userId !== req.currentUser!.id) {
 			throw new NotAuthorizedError()
+		}
+
+		if(ticket.orderId) {
+			throw new BadRequestError('Ticket is reserved')
 		}
 
 		ticket.set({
