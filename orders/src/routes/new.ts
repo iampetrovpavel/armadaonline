@@ -10,7 +10,7 @@ import { natsWrapper } from '../nats-wrapper'
 
 const router = express.Router()
 
-const EXPIRATION_WINDOW_SECONDS = 15 * 60
+const EXPIRATION_WINDOW_SECONDS = 10
 
 router.post('/api/orders', requireAuth, [
 		body('ticketId')
@@ -31,7 +31,7 @@ router.post('/api/orders', requireAuth, [
 			throw new BadRequestError('Ticket is already reserved')
 		}
 		const expiration = new Date()
-		expiration.setSeconds(expiration.getSeconds() * EXPIRATION_WINDOW_SECONDS)
+		expiration.setSeconds(expiration.getSeconds() + EXPIRATION_WINDOW_SECONDS)
 		const order = Order.build({
 			userId: req.currentUser!.id,
 			status: OrderStatus.Created,
