@@ -2,27 +2,28 @@ import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
 import {
   requireAuth,
-  validateRequest,
+  ValidateRequest,
   BadRequestError,
   NotAuthorizedError,
   NotFoundError,
   OrderStatus,
-} from '@cygnetops/common';
-import { stripe } from '../stripe';
+  PaymentStatus
+} from '@dallasstudio/common';
 import { Order } from '../models/order';
 import { Payment } from '../models/payment';
 import { PaymentCreatedPublisher } from '../events/publishers/payment-created-publisher';
 import { natsWrapper } from '../nats-wrapper';
+import { ukassa } from '../ukassa'
 
 const router = express.Router();
 
 router.post(
   '/api/payments',
   requireAuth,
-  [body('token').not().isEmpty(), body('orderId').not().isEmpty()],
-  validateRequest,
+  [body('orderId').not().isEmpty()],
+  ValidateRequest,
   async (req: Request, res: Response) => {
-    const { token, orderId } = req.body;
+    const {  orderId } = req.body;
 
     const order = await Order.findById(orderId);
 
@@ -35,24 +36,38 @@ router.post(
     if (order.status === OrderStatus.Cancelled) {
       throw new BadRequestError('Cannot pay for an cancelled order');
     }
+    const charge = await ukassa.pay(orderId, "2.00")
+    // const charge = await stripe.charges.create({
+    //   currency: 'usd',
+    //   amount: order.price * 100,
+    //   source: token,
+    // });
 
-    const charge = await stripe.charges.create({
-      currency: 'usd',
-      amount: order.price * 100,
-      source: token,
-    });
+    console.log("CHARGE ", charge)
+
+    if(!charge || !charge.confirmation || !charge.confirmation.confirmation_url){
+      throw new BadRequestError('Ukassa confirmation error!');
+    }
+
     const payment = Payment.build({
       orderId,
-      stripeId: charge.id,
+      paymentId: charge.id,
+      confirmation_url: charge.confirmation.confirmation_url,
+      paid: charge.paid,
+      status: charge.status
     });
+
     await payment.save();
+    
     new PaymentCreatedPublisher(natsWrapper.client).publish({
       id: payment.id,
       orderId: payment.orderId,
-      stripeId: payment.stripeId,
+      paymentId: payment.paymentId,
     });
 
-    res.status(201).send({ id: payment.id });
+    res.redirect(charge.confirmation.confirmation_url)
+
+    // res.status(201).send({ id: payment.id });
   }
 );
 

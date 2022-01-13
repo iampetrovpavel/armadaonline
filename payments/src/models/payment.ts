@@ -1,13 +1,17 @@
 import mongoose from 'mongoose';
+import { PaymentStatus } from '@dallasstudio/common'
 
 interface PaymentAttrs {
   orderId: string;
-  stripeId: string;
+  paymentId: string;
+  confirmation_url: string,
+  paid: boolean,
+  status: PaymentStatus
 }
 
 interface PaymentDoc extends mongoose.Document {
   orderId: string;
-  stripeId: string;
+  paymentId: string;
 }
 
 interface PaymentModel extends mongoose.Model<PaymentDoc> {
@@ -20,7 +24,7 @@ const paymentSchema = new mongoose.Schema(
       required: true,
       type: String,
     },
-    stripeId: {
+    paymentId: {
       required: true,
       type: String,
     },

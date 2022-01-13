@@ -1,0 +1,41 @@
+https://test.ru/api/users/currentuser
+
+###
+POST https://test.ru/api/users/signup
+Content-Type: application/json
+
+{
+    "email":"test2@mail.ru",
+    "password":"1212"
+}
+
+###
+POST https://test.ru/api/users/signin
+Content-Type: application/json
+
+{
+    "email":"test1@mail.ru",
+    "password":"1212"
+}
+
+###
+POST test.ru/api/tickets
+Content-Type: application/json
+
+{"title":"test", "price": 100}
+
+###
+GET test.ru/api/orders
+
+###
+POST test.ru/api/orders
+Content-Type: application/json
+
+{"ticketId":"61e058763ce33eaa8028d598"}
+
+###
+POST test.ru/api/payments
+Content-Type: application/json
+
+{"orderId":"61e0589272b74e89324e0e4a"}
+
