@@ -48,11 +48,3 @@ build:
         manual:
           - src: "src/**/*.js"
             dest: .
-    - image: iampetrovpavel/payments
-      context: payments
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: 'src/**/*.ts'
-            dest: .

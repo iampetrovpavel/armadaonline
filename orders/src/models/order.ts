@@ -5,11 +5,18 @@ import { updateIfCurrentPlugin } from 'mongoose-update-if-current'
 
 export { OrderStatus }
 
+interface Payment {
+  id: string,
+  confirmation_url: string,
+  status: string
+}
+
 interface OrderAttrs {
   userId: string;
   status: OrderStatus;
   expiresAt: Date;
   ticket: TicketDoc;
+  payment: Payment
 }
 
 interface OrderDoc extends mongoose.Document {
@@ -18,6 +25,7 @@ interface OrderDoc extends mongoose.Document {
   expiresAt: Date;
   ticket: TicketDoc;
   version: number;
+  payment: Payment;
 }
 
 interface OrderModel extends mongoose.Model<OrderDoc> {
@@ -43,6 +51,13 @@ const orderSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Ticket',
     },
+    payment: {
+      type: {
+          id: String,
+          confirmation_url: String,
+          status: String
+      }
+    }
   },
   {
     toJSON: {
