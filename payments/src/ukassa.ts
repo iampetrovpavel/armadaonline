@@ -18,11 +18,11 @@ export class Ukassa {
     pay = async (orderId: string, amount:string) => {
         this.headers['Idempotence-Key'] = orderId
         this.data['amount']['value'] = amount
-        console.log(this.api)
-        console.log(this.idempotenceKey)
-        console.log(this.data)
-        console.log(this.headers)
         const response = await axios.post(this.api, this.data, {headers: this.headers})
+        return response.data
+    }
+    check = async (paymentId: string) => {
+        const response = await axios.get(`${this.api}/${paymentId}`, {headers: this.headers})
         return response.data
     }
 }

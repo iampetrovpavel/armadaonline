@@ -10,10 +10,8 @@ Idempotence-Key: 223
     "capture": true
 }
 
-29721f74-000f-5000-9000-1e81ddd9dd87
-
 ###
-GET https://api.yookassa.ru/v3/payments/2972516f-000f-5000-a000-1c9811248687
+GET https://api.yookassa.ru/v3/payments/2973ffbc-000f-5000-8000-123e7ad49acf
 Content-Type: application/json
 Authorization: Basic ODQxNzE4OmxpdmVfaHQ5ZHZ4MU54XzRwOEJPaTJHOGx1blU2ZE5mSll2MUJvbTRib2ZlQzJOOA==
 

@@ -4,6 +4,7 @@ import { json } from 'body-parser';
 import cookieSession from 'cookie-session';
 import { errorHandler, NotFoundError, currentUser } from '@dallasstudio/common';
 import { createChargeRouter } from './routes/new';
+import { checkChargeRouter } from './routes/check';
 
 const app = express();
 app.set('trust proxy', true);
@@ -17,6 +18,7 @@ app.use(
 app.use(currentUser);
 
 app.use(createChargeRouter);
+app.use(checkChargeRouter);
 
 app.all('*', async (req, res) => {
   throw new NotFoundError();

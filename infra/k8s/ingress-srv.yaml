@@ -35,7 +35,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: payments-srv
+                name: payments-clusterip-srv
                 port:
                   number: 3000
           - path: /?(.*)

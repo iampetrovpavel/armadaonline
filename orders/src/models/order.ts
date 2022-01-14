@@ -16,7 +16,7 @@ interface OrderAttrs {
   status: OrderStatus;
   expiresAt: Date;
   ticket: TicketDoc;
-  payment: Payment
+  payment?: Payment
 }
 
 interface OrderDoc extends mongoose.Document {
@@ -25,7 +25,7 @@ interface OrderDoc extends mongoose.Document {
   expiresAt: Date;
   ticket: TicketDoc;
   version: number;
-  payment: Payment;
+  payment?: Payment;
 }
 
 interface OrderModel extends mongoose.Model<OrderDoc> {

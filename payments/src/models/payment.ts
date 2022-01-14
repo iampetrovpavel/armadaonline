@@ -12,6 +12,7 @@ interface PaymentAttrs {
 interface PaymentDoc extends mongoose.Document {
   orderId: string;
   paymentId: string;
+  confirmation_url: string,
 }
 
 interface PaymentModel extends mongoose.Model<PaymentDoc> {
@@ -28,6 +29,7 @@ const paymentSchema = new mongoose.Schema(
       required: true,
       type: String,
     },
+  confirmation_url: String
   },
   {
     toJSON: {

@@ -34,29 +34,27 @@ router.post('/api/orders', requireAuth, [
 		const expiration = new Date()
 		expiration.setSeconds(expiration.getSeconds() + EXPIRATION_WINDOW_SECONDS)
 		
-	    const idempotenceKey = (new Date().getTime() * (Math.random() * 10000)).toString()
+	    // const idempotenceKey = (new Date().getTime() * (Math.random() * 10000)).toString()
 
-		const payment = await ukassa.pay(idempotenceKey, "2.00")
-	    console.log("CHARGE ", payment)
+		// const payment = await ukassa.pay(idempotenceKey, "2.00")
+	    // console.log("CHARGE ", payment)
 
-	    if(!payment || !payment.confirmation || !payment.confirmation.confirmation_url){
-	      throw new BadRequestError('Ukassa confirmation error!');
-	    }
+	    // if(!payment || !payment.confirmation || !payment.confirmation.confirmation_url){
+	    //   throw new BadRequestError('Ukassa confirmation error!');
+	    // }
 
 		const order = Order.build({
 			userId: req.currentUser!.id,
 			status: OrderStatus.Created,
 			expiresAt: expiration,
 			ticket,
-			payment: {
-				id: payment.id,
-				confirmation_url: payment.confirmation.confirmation_url,
-				status: payment.status
-			}
+			// payment: {
+			// 	id: payment.id,
+			// 	confirmation_url: payment.confirmation.confirmation_url,
+			// 	status: payment.status
+			// }
 		})
 		await order.save()
-
-		console.log(order.toObject())
 
 		new OrderCreatedPublisher(natsWrapper.client).publish({
 			id: order.id,

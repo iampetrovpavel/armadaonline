@@ -24,7 +24,6 @@ router.post(
   ValidateRequest,
   async (req: Request, res: Response) => {
     const {  orderId } = req.body;
-
     const order = await Order.findById(orderId);
 
     if (!order) {
@@ -37,16 +36,17 @@ router.post(
       throw new BadRequestError('Cannot pay for an cancelled order');
     }
     const charge = await ukassa.pay(orderId, "2.00")
-    // const charge = await stripe.charges.create({
-    //   currency: 'usd',
-    //   amount: order.price * 100,
-    //   source: token,
-    // });
-
-    console.log("CHARGE ", charge)
 
     if(!charge || !charge.confirmation || !charge.confirmation.confirmation_url){
+      if(charge.status === 'cancelled'){
+        console.log("Order cancelled by Ukassa!")
+      }
       throw new BadRequestError('Ukassa confirmation error!');
+    }
+    const existPayment = await Payment.findOne({orderId})
+    if(existPayment !== null){
+      console.log("Payment exist!")
+      return res.redirect(existPayment.confirmation_url)
     }
 
     const payment = Payment.build({
@@ -54,20 +54,18 @@ router.post(
       paymentId: charge.id,
       confirmation_url: charge.confirmation.confirmation_url,
       paid: charge.paid,
-      status: charge.status
+      status: charge.status,
     });
 
     await payment.save();
-    
+
     new PaymentCreatedPublisher(natsWrapper.client).publish({
       id: payment.id,
       orderId: payment.orderId,
       paymentId: payment.paymentId,
     });
 
-    res.redirect(charge.confirmation.confirmation_url)
-
-    // res.status(201).send({ id: payment.id });
+    return res.redirect(charge.confirmation.confirmation_url)
   }
 );
 
