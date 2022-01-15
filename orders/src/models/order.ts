@@ -8,7 +8,7 @@ export { OrderStatus }
 interface Payment {
   id: string,
   confirmation_url: string,
-  status: string
+  status?: string
 }
 
 interface OrderAttrs {

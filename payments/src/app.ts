@@ -5,8 +5,10 @@ import cookieSession from 'cookie-session';
 import { errorHandler, NotFoundError, currentUser } from '@dallasstudio/common';
 import { createChargeRouter } from './routes/new';
 import { checkChargeRouter } from './routes/check';
+import { tokenRouter } from './routes/token';
 
 const app = express();
+
 app.set('trust proxy', true);
 app.use(json());
 app.use(
@@ -19,6 +21,7 @@ app.use(currentUser);
 
 app.use(createChargeRouter);
 app.use(checkChargeRouter);
+app.use(tokenRouter);
 
 app.all('*', async (req, res) => {
   throw new NotFoundError();

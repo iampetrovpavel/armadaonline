@@ -1,12 +1,12 @@
 POST https://api.yookassa.ru/v3/payments
 Content-Type: application/json
 Authorization: Basic ODQxNzE4OmxpdmVfaHQ5ZHZ4MU54XzRwOEJPaTJHOGx1blU2ZE5mSll2MUJvbTRib2ZlQzJOOA==
-Idempotence-Key: 223
+Idempotence-Key: 2231
 
 {"amount":
     {"value": "2.00","currency":"RUB"},
     "payment_method_data": {"type": "bank_card"},
-    "confirmation": {"type": "redirect","return_url": "test"},
+    "confirmation": {"type": "embedded "},
     "capture": true
 }
 

@@ -26,8 +26,8 @@ export class PaymentCreatedListener extends Listener<PaymentCreatedEvent> {
     order.set({
       status: OrderStatus.AwaitingPayment,
     });
+
     await order.save();
-    console.log("ORDER AWAITING PAYMENT ", order.toObject())
     msg.ack();
   }
 }

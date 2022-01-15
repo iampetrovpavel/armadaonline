@@ -20,14 +20,13 @@ export class PaymentCompleteListener extends Listener<PaymentCompleteEvent> {
     }
 
     if(order.status === OrderStatus.Cancelled || order.status === OrderStatus.Complete) {
-      throw new Error('Order has been cancelled or complited');
+      return msg.ack();
     }
 
     order.set({
       status: OrderStatus.Complete,
     });
     await order.save();
-    console.log("ORDER PAYMENT COMPLITE ", order.toObject())
     msg.ack();
   }
 }

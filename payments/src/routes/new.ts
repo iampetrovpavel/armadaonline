@@ -35,26 +35,39 @@ router.post(
     if (order.status === OrderStatus.Cancelled) {
       throw new BadRequestError('Cannot pay for an cancelled order');
     }
-    const charge = await ukassa.pay(orderId, "2.00")
-
-    if(!charge || !charge.confirmation || !charge.confirmation.confirmation_url){
-      if(charge.status === 'cancelled'){
-        console.log("Order cancelled by Ukassa!")
-      }
-      throw new BadRequestError('Ukassa confirmation error!');
+    if (order.status === OrderStatus.Complete) {
+      throw new BadRequestError('Cannot pay for an complite order');
     }
-    const existPayment = await Payment.findOne({orderId})
-    if(existPayment !== null){
-      console.log("Payment exist!")
-      return res.redirect(existPayment.confirmation_url)
+
+    const existPayment = await Payment.findOne({
+      $and:[
+        {orderId}, 
+        {$or:[
+          {status: PaymentStatus.Pending},
+          // {status: PaymentStatus.Cancelled},
+        ]}
+      ]})
+
+    if(existPayment && (existPayment.status === PaymentStatus.Pending)){
+      // return res.redirect(existPayment.confirmation_url)
+      return res.send({redirect: existPayment.confirmation_url})
+    }
+
+    const idempotenceKey = Math.floor(new Date().getTime() + (Math.random() * 10000)).toString()
+
+    const ukassaPayment = await ukassa.pay(idempotenceKey, order.price.toString())
+
+    if(!ukassaPayment || !ukassaPayment.confirmation || !ukassaPayment.confirmation.confirmation_url){
+      throw new BadRequestError('Ukassa confirmation error!');
     }
 
     const payment = Payment.build({
       orderId,
-      paymentId: charge.id,
-      confirmation_url: charge.confirmation.confirmation_url,
-      paid: charge.paid,
-      status: charge.status,
+      paymentId: ukassaPayment.id,
+      confirmation_url: ukassaPayment.confirmation.confirmation_url,
+      paid: ukassaPayment.paid,
+      status: PaymentStatus.Pending,
+      idempotenceKey
     });
 
     await payment.save();
@@ -65,7 +78,7 @@ router.post(
       paymentId: payment.paymentId,
     });
 
-    return res.redirect(charge.confirmation.confirmation_url)
+    return res.send({redirect: ukassaPayment.confirmation.confirmation_url})
   }
 );
 

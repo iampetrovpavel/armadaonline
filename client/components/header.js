@@ -53,7 +53,7 @@ const Header = ({currentUser}) => {
                         <Image  src="/imgs/logo.png" alt="me" width="217" height="130" />
                     </div>
                     <div onClick={toggleMenu} style={{background:c.yellow, padding: '5px', marginLeft:'-12px'}} className='d-flex d-lg-none' >
-                        <Image src="/imgs/logo-bird-blue.png" alt="me" width="60" height="60"/>
+                        <Image src="/imgs/logo-bird-blue.png" priority={true} alt="me" width="60" height="60"/>
                     </div>
                     <div className='h-100 d-flex justify-content-center flex-column p-3' style={s.contacts}>
                         <span>+7(952)2465072</span>   
@@ -67,7 +67,14 @@ const Header = ({currentUser}) => {
                     <div className='p-2'>КОНТАКТЫ</div>
                     <Link href='/auth/signin'>
                         <a className='p-2 mb-3 mb-lg-0 d-flex'>
-                            <Image src="/imgs/signin.png" alt="me" width="27" height="27" />
+                            Вход
+                            {/* <Image src="/imgs/signin.png" alt="me" width="27" height="27" /> */}
+                        </a>
+                    </Link>
+                    <Link href='/auth/signup'>
+                        <a className='p-2 mb-3 mb-lg-0 d-flex'>
+                            Регистрация
+                            {/* <Image src="/imgs/signin.png" alt="me" width="27" height="27" /> */}
                         </a>
                     </Link>
                 </div>

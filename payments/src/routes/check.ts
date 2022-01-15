@@ -33,24 +33,47 @@ router.get(
     if (order.status === OrderStatus.Cancelled) {
       throw new BadRequestError('Order cancelled');
     }
+    if (order.status === OrderStatus.Complete) {
+      return res.send(PaymentStatus.Succeeded)
+    }
 
-    const existPayment = await Payment.findOne({orderId})
+    const existPayment = await Payment.findOne({
+      $and:[
+        {orderId}, 
+        {$or:[
+          {status: PaymentStatus.Pending},
+          // {status: PaymentStatus.Cancelled},
+        ]}
+      ]})
+
     if(!existPayment){
         throw new NotFoundError()
     }
-
     const ukassaPayment = await ukassa.check(existPayment.paymentId)
 
     if(ukassaPayment.type && ukassaPayment.type === "error"){
         throw new BadRequestError(ukassaPayment.description)
     }
 
-    new PaymentCompletePublisher(natsWrapper.client).publish({
+    if (ukassaPayment.status === PaymentStatus.Succeeded) {
+      existPayment.status = PaymentStatus.Succeeded
+      await existPayment.save()
+      order.status = OrderStatus.Complete
+      await order.save()
+      new PaymentCompletePublisher(natsWrapper.client).publish({
         id: existPayment.id,
         orderId: existPayment.orderId,
         paymentId: existPayment.paymentId,
       });
+      return res.send(PaymentStatus.Succeeded)
+    }
+    console.log("TEST", ukassaPayment.status === PaymentStatus.Canceled)
 
+    if (ukassaPayment.status === PaymentStatus.Canceled) {
+      existPayment.status = PaymentStatus.Canceled
+      await existPayment.save()
+      return res.send(PaymentStatus.Canceled)
+    }
     return res.send(ukassaPayment.status)
   }
 );

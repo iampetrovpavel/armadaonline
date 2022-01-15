@@ -5,8 +5,12 @@ import Header from "../components/header";
 
 const App = ({ Component, pageProps, currentUser}) => {
     return <div>
+        <script src="https://static.yoomoney.ru/checkout-js/v1/checkout.js"></script>
+        <script src="https://yookassa.ru/checkout-widget/v1/checkout-widget.js"></script>
         <Header currentUser={currentUser}/>
-        <Component {...pageProps}/>
+        <div className='container'>
+            <Component {...pageProps} currentUser={currentUser}/>
+        </div>
     </div>
 }
 
@@ -15,7 +19,7 @@ App.getInitialProps = async (appContext) => {
     const { data } = await client.get('/api/users/currentuser')
     let pageProps = {};
     if( appContext.Component.getInitialProps ) {
-        pageProps = await appContext.Component.getInitialProps(appContext.ctx)
+        pageProps = await appContext.Component.getInitialProps(appContext.ctx, client, data.currentUser)
     }
     return {
         pageProps,

@@ -6,13 +6,16 @@ interface PaymentAttrs {
   paymentId: string;
   confirmation_url: string,
   paid: boolean,
-  status: PaymentStatus
+  status: PaymentStatus,
+  idempotenceKey: string
 }
 
 interface PaymentDoc extends mongoose.Document {
   orderId: string;
   paymentId: string;
   confirmation_url: string,
+  idempotenceKey: string,
+  status: PaymentStatus,
 }
 
 interface PaymentModel extends mongoose.Model<PaymentDoc> {
@@ -29,7 +32,9 @@ const paymentSchema = new mongoose.Schema(
       required: true,
       type: String,
     },
-  confirmation_url: String
+    confirmation_url: String,
+    idempotenceKey: String,
+    status: String
   },
   {
     toJSON: {

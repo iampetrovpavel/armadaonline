@@ -4,7 +4,7 @@ import Router from 'next/router'
 
 const SignUp = () => {
     const [email, setEmail] = useState('test@test.ru')
-    const [password, setPassword] = useState('123123')
+    const [password, setPassword] = useState('dsfsdf!@#1223')
     const {doRequest, errors, loading} = useRequest({
         url: '/api/users/signup',
         method: 'post',

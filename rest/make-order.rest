@@ -1,7 +1,7 @@
-https://test.ru/api/users/currentuser
+https://dallasstudio.ru/api/users/currentuser
 
 ###
-POST https://test.ru/api/users/signup
+POST https://dallasstudio.ru/api/users/signup
 Content-Type: application/json
 
 {
@@ -10,7 +10,7 @@ Content-Type: application/json
 }
 
 ###
-POST https://test.ru/api/users/signin
+POST https://dallasstudio.ru/api/users/signin
 Content-Type: application/json
 
 {
@@ -19,27 +19,27 @@ Content-Type: application/json
 }
 
 ###
-POST test.ru/api/tickets
+POST dallasstudio.ru/api/tickets
 Content-Type: application/json
 
-{"title":"test", "price": 100}
+{"title":"test", "price": 3}
 
 ###
-GET test.ru/api/orders
+GET dallasstudio.ru/api/orders
 
 ###
-POST test.ru/api/orders
+POST dallasstudio.ru/api/orders
 Content-Type: application/json
 
-{"ticketId":"61e1ebeb0bdb8a7e5f410fe4"}
+{"ticketId":"61e23b6c8f84e1549c410e0a"}
 
 ###
-POST test.ru/api/payments
+POST dallasstudio.ru/api/payments
 Content-Type: application/json
 
-{"orderId":"61e1ebf300192dc0fc39f600"}
+{"orderId":"61e23b76c572055fb63c61d0"}
 
 
 ###
-GET test.ru/api/payments/61e1ebf300192dc0fc39f601
+GET dallasstudio.ru/api/payments/61e23b76c572055fb63c61d0
 Content-Type: application/json
