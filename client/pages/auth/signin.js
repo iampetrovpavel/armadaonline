@@ -1,6 +1,7 @@
 import { useState} from "react";
 import useRequest from '../../hooks/use-request'
 import Router from 'next/router'
+import colors from "../../assets/colors";
 
 const SignIn = () => {
     const [email, setEmail] = useState('test@test.ru')
@@ -17,19 +18,25 @@ const SignIn = () => {
         doRequest()
     }
     return (
-        <form onSubmit={onSubmit}>
-            <h1>Sign In</h1>
-            <div className='mb-3'>
-                <label className='form-label'>Email Address</label>
-                <input type="text" value={email} onChange={e => setEmail(e.target.value)} className="form-control"/>
+        <div className="card my-3 shadow animate__animated animate__jackInTheBox" style={{maxWidth: '800px', margin: '0 auto'}}>
+            <div className="card-body">
+                <form onSubmit={onSubmit}>
+                    <h1>Вход</h1>
+                    <div className='mb-3'>
+                        <label className='form-label'>Email</label>
+                        <input type="text" value={email} onChange={e => setEmail(e.target.value)} className="form-control"/>
+                    </div>
+                    <div className="mb-3">
+                        <label className='form-label'>Пароль</label>
+                        <input type='password' value={password} onChange={e => setPassword(e.target.value)} className='form-control'/>
+                    </div>
+                    {errors}
+                    <button className='btn btn-primary' 
+                        style={{backgroundColor: colors.green, border: 'none'}}>{!loading && 'Войти'}{loading}</button>
+                </form>
             </div>
-            <div className="mb-3">
-                <label className='form-label'>Password</label>
-                <input type='password' value={password} onChange={e => setPassword(e.target.value)} className='form-control'/>
-            </div>
-            {errors}
-            <button className='btn btn-primary'>{!loading && 'Sign In'}{loading}</button>
-        </form>
+        </div>
+
     )
 }
 

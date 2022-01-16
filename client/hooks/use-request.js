@@ -4,13 +4,13 @@ import {useState} from "react";
 const useRequest = ({ url, method, body, onSuccess}) => {
     const [errors, setErrors] = useState(null)
     const [loading, setLoading] = useState(null)
-    const doRequest = async () => {
+    const doRequest = async (props = {}) => {
         try{
             setLoading(
                 <div className="spinner-border" role='status'/>
             )
             setErrors(null)
-            const response = await axios[method](url, body)
+            const response = await axios[method](url, {...body, ...props})
             if(onSuccess){
                 onSuccess(response.data)
             }

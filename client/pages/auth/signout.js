@@ -14,7 +14,7 @@ const Signout = () => {
     useEffect(() => {
         doRequest()
     }, [])
-    return <div>Signing out...</div>
+    return <div>Досвидания...</div>
 }
 
 export default Signout

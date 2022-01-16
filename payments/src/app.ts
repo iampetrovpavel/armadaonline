@@ -6,6 +6,7 @@ import { errorHandler, NotFoundError, currentUser } from '@dallasstudio/common';
 import { createChargeRouter } from './routes/new';
 import { checkChargeRouter } from './routes/check';
 import { tokenRouter } from './routes/token';
+import { allPaymentsRouter } from './routes';
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(currentUser);
 app.use(createChargeRouter);
 app.use(checkChargeRouter);
 app.use(tokenRouter);
+app.use(allPaymentsRouter);
 
 app.all('*', async (req, res) => {
   throw new NotFoundError();
