@@ -10,7 +10,9 @@ const useRequest = ({ url, method, body, onSuccess}) => {
                 <div className="spinner-border" role='status'/>
             )
             setErrors(null)
-            const response = await axios[method](url, {...body, ...props})
+            console.log(url, body)
+            const response = await axios[method](url, body)
+            console.log("RESPONSE ",response.data)
             if(onSuccess){
                 onSuccess(response.data)
             }
@@ -22,7 +24,7 @@ const useRequest = ({ url, method, body, onSuccess}) => {
                 <div className='alert alert-danger'>
                     <h4>Ooopsss...</h4>
                     <ul className='my-0'>
-                        {error.response.data.errors.map(err => <li key={err.message}>{err.message}</li>)}
+                        {/* {error.response.data.errors.map(err => <li key={err.message}>{err.message}</li>)} */}
                     </ul>
                 </div>
             )

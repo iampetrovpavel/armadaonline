@@ -31,13 +31,13 @@ GET dallasstudio.ru/api/orders
 POST dallasstudio.ru/api/orders
 Content-Type: application/json
 
-{"ticketId":"61e34bafbe9ef3df888a1799"}
+{"ticketId":"61e54911c56f54823cf38a20"}
 
 ###
 POST dallasstudio.ru/api/payments
 Content-Type: application/json
 
-{"orderId":"61e34bb93de8cf3232abbafb"}
+{"orderId":"61e54917d9127649b869d637"}
 
 
 ###
