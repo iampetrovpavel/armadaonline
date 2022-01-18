@@ -34,6 +34,16 @@ Content-Type: application/json
 {"ticketId":"61e54911c56f54823cf38a20"}
 
 ###
+POST dallasstudio.ru/api/orders/trial
+Content-Type: application/json
+
+{"name":"Pavel", "phone": "+79231453456"}
+
+###
+GET dallasstudio.ru/api/orders/trial?skip=0
+Content-Type: application/json
+
+###
 POST dallasstudio.ru/api/payments
 Content-Type: application/json
 

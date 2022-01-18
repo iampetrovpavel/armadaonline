@@ -27,9 +27,9 @@ const Footer = () => {
                             <h4>Цены</h4>
                         </div>
                         <div className="col d-flex justify-content-end align-items-start">
-                            <Image src="/imgs/instagram.png" priority={true} alt="me" width="50" height="50"/>
+                            <Image src="/imgs/instagram.png" priority={true} alt="me" width="30" height="30"/>
                             <div style={{width:'20px'}}></div>
-                            <Image src="/imgs/vk.png" priority={true} alt="me" width="84" height="50"/>
+                            <Image src="/imgs/vk.png" priority={true} alt="me" width="54" height="30"/>
                         </div>
                     </div>
                 </div>
