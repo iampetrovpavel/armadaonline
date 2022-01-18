@@ -17,7 +17,6 @@ const OrderShow = ({order}) => {
     }, [order])
 
     const getToken = async () => {
-        console.log("ORDER ", order)
         const {data} = await axios.post('/api/payments/token',{
             orderId: order.id
         })
@@ -58,7 +57,7 @@ const OrderShow = ({order}) => {
             Time left to pay: {timeLeft} seconds
             {errors}
             <div id="payment-form"></div>
-            <button className="btn btn-success" onClick={getToken}>Pay with CreditCard</button>
+            <button className="btn btn-success" onClick={Pay}>Pay with CreditCard</button>
         </div>
     )
 }

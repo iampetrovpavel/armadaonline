@@ -1,0 +1,88 @@
+:root {
+    --yellow:   "#FFE600";
+    --blue:     "#48357C"
+    --pink: "#EF5DA8"
+}
+
+html, body {
+    height: 100%;
+    color: #48357C;
+}
+
+#__next{
+    height: 100%;
+}
+
+.shadow {
+    -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
+.header-menu a{
+    color: #FFE600;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.header-menu a:hover{
+    background-color: #FFE600;
+    color: #48357C;
+    text-decoration: none;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.banner {
+    background-color: #EF5DA8;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /* font-size: 24px; */
+    /* font-weight: 700; */
+}
+
+.banner ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: white;
+  }
+.banner ::-moz-placeholder { /* Firefox 19+ */
+    color: white;
+  }
+.banner :-ms-input-placeholder { /* IE 10+ */
+    color: white;
+  }
+.banner :-moz-placeholder { /* Firefox 18- */
+    color: white;
+}
+.banner button {
+    background-color: white;
+    color: #EF5DA8;
+    outline: none;
+    border: none;
+    padding: 5px;
+    /* font-weight: 700; */
+    border-radius: 6px;
+}
+
+.banner input {
+    background-color: #EF5DA8;
+    outline: none;
+    border: none;
+    border-bottom: 3px solid white;
+    color: white;
+}
+
+.banner span {
+    color: white;
+}
+
+.footer {
+    background-color: #48357C;
+    width: 100%;
+    height: 200px;
+    color: #FFE600;
+}
