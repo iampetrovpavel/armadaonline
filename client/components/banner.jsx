@@ -47,7 +47,7 @@ const Banner = () => {
 export default Banner
 
 const SuccessMessage = ({title, message, show = false, close}) => (
-    <div className="modal fade" tabIndex="-1" style={{display: show?'block':'none'}}>
+    <div className="modal" tabIndex="-1" style={{display: show?'block':'none'}}>
         <div className="modal-dialog">
             <div className="modal-content">
             <div className="modal-header">
