@@ -9,7 +9,7 @@ const Directions = () => {
         {id:3, name: 'Балет', img: '/imgs/directions/balet.jpg'},
         {id:4, name: 'Стрип', img: '/imgs/directions/strip.jpg'},
         {id:5, name: 'Здоровая спина', img: '/imgs/directions/spina.png'},
-        {id:6, name: 'Индивидуальные', img: '/imgs/directions/individ.jpg'},
+        // {id:6, name: 'Индивидуальные', img: '/imgs/directions/individ.jpg'},
     ]
     const ages = {
         all: {name: 'Все', directions: [1,2,3,4,5,6]},
@@ -19,7 +19,7 @@ const Directions = () => {
     }
     return (
         <div className="row">
-            <div className="col-12 col-sm-4 ">
+            {/* <div className="col-12 col-sm-4 ">
                     <div className="d-flex justify-content-center align-items-center h-100 m-3 m-sm-0">
                         <div>
                             <h4 className="fw-bolder">Направления</h4>
@@ -35,9 +35,24 @@ const Directions = () => {
                             </ul>
                         </div>
                     </div>
-            </div>
-            <div className="col-12 col-sm-8">
+            </div> */}
+            <div className="col-12">
                 <div className="row justify-content-center animate__animated animate__fadeIn">
+                    <div className="col-12 col-sm-6 col-lg-4 square p-0">
+                        <div className="square-content d-flex flex-column">
+                            <h4 className="fw-bolder">Направления</h4>
+                            <ul className="p-0 fs-6 directions-menu">
+                                {Object.keys(ages).map(key=>(
+                                    <li key={ages[key].name} 
+                                        onClick={()=>setSelectedAge(key)} 
+                                        className={"p-2 rounded-3 fw-bolder " + ((key === selectedAge) && "directions-menu-selected")}
+                                    >
+                                        {ages[key].name}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
                     {directions
                         .filter(direction=>ages[selectedAge].directions.indexOf(direction.id)>-1)
                         .map(direction=>(
