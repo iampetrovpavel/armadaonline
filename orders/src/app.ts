@@ -7,6 +7,7 @@ import { newOrderRouter } from './routes/new'
 import {showOrderRouter} from './routes/show'
 import {indexOrderRouter} from './routes/index'
 import {deleteOrderRouter} from './routes/delete'
+import { trialRouter } from './routes/trial';
 
 
 const app = express()
@@ -18,6 +19,8 @@ app.use(cookieSession({
 }))
 
 app.use(currentUser)
+
+app.use(trialRouter)
 
 app.use(newOrderRouter)
 app.use(showOrderRouter)

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import {useState} from "react";
 
-const useRequest = ({ url, method, body, onSuccess}) => {
+const useRequest = ({ url, method, body, onSuccess, onFail}) => {
     const [errors, setErrors] = useState(null)
     const [loading, setLoading] = useState(null)
     const doRequest = async (props = {}) => {
@@ -19,15 +19,15 @@ const useRequest = ({ url, method, body, onSuccess}) => {
             return response.data
         }
         catch(error){
-            console.log("CUSTOM ERROR ", error)
             setErrors(
                 <div className='alert alert-danger'>
                     <h4>Ooopsss...</h4>
                     <ul className='my-0'>
-                        {/* {error.response.data.errors.map(err => <li key={err.message}>{err.message}</li>)} */}
+                        {error.response.data.errors.map(err => <li key={err.message}>{err.message}</li>)}
                     </ul>
                 </div>
             )
+            onFail(error.response.data.errors)
         }
         finally {
             setLoading(null)

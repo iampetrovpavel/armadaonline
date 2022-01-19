@@ -46,12 +46,16 @@ const Header = ({currentUser}) => {
             <div className='container d-flex justify-content-between flex-column flex-lg-row'>
                 <div className='d-flex justify-content-between'>
                     <div className='d-flex'>
-                        <div className='d-none d-lg-flex'>
-                            <Image  src="/imgs/logo.png" alt="me" width="200" height="120" />
-                        </div>
-                        <div  style={{background:colors.yellow, padding: '5px', marginLeft:'-12px'}} className='d-flex d-lg-none' >
-                            <Image src="/imgs/logo-bird-blue.png" priority={true} alt="me" width="60" height="60"/>
-                        </div>
+                        <Link href='/'>
+                            <div className='d-none d-lg-flex' style={{cursor: 'pointer'}}>
+                                <Image  src="/imgs/logo.png" alt="me" width="200" height="120" />
+                            </div>
+                        </Link>
+                        <Link href='/'>
+                            <div  style={{background:colors.yellow, padding: '5px', marginLeft:'-12px', cursor: 'pointer'}} className='d-flex d-lg-none' >
+                                    <Image src="/imgs/logo-bird-blue.png" priority={true} alt="me" width="60" height="60"/>
+                            </div>
+                        </Link>
                         <div className='h-100 d-flex justify-content-center flex-column p-2 p-lg-3 fs-6 fw-bolder' style={s.contacts}>
                             <span>+7(952)2465072</span>   
                             <span>г. Пушкин, ул. Глинки, д. 1</span>
@@ -59,61 +63,45 @@ const Header = ({currentUser}) => {
                     </div>
                     <div style={{position: 'relative'}} className='d-block d-lg-none'>
                         <input id="menu__toggle" type="checkbox" />
-                        <label class="menu__btn" for="menu__toggle" onClick={toggleMenu}>
+                        <label className="menu__btn" htmlFor="menu__toggle" onClick={toggleMenu}>
                             <span></span>
                         </label>
                     </div>
                 </div>
                 <div ref={menu} className='header-menu d-none d-lg-flex align-items-center flex-column flex-lg-row mt-3 mt-lg-0 fs-5' onClick={closeMenu}>
-                    <Link href='/auth/signin'>
+                    <Link href='/'>
                         <a className='p-2 mb-lg-0 d-flex'>
                             Направления
-                            {/* <Image src="/imgs/signin.png" alt="me" width="27" height="27" /> */}
                         </a>
                     </Link>
                     <Link href='/auth/signin'>
                         <a className='p-2 mb-lg-0 d-flex'>
                             Цены
-                            {/* <Image src="/imgs/signin.png" alt="me" width="27" height="27" /> */}
                         </a>
                     </Link>
                     <Link href='/auth/signin'>
                         <a className='p-2 mb-lg-0 d-flex'>
                             Расписание
-                            {/* <Image src="/imgs/signin.png" alt="me" width="27" height="27" /> */}
                         </a>
                     </Link>
                     <Link href='/auth/signin'>
                         <a className='p-2 mb-lg-0 d-flex'>
                             Контакты
-                            {/* <Image src="/imgs/signin.png" alt="me" width="27" height="27" /> */}
                         </a>
                     </Link>
                     <Link href='/auth/signin'>
                         <a className='p-2 mb-lg-0 d-flex'>
                             Вход
-                            {/* <Image src="/imgs/signin.png" alt="me" width="27" height="27" /> */}
                         </a>
                     </Link>
                     <Link href='/auth/signup'>
                         <a className='p-2 mb-3 mb-lg-0 d-flex'>
                             Регистрация
-                            {/* <Image src="/imgs/signin.png" alt="me" width="27" height="27" /> */}
                         </a>
                     </Link>
                 </div>
             </div>
         </div>
-        // <nav className='navbar navbar-dark bg-dark'>
-        //     <Link href='/'>
-        //         <a href="/"></a>
-        //     </Link>
-        //     <div className="flex justify-content-end">
-        //         <ul className='nav d-flex align-items-center'>
-        //             {links}
-        //         </ul>
-        //     </div>
-        // </nav>
     )
 }
 
