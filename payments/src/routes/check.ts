@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
+import mongoose from 'mongoose'
 import {
   requireAuth,
   ValidateRequest,
@@ -14,6 +15,7 @@ import { Payment } from '../models/payment';
 import { PaymentCompletePublisher } from '../events/publishers/payment-complete-publisher';
 import { natsWrapper } from '../nats-wrapper';
 import { ukassa } from '../ukassa'
+import { Mongoose } from 'mongoose';
 
 const router = express.Router();
 
@@ -22,17 +24,20 @@ router.get(
   requireAuth,
   async (req: Request, res: Response) => {
     const {  orderId } = req.params;
+    if (!mongoose.isValidObjectId(orderId)) {
+      throw new BadRequestError('Invalid Id');
+    }
     const order = await Order.findById(orderId);
-
+    
     if (!order) {
       throw new NotFoundError();
     }
     if (order.userId !== req.currentUser!.id) {
       throw new NotAuthorizedError();
     }
-    if (order.status === OrderStatus.Cancelled) {
-      throw new BadRequestError('Order cancelled');
-    }
+    // if (order.status === OrderStatus.Cancelled) {
+    //   throw new BadRequestError('Order cancelled');
+    // }
     if (order.status === OrderStatus.Complete) {
       return res.send(PaymentStatus.Succeeded)
     }
@@ -67,7 +72,6 @@ router.get(
       });
       return res.send(PaymentStatus.Succeeded)
     }
-    console.log("TEST", ukassaPayment.status === PaymentStatus.Canceled)
 
     if (ukassaPayment.status === PaymentStatus.Canceled) {
       existPayment.status = PaymentStatus.Canceled

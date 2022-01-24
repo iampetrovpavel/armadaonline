@@ -1,23 +1,24 @@
 import axios from 'axios'
 import {useState} from "react";
 
-const useRequest = ({ url, method, body, onSuccess}) => {
+const useRequest = ({ url, method, body, onSuccess, onFail}) => {
     const [errors, setErrors] = useState(null)
     const [loading, setLoading] = useState(null)
-    const doRequest = async () => {
+    const doRequest = async (props = {}) => {
         try{
             setLoading(
                 <div className="spinner-border" role='status'/>
             )
             setErrors(null)
+            console.log(url, body)
             const response = await axios[method](url, body)
+            console.log("RESPONSE ",response.data)
             if(onSuccess){
                 onSuccess(response.data)
             }
             return response.data
         }
         catch(error){
-            console.log("CUSTOM ERROR ", error)
             setErrors(
                 <div className='alert alert-danger'>
                     <h4>Ooopsss...</h4>
@@ -26,6 +27,7 @@ const useRequest = ({ url, method, body, onSuccess}) => {
                     </ul>
                 </div>
             )
+            onFail(error.response.data.errors)
         }
         finally {
             setLoading(null)

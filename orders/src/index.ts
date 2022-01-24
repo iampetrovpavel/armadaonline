@@ -8,6 +8,7 @@ import { PaymentCreatedListener } from "./events/listeners/payment-created-liste
 import { PaymentCompleteListener } from "./events/listeners/payment-complete-listener";
 
 const start = async () => {
+    console.log("Starting!")
     if(!process.env.JWT_KEY){
         throw new Error('JWT_KEY undefined')
     }
