@@ -84,7 +84,7 @@ const Header = ({currentUser}) => {
                             Расписание
                         </a>
                     </Link>
-                    <Link href='/auth/signin'>
+                    <Link href='/contacts'>
                         <a className='p-2 mb-lg-0 d-flex'>
                             Контакты
                         </a>

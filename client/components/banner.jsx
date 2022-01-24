@@ -33,7 +33,7 @@ const Banner = () => {
                 </div>
                 <div>
                     <input className="banner-input my-3" placeholder="Имя" value={name} onChange={(e)=>setName(e.target.value)}/>
-                    <div className="d-none d-lg-inline-block" style={{width: '20px'}}></div>
+                    <div className="d-none d-md-inline-block" style={{width: '20px'}}></div>
                     <input className="banner-input my-3" placeholder="Телефон" value={phone} onChange={(e)=>setPhone(e.target.value)}/>          
                 </div>
                 <div>
