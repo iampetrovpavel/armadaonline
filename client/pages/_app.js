@@ -22,11 +22,17 @@ const App = ({ Component, pageProps, currentUser}) => {
     )}
 
 App.getInitialProps = async (appContext) => {
-    const client = buildClient(appContext.ctx)
-    const { data } = await client.get('/api/users/currentuser')
+    let data
+    if(process.env.NEXT_PUBLIC_ENV === 'single'){
+        data = {currentUser: null}
+    } else {
+        const client = buildClient(appContext.ctx)
+        const res = await client.get('/api/users/currentuser')
+        data = res.data
+    }
     let pageProps = {};
     if( appContext.Component.getInitialProps ) {
-        pageProps = await appContext.Component.getInitialProps(appContext.ctx, client, data.currentUser)
+        (process.env.NEXT_PUBLIC_ENV !== 'single') && (pageProps = await appContext.Component.getInitialProps(appContext.ctx, client, data.currentUser))
     }
     return {
         pageProps,
