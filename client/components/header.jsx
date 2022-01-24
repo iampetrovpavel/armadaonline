@@ -74,12 +74,12 @@ const Header = ({currentUser}) => {
                             Направления
                         </a>
                     </Link>
-                    <Link href='/auth/signin'>
+                    <Link href='/prices'>
                         <a className='p-2 mb-lg-0 d-flex'>
                             Цены
                         </a>
                     </Link>
-                    <Link href='/auth/signin'>
+                    <Link href='/schedule'>
                         <a className='p-2 mb-lg-0 d-flex'>
                             Расписание
                         </a>

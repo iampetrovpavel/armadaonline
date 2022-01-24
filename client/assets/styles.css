@@ -2,6 +2,7 @@
     --yellow:   "#FFE600";
     --blue:     "#48357C"
     --pink: "#EF5DA8"
+    --white: "#FAF8EB"
 }
 
 html, body {
@@ -72,7 +73,7 @@ html, body {
     background-color: #EF5DA8;
     outline: none;
     border: none;
-    border-bottom: 3px solid white;
+    border-bottom: 2px solid white;
     color: white;
 }
 
@@ -102,10 +103,10 @@ html, body {
     position: absolute;
     width: 100%;
     height: 100%;
-    display: flex;
+    /* display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    overflow: hidden; */
 }
 
   .circle {
@@ -156,4 +157,32 @@ html, body {
 
 .directions-menu-selected {
     background-color: #FFE600;
+}
+
+.prices-menu {
+    list-style-type: none;
+    cursor: pointer;
+    color: #48357C;
+}
+.prices-menu li{
+}
+
+.prices-menu li:hover{
+  background-color: #FFE600;
+  /* color: #FAF8EB; */
+}
+
+.prices-menu-selected {
+  background-color: #FFE600;
+  /* color: #FAF8EB; */
+}
+
+.schedule-table td{
+  /* width: 160px; */
+  border-left: 2px solid #48357C;
+  padding: 10px;
+}
+
+.schedule-table th{
+  padding: 10px;
 }
