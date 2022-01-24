@@ -1,6 +1,7 @@
 import { useState } from "react"
 import data from '../../assets/data'
 import Link from 'next/link'
+
 import colors from '../../assets/colors'
 
 const Directions = () => {
