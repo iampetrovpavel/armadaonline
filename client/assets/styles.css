@@ -178,11 +178,19 @@ html, body {
 }
 
 .schedule-table td{
-  /* width: 160px; */
+  width: 160px;
+  min-width: 160px;
   border-left: 2px solid #48357C;
   padding: 10px;
 }
 
 .schedule-table th{
+  min-width: 80px;
+  width: 80px;
   padding: 10px;
+}
+
+.contacts ul{
+  list-style-type: none;
+  padding-left: 0;
 }

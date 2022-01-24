@@ -1,22 +1,25 @@
 import data from '../../assets/data'
 import colors from '../../assets/colors'
+import { monthList } from '@iampetrovpavel/time'
 
 const Schedule = () => {
-    const {directions} = data
-    const datesCount = getDatesCount()
-    const datesList = getDatesList(datesCount)
-    const times = getTimes(directions)
-    const days = {0: 'ВС', 1: 'ПН', 2: 'ВТ', 3: 'СР', 4: 'ЧТ', 5: 'ПТ', 6: 'СБ'}
+    const {directions, lessons, users, groups} = data
     const now = new Date()
     const month = now.getMonth()
     const year = now.getFullYear()
+    const datesCount = getDatesCount()
+    const datesList = getDatesList(datesCount)
+    const times = getTimes(lessons, month, year)
+    const teachersGroup = groups.find(group => group.name === 'Преподаватель')
+    const teachers = users.filter(user => user.groupsId.indexOf(teachersGroup.id) >= 0)
+    const days = {0: 'ВС', 1: 'ПН', 2: 'ВТ', 3: 'СР', 4: 'ЧТ', 5: 'ПТ', 6: 'СБ'}
 
-    const Direction = ({direction}) => (
+    const Direction = ({direction, teacher}) => (
         <td>
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">{direction.name}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{direction.teacher}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">{teacher}</h6>
                     {/* <a href="#" class="btn" style={{background: colors.green, border: 0, color: 'white'}}>Купить</a> */}
                 </div>
             </div>
@@ -25,17 +28,21 @@ const Schedule = () => {
 
     const getRow = (date) => {
         const row = []
-        const directionsFromDate = getDirectionFromDate(date, directions)
+        const lessonsFromDate = getLessonsFromDate(year, month, date, lessons)
+        if (lessonsFromDate.length === 0) return null
         times.map(time => {
-            const direction =getDirectionFromTime(time, directionsFromDate)
+            const lesson = lessonsFromDate.find(lesson => lesson.time.getTime() === time.getTime())
+            if (!lesson) return row.push(<td></td>)
+            const direction = directions.find(direction => direction.id === lesson.directionId)
+            const teacher = teachers.find(teacher => lesson.teacherId === teacher.id)
+            console.log(direction)
             if (direction) {
-                row.push(<Direction direction={direction}/>)
+                row.push(<Direction direction={direction} teacher={teacher.name}/>)
             }
             else {
                 row.push(<td></td>)
             }
         })
-        if (directionsFromDate.length === 0) return null
         const dayNumber = (new Date(year, month, date)).getDay()
         const day = days[dayNumber]
         return (
@@ -52,26 +59,34 @@ const Schedule = () => {
     }
     
     return (
-        <div className='pt-3 mb-3'>
-            <h2>Расписание</h2>
-            <table className="schedule-table">
-                <thead>
-                    <tr>
-                        <th></th>
-                        {times.map(time => <th style={{fontSize: '24px'}}>{time.getHours()}:{time.getMinutes()}</th>)}
-                    </tr>
-                </thead>
-                <tbody>
-                    {datesList.map(date => getRow(date))}
-                </tbody>
-            </table>
+        <div className='pt-3 mb-3' style={{position: 'relative'}}>
+            <h2>Расписание <span style={{color: colors.pink}}>{monthList[month]} {year}</span></h2>
+            <div style={{overflowX: 'scroll'}}>
+                <table className='schedule-table' style={{position:'sticky', top: '0px', zIndex:1}}>
+                    <thead>
+                        <tr style={{backgroundColor: colors.white, borderBottom: '1px solid #eae8e8'}}>
+                            <th></th>
+                            {times.map(
+                                        time => <th style={{fontSize: '24px', width: '160px', minWidth: '160px'}}>
+                                                {addZero(time.getHours().toString())}:{addZero(time.getMinutes().toString())}
+                                            </th>
+                            )}
+                        </tr>
+                    </thead>
+                </table>
+                <table className="schedule-table">
+                    <tbody>
+                        {datesList.map(date => getRow(date))}
+                    </tbody>
+                </table>
+            </div>
+
         </div>
 
     )
 }
 
 const addZero = (str) => {
-    console.log(str)
     let result = str
     if (str.length === 1){
         result = "0"+str
@@ -94,23 +109,37 @@ const getDatesList = (daysCount) => {
     return datesList
 }
 
-const getTimes = (directions) => {
+const getTimes = (lessons, month, year) => {
     const times = []
-    directions.map(direction => {
-        direction.times.map(directionTime => {
-            if (times.find(time => time.getHours() === directionTime.getHours() && time.getMinutes() === directionTime.getMinutes())) {
-                return
-            }
-            times.push(directionTime)
-        })
+    lessons.map(lesson => {
+        if (times.find(time => 
+                    lesson.time.getFullYear() !== year
+                    || lesson.time.getMonth() !== month
+                    || (time.getHours() === lesson.time.getHours() 
+                    && time.getMinutes() === lesson.time.getMinutes())
+                )
+            ) {
+            return
+        }
+        times.push(lesson.time)
     })
     return times
         .sort((a, b)=>((a.getHours()+a.getMinutes()/60) - (b.getHours()+b.getMinutes()/60)))
 }
 
-const getDirectionFromDate = (date, directions) => {
-    return directions.filter(direction => typeof direction.times.find(time => time.getDate() === date) !== 'undefined')
+const getLessonsFromDate = (year, month, date, lessons) => {
+    return lessons.filter(lesson => (
+            lesson.time.getFullYear() === year
+            && lesson.time.getMonth() === month
+            && lesson.time.getDate() === date
+        )
+    )
 }
+
+// const getDirectionFromDate = (date, directions, lessons) => {
+    
+//     return directions.filter(direction => typeof direction.times.find(time => time.getDate() === date) !== 'undefined')
+// }
 const getDirectionFromTime = (time, directions) => {
     return directions.find(direction => {
         return typeof direction.times.find(directionTime => (

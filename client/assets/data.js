@@ -1,17 +1,20 @@
 export default {
     directions : [
-        {id:1, name: 'Чирхоп', img: '/imgs/directions/chirhop.jpg', times: [new Date(2022, 0, 3, 16, 30)], teacher: 'Петрова Анастасия'},
-        {id:2, name: 'Кавердэнс', img: '/imgs/directions/kaver.jpg', times: [new Date(2022, 0, 5, 15, 15), new Date(2022, 0, 5, 17, 30)], teacher: 'Петрова Анастасия'},
-        {id:3, name: 'Балет', img: '/imgs/directions/balet.jpg', times: [new Date(2022, 0, 6, 11, 30)], teacher: 'Петрова Анастасия'},
-        {id:4, name: 'Стрип', img: '/imgs/directions/strip.jpg', times: [new Date(2022, 0, 1, 13, 30)], teacher: 'Петрова Анастасия'},
-        {id:5, name: 'Здоровая спина', img: '/imgs/directions/spina.png', times: [new Date(2022, 0, 26, 16, 30)], teacher: 'Петрова Анастасия'},
+        {id:1, name: 'Чирхоп', img: '/imgs/directions/chirhop.jpg'},
+        {id:2, name: 'Кавердэнс', img: '/imgs/directions/kaver.jpg',},
+        {id:3, name: 'Балет', img: '/imgs/directions/balet.jpg',},
+        {id:4, name: 'Стрип', img: '/imgs/directions/strip.jpg', },
+        {id:5, name: 'Здоровая спина', img: '/imgs/directions/spina.png',},
     ],
     lessons: [
-        {id:1, directionId: 1, time: new Date(2022, 0, 1, 12, 25), teacherId: 1, studentsId: []},
+        {id:1, directionId: 4, time: new Date(2022, 0, 1, 12, 25), teacherId: 1, studentsId: []},
         {id:1, directionId: 1, time: new Date(2022, 0, 5, 15, 15), teacherId: 1, studentsId: []},
         {id:1, directionId: 1, time: new Date(2022, 0, 7, 22, 15), teacherId: 1, studentsId: []},
-        {id:1, directionId: 1, time: new Date(2022, 0, 3, 17, 30), teacherId: 1, studentsId: []},
-        {id:1, directionId: 1, time: new Date(2022, 0, 12, 18, 0), teacherId: 1, studentsId: []},
+        {id:1, directionId: 3, time: new Date(2022, 0, 7, 14, 15), teacherId: 1, studentsId: []},
+        {id:1, directionId: 2, time: new Date(2022, 0, 7, 12, 15), teacherId: 1, studentsId: []},
+        {id:1, directionId: 1, time: new Date(2022, 1, 7, 11, 11), teacherId: 1, studentsId: []},
+        {id:1, directionId: 5, time: new Date(2022, 0, 3, 17, 30), teacherId: 1, studentsId: []},
+        {id:1, directionId: 2, time: new Date(2022, 0, 12, 18, 0), teacherId: 1, studentsId: []},
         {id:1, directionId: 1, time: new Date(2022, 0, 19, 14, 20), teacherId: 1, studentsId: []},
     ],
     users: [
