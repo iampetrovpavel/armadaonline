@@ -11,11 +11,14 @@ export class Ukassa {
         "capture": true,
     }
     headers = {
-            Authorization: 'Basic ' + 'ODQxNzE4OmxpdmVfaHQ5ZHZ4MU54XzRwOEJPaTJHOGx1blU2ZE5mSll2MUJvbTRib2ZlQzJOOA==',
+            Authorization: 'Basic ' + process.env.UKASSA_AUTH,
+            // Authorization: 'Basic ' + 'ODQxNzE4OmxpdmVfaHQ5ZHZ4MU54XzRwOEJPaTJHOGx1blU2ZE5mSll2MUJvbTRib2ZlQzJOOA==',
             'Idempotence-Key': '',
             'Content-Type': 'application/json'
     }
     pay = async (orderId: string, amount:string) => {
+        console.log("ENV ",process.env.UKASSA_AUTH)
+        console.log("ENV ",process.env.JWT_KEY)
         this.headers['Idempotence-Key'] = orderId
         this.data['amount']['value'] = amount
         const response = await axios.post(this.api, this.data, {headers: this.headers})
