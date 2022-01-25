@@ -1,6 +1,9 @@
 https://test.ru/api/users/currentuser
 
 ###
+http://dallasstudio.ru/api/users/currentuser
+
+###
 POST https://test.ru/api/users/signup
 Content-Type: application/json
 
