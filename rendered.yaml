@@ -1,0 +1,530 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-depl
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+      - env:
+        - name: MONGO_URI
+          value: mongodb://auth-mongo-srv:27017/auth
+        - name: JWT_KEY
+          valueFrom:
+            secretKeyRef:
+              key: JWT_KEY
+              name: secrets
+        image: iampetrovpavel/auth:1da703d@sha256:07788138e826efc41894e79f0c9d9e4c65e981653d84f961dee5dc0fff109d06
+        name: auth
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-clusterip-srv
+  namespace: default
+spec:
+  ports:
+  - name: auth
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: auth
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-mongo-depl
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-mongo
+  template:
+    metadata:
+      labels:
+        app: auth-mongo
+    spec:
+      containers:
+      - image: mongo
+        name: auth-mongo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-mongo-srv
+  namespace: default
+spec:
+  ports:
+  - name: db
+    port: 27017
+    protocol: TCP
+    targetPort: 27017
+  selector:
+    app: auth-mongo
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-depl
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client
+  template:
+    metadata:
+      labels:
+        app: client
+    spec:
+      containers:
+      - image: iampetrovpavel/client:1da703d-dirty@sha256:84072fff5e8b828b2cad63d027b4a5526effbcec9d001bce8fa9b651fdf070b5
+        name: client
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-srv
+  namespace: default
+spec:
+  ports:
+  - name: client
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: client
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: expiration-depl
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: expiration
+  template:
+    metadata:
+      labels:
+        app: expiration
+    spec:
+      containers:
+      - env:
+        - name: NATS_CLIENT_ID
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: NATS_URL
+          value: http://nats-srv:4222
+        - name: NATS_CLUSTER_ID
+          value: ticketing
+        - name: REDIS_HOST
+          value: expiration-redis-srv
+        image: iampetrovpavel/expiration:1da703d@sha256:075f896a74d970e8ac9d568c461ffc8bbc1b816651b309948f32106264bffeb9
+        name: expiration
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: expiration-redis-depl
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: expiration-redis
+  template:
+    metadata:
+      labels:
+        app: expiration-redis
+    spec:
+      containers:
+      - image: redis
+        name: expiration-redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: expiration-redis-srv
+  namespace: default
+spec:
+  ports:
+  - name: db
+    port: 6379
+    protocol: TCP
+    targetPort: 6379
+  selector:
+    app: expiration-redis
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nats-depl
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nats
+  template:
+    metadata:
+      labels:
+        app: nats
+    spec:
+      containers:
+      - args:
+        - -p
+        - "4222"
+        - -m
+        - "8222"
+        - -hbi
+        - 5s
+        - -hbt
+        - 5s
+        - -hbf
+        - "2"
+        - -SD
+        - -cid
+        - ticketing
+        image: nats-streaming:0.17.0
+        name: nats
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nats-srv
+  namespace: default
+spec:
+  ports:
+  - name: client
+    port: 4222
+    protocol: TCP
+    targetPort: 4222
+  - name: monitoring
+    port: 8222
+    protocol: TCP
+    targetPort: 8222
+  selector:
+    app: nats
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders-depl
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orders
+  template:
+    metadata:
+      labels:
+        app: orders
+    spec:
+      containers:
+      - env:
+        - name: NATS_CLIENT_ID
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: NATS_URL
+          value: http://nats-srv:4222
+        - name: NATS_CLUSTER_ID
+          value: ticketing
+        - name: MONGO_URI
+          value: mongodb://orders-mongo-srv:27017/orders
+        - name: JWT_KEY
+          valueFrom:
+            secretKeyRef:
+              key: JWT_KEY
+              name: secrets
+        image: iampetrovpavel/orders:1da703d@sha256:75b8b44a02fba2e8adf62042ae94f34852ece62115581b0212cda09685893c66
+        name: orders
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orders-clusterip-srv
+  namespace: default
+spec:
+  ports:
+  - name: orders
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: orders
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders-mongo-depl
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orders-mongo
+  template:
+    metadata:
+      labels:
+        app: orders-mongo
+    spec:
+      containers:
+      - image: mongo
+        name: orders-mongo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orders-mongo-srv
+  namespace: default
+spec:
+  ports:
+  - name: db
+    port: 27017
+    protocol: TCP
+    targetPort: 27017
+  selector:
+    app: orders-mongo
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payments-depl
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: payments
+  template:
+    metadata:
+      labels:
+        app: payments
+    spec:
+      containers:
+      - env:
+        - name: NATS_CLIENT_ID
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: NATS_URL
+          value: http://nats-srv:4222
+        - name: NATS_CLUSTER_ID
+          value: ticketing
+        - name: MONGO_URI
+          value: mongodb://payments-mongo-srv:27017/payments
+        - name: JWT_KEY
+          valueFrom:
+            secretKeyRef:
+              key: JWT_KEY
+              name: secrets
+        - name: UKASSA_AUTH
+          valueFrom:
+            secretKeyRef:
+              key: UKASSA_AUTH
+              name: secrets
+        image: iampetrovpavel/payments:1da703d@sha256:9b3e8665a4a3c2506f1aeaee4e1e91ae9fd8692d5374828fa03bb090655e3e39
+        name: payments
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payments-clusterip-srv
+  namespace: default
+spec:
+  ports:
+  - name: payments
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: payments
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payments-mongo-depl
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: payments-mongo
+  template:
+    metadata:
+      labels:
+        app: payments-mongo
+    spec:
+      containers:
+      - image: mongo
+        name: payments-mongo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payments-mongo-srv
+  namespace: default
+spec:
+  ports:
+  - name: db
+    port: 27017
+    protocol: TCP
+    targetPort: 27017
+  selector:
+    app: payments-mongo
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tickets-depl
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tickets
+  template:
+    metadata:
+      labels:
+        app: tickets
+    spec:
+      containers:
+      - env:
+        - name: NATS_CLIENT_ID
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: NATS_URL
+          value: http://nats-srv:4222
+        - name: NATS_CLUSTER_ID
+          value: ticketing
+        - name: MONGO_URI
+          value: mongodb://tickets-mongo-srv:27017/tickets
+        - name: JWT_KEY
+          valueFrom:
+            secretKeyRef:
+              key: JWT_KEY
+              name: secrets
+        image: iampetrovpavel/tickets:1da703d@sha256:d2d48b3dc109becae9c95796cd572cd88a68ab5881e78e139aa57b382e1a1451
+        name: tickets
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tickets-clusterip-srv
+  namespace: default
+spec:
+  ports:
+  - name: tickets
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: tickets
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tickets-mongo-depl
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tickets-mongo
+  template:
+    metadata:
+      labels:
+        app: tickets-mongo
+    spec:
+      containers:
+      - image: mongo
+        name: tickets-mongo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tickets-mongo-srv
+  namespace: default
+spec:
+  ports:
+  - name: db
+    port: 27017
+    protocol: TCP
+    targetPort: 27017
+  selector:
+    app: tickets-mongo
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: "true"
+  name: ingress-srv
+  namespace: default
+spec:
+  rules:
+  - host: dallasstudio.ru
+    http:
+      paths:
+      - backend:
+          service:
+            name: auth-clusterip-srv
+            port:
+              number: 3000
+        path: /api/users/?(.*)
+        pathType: Prefix
+      - backend:
+          service:
+            name: tickets-clusterip-srv
+            port:
+              number: 3000
+        path: /api/tickets/?(.*)
+        pathType: Prefix
+      - backend:
+          service:
+            name: orders-clusterip-srv
+            port:
+              number: 3000
+        path: /api/orders/?(.*)
+        pathType: Prefix
+      - backend:
+          service:
+            name: payments-clusterip-srv
+            port:
+              number: 3000
+        path: /api/payments/?(.*)
+        pathType: Prefix
+      - backend:
+          service:
+            name: client-srv
+            port:
+              number: 3000
+        path: /?(.*)
+        pathType: Prefix
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: secrets
+  namespace: default
+stringData:
+  JWT_KEY: jhgjhg^7^!55!_87
+  UKASSA_AUTH: ODQxNzE4OmxpdmVfaHQ5ZHZ4MU54XzRwOEJPaTJHOGx1blU2ZE5mSll2MUJvbTRib2ZlQzJOOA==
+type: Opaque

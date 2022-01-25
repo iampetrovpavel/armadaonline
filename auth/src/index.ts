@@ -2,6 +2,7 @@ import mongoose from "mongoose"
 import { app } from './app'
 
 const start = async () => {
+    console.log("Starting...")
     if(!process.env.JWT_KEY){
         throw new Error('JWT_KEY undefined')
     }
@@ -9,7 +10,7 @@ const start = async () => {
         throw new Error('MONGO_URI undefined')
     }
     try {
-        await mongoose.connect(process.env.MONGO_URI);
+        await mongoose.connect(process.env.MONGO_URI+process.env.MONGO_DB);
         console.log('Connected to MongoDb');
     } catch (err) {
         console.error(err);

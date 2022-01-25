@@ -1,10 +1,10 @@
-apiVersion: skaffold/v2alpha3
+apiVersion: skaffold/v2beta24
 kind: Config
 deploy:
   kubectl:
     manifests:
       - ./infra/k8s/*
-      - ./infra/k8s-dev/*
+      - ./infra/k8s-prod/*
 build:
   local:
     push: true
@@ -13,6 +13,7 @@ build:
       context: auth
       docker:
         dockerfile: Dockerfile
+        cliFlags: ["--platform", "linux/amd64"]
       sync:
         manual:
           - src: "src/**/*.js"
@@ -21,6 +22,7 @@ build:
       context: client
       docker:
         dockerfile: Dockerfile
+        cliFlags: ["--platform", "linux/amd64"]
       sync:
         manual:
           - src: "**/*.js"
@@ -29,6 +31,7 @@ build:
       context: tickets
       docker:
         dockerfile: Dockerfile
+        cliFlags: ["--platform", "linux/amd64"]
       sync:
         manual:
           - src: "src/**/*.js"
@@ -37,6 +40,7 @@ build:
       context: orders
       docker:
         dockerfile: Dockerfile
+        cliFlags: ["--platform", "linux/amd64"]
       sync:
         manual:
           - src: "src/**/*.js"
@@ -45,6 +49,7 @@ build:
       context: expiration
       docker:
         dockerfile: Dockerfile
+        cliFlags: ["--platform", "linux/amd64"]
       sync:
         manual:
           - src: "src/**/*.js"
@@ -53,6 +58,7 @@ build:
       context: payments
       docker:
         dockerfile: Dockerfile
+        cliFlags: ["--platform", "linux/amd64"]
       sync:
         manual:
           - src: "src/**/*.js"
