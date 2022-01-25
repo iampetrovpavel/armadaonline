@@ -19,7 +19,18 @@ const useRequest = ({ url, method, body, onSuccess, onFail}) => {
             return response.data
         }
         catch(error){
-            if(!error.response || !error.response.data || !error.response.data.errors) return console.log(error)
+            if(!error.response || !error.response.data || !error.response.data.errors) {
+                setErrors(
+                    <div className='alert alert-danger'>
+                        <h4>Ooopsss...</h4>
+                        <ul className='my-0'>
+                            <li>Что-то пошло не так...</li>
+                        </ul>
+                    </div>
+                )
+                if(onFail)onFail(error)
+                return
+            }
             setErrors(
                 <div className='alert alert-danger'>
                     <h4>Ooopsss...</h4>

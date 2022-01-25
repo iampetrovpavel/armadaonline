@@ -4,9 +4,9 @@ import Router from 'next/router'
 import colors from "../../assets/colors";
 
 const SignUp = () => {
-    const [email, setEmail] = useState('test@test.ru')
+    const [email, setEmail] = useState('')
     const [name, setName] = useState('')
-    const [password, setPassword] = useState('dsfsdf!@#1223')
+    const [password, setPassword] = useState('')
     const {doRequest, errors, loading} = useRequest({
         url: '/api/users/signup',
         method: 'post',

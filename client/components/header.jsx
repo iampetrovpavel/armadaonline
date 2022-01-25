@@ -5,18 +5,10 @@ import colors from '../assets/colors'
 
 const Header = ({currentUser}) => {
     const links = [
-        !currentUser && {label:'Sign Up', href: '/auth/signup'},
-        !currentUser && {label:'Sign In', href: '/auth/signin'},
-        currentUser && {label:'Sign Out', href: '/auth/signout'}
-    ]
-        .filter(linkConfig => linkConfig)
-        .map(({ label, href}) => (
-            <li key={href} className='nav-item'>
-                <Link href={href}>
-                    <a className='nav-link'>{label}</a>
-                </Link>
-            </li>
-        ))
+        !currentUser && {label:'Регистрация', href: '/auth/signup'},
+        !currentUser && {label:'Вход', href: '/auth/signin'},
+        currentUser && {label:'Выход', href: '/auth/signout'}
+    ].filter(link => link)
 
     const menu = useRef()
     function toggleMenu(){
@@ -89,16 +81,13 @@ const Header = ({currentUser}) => {
                             Контакты
                         </a>
                     </Link>
-                    <Link href='/auth/signin'>
-                        <a className='p-2 mb-lg-0 d-flex'>
-                            Вход
-                        </a>
-                    </Link>
-                    <Link href='/auth/signup'>
-                        <a className='p-2 mb-3 mb-lg-0 d-flex'>
-                            Регистрация
-                        </a>
-                    </Link>
+                    {links.map(({label, href}) => (
+                        <Link href={href} key={href}>
+                            <a className='p-2 mb-lg-0 d-flex'>
+                                {label}
+                            </a>
+                        </Link>
+                    ))}
                 </div>
             </div>
         </div>
