@@ -19,6 +19,7 @@ const useRequest = ({ url, method, body, onSuccess, onFail}) => {
             return response.data
         }
         catch(error){
+            if(!error.response || !error.response.data || !error.response.data.errors) return console.log(error)
             setErrors(
                 <div className='alert alert-danger'>
                     <h4>Ooopsss...</h4>
@@ -27,7 +28,7 @@ const useRequest = ({ url, method, body, onSuccess, onFail}) => {
                     </ul>
                 </div>
             )
-            onFail(error.response.data.errors)
+            if(onFail)onFail(error.response.data.errors)
         }
         finally {
             setLoading(null)
