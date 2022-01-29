@@ -1,7 +1,7 @@
 import Head from 'next/head'
-import Card from '../components/Card'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
+import Card from '../components/Card.jsx'
+import Header from '../components/Header.jsx'
+import Footer from '../components/Footer.jsx'
 
 export default function Home() {
   return (
