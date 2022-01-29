@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>DDS</title>
+        <title>Dance Dallas Studio</title>
         <meta name="description" content="Dance Dallas Studio Site" />
         <link rel="icon" href="/favicon.ico" />
         <link href="/fonts/all.css" rel="stylesheet"/>
