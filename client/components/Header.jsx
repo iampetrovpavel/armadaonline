@@ -10,8 +10,8 @@ const Header = ({currentUser}) => {
         {id: 4, href: '/', label: 'Контакты'},
         !currentUser && {id: 5, href: '/auth/signin', label: 'Вход', right: true},
         !currentUser && {id: 6, href: '/auth/signup', label: 'Регистрация', right: true},
-        currentUser && {id: 7, href: '/auth/signup', label: 'Личный кабинет', right: true},
-    ].finter(item=>item).map(item => (
+        currentUser && {id: 7, href: '/', label: 'Личный кабинет', right: true},
+    ].filter(item=>item).map(item => (
             <li key={item.id} className={'' + (item.id === selected? ' selected': '') + (item.right?' float-right': ' float-left')} >
                 <a href={item.href}>{item.label}</a>
             </li>
@@ -28,7 +28,7 @@ const Header = ({currentUser}) => {
     ))
     return (
         <div className='header-wrapper'>
-            <Image alt='logo' src={logo}/>
+            {/* <Image alt='logo' src={logo}/> */}
             <div className="header">
                 <ul className='menu'>
                     {menuItems}

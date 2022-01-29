@@ -37,7 +37,7 @@ App.getInitialProps = async (appContext) => {
       const client = buildClient(appContext.ctx)
       const res = await client.get('/api/users/currentuser')
       data = res.data
-  }
+    }
   let pageProps = {};
   if( appContext.Component.getInitialProps ) {
       (process.env.NEXT_PUBLIC_ENV !== 'single') && (pageProps = await appContext.Component.getInitialProps(appContext.ctx, client, data.currentUser))
