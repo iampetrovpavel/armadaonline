@@ -1,26 +1,25 @@
 import { useState} from "react";
 import useRequest from '../../hooks/use-request'
 import Router from 'next/router'
-// import colors from "../../assets/colors";
 
 const SignUp = () => {
-    // const [email, setEmail] = useState('test@test.ru')
-    // const [name, setName] = useState('')
-    // const [password, setPassword] = useState('dsfsdf!@#1223')
-    // const {doRequest, errors, loading} = useRequest({
-    //     url: '/api/users/signup',
-    //     method: 'post',
-    //     body: {email, password},
-    //     onSuccess: () => Router.push('/')
-    // })
+    const [email, setEmail] = useState('test@test.ru')
+    const [name, setName] = useState('')
+    const [password, setPassword] = useState('dsfsdf!@#1223')
+    const {doRequest, errors, loading} = useRequest({
+        url: '/api/users/signup',
+        method: 'post',
+        body: {email, password},
+        onSuccess: () => Router.push('/')
+    })
 
-    // const onSubmit = async e => {
-    //     e.preventDefault()
-    //     doRequest()
-    // }
+    const onSubmit = async e => {
+        e.preventDefault()
+        doRequest()
+    }
     return (
         <div className="card my-3 shadow animate__animated animate__jackInTheBox" style={{maxWidth: '800px', margin: '0 auto'}}>
-            {/* <div className="card-body">
+            <div className="card-body">
                 <form onSubmit={onSubmit}>
                     <h1>Регистрация</h1>
                     <div className='mb-3'>
@@ -37,9 +36,10 @@ const SignUp = () => {
                     </div>
                     {errors}
                     <button className='btn btn-primary' 
-                        style={{backgroundColor: colors.green, border: 'none'}}>{!loading && 'Зарегистрироваться'}{loading}</button>
+                        // style={{backgroundColor: colors.green, border: 'none'}}
+                    >{!loading && 'Зарегистрироваться'}{loading}</button>
                 </form>
-            </div> */}
+            </div>
         </div>
     )
 }

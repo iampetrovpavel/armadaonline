@@ -1,16 +1,17 @@
 import Image from 'next/image'
 import logo from '../images/logo.png'
 
-const Header = () => {
+const Header = ({currentUser}) => {
     const selected = 1
     const menuItems = [
         {id: 1, href: '/', label: 'Направления'},
         {id: 2, href: '/', label: 'Цены'},
         {id: 3, href: '/', label: 'Расписание'},
         {id: 4, href: '/', label: 'Контакты'},
-        {id: 5, href: '/', label: 'Личный кабинет', right: true},
-        {id: 6, href: '/', label: 'Регистрация', right: true},
-    ].map(item => (
+        !currentUser && {id: 5, href: '/auth/signin', label: 'Вход', right: true},
+        !currentUser && {id: 6, href: '/auth/signup', label: 'Регистрация', right: true},
+        currentUser && {id: 7, href: '/auth/signup', label: 'Личный кабинет', right: true},
+    ].finter(item=>item).map(item => (
             <li key={item.id} className={'' + (item.id === selected? ' selected': '') + (item.right?' float-right': ' float-left')} >
                 <a href={item.href}>{item.label}</a>
             </li>
