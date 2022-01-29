@@ -8,7 +8,7 @@ const Card = ({className}) => {
                 <span>19 дек 2022</span>
             </div>
             <div className='card-img'>
-                <Image src={balet} className='cover' layout='fill'/>
+                <Image alt='image' src={balet} className='cover' layout='fill'/>
             </div>
             <div className='card-details'>
                 <h3>

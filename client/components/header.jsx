@@ -11,7 +11,7 @@ const Header = () => {
         {id: 5, href: '/', label: 'Личный кабинет', right: true},
         {id: 6, href: '/', label: 'Регистрация', right: true},
     ].map(item => (
-            <li className={'' + (item.id === selected? ' selected': '') + (item.right?' float-right': ' float-left')} >
+            <li key={item.id} className={'' + (item.id === selected? ' selected': '') + (item.right?' float-right': ' float-left')} >
                 <a href={item.href}>{item.label}</a>
             </li>
     ))
@@ -21,13 +21,13 @@ const Header = () => {
         {id: 3, href: '/', label: 'От 10 до 18 лет'},
         {id: 4, href: '/', label: 'Взрослые'},
     ].map(item => (
-            <li className={item.id === selected? 'selected': ''} style={{float: item.right?'right': 'left'}}>
+            <li key={item.id} className={item.id === selected? 'selected': ''} style={{float: item.right?'right': 'left'}}>
                 <a href={item.href}>{item.label}</a>
             </li>
     ))
     return (
         <div className='header-wrapper'>
-            <Image src={logo}/>
+            <Image alt='logo' src={logo}/>
             <div className="header">
                 <ul className='menu'>
                     {menuItems}

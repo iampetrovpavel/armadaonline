@@ -10,7 +10,7 @@ export default function Home() {
         <title>Dance Dallas Studio</title>
         <meta name="description" content="Dance Dallas Studio Site" />
         <link rel="icon" href="/favicon.ico" />
-        <link href="/fonts/all.css" rel="stylesheet"/>
+        {/* <link href="/fonts/all.css" rel="stylesheet"/> */}
       </Head>
       <div className="container">
         <Header/>

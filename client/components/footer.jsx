@@ -1,4 +1,9 @@
+import Link from 'next/link'
+
 const Footer = () => {
+    const directions = [
+        {href:'/', }
+    ]
     return (
         <div className="footer">
             <div className='container'>
@@ -13,25 +18,33 @@ const Footer = () => {
                     </div>
                     <div className="col-m-4 col-t-2 col-1">
                         <ul>
-                            <li><a href="/">Бальные танцы</a></li>
-                            <li><a href="/">Стрип пластика</a></li>
-                            <li><a href="/">Кавердэнс</a></li>
-                            <li><a href="/">Чирхоп</a></li>
+                            <li><Link href="/"><a>Бальные танцы</a></Link></li>
+                            <li><Link href="/"><a >Стрип пластика</a></Link></li>
+                            <li><Link href="/"><a >Кавердэнс</a></Link></li>
+                            <li><Link href="/"><a>Чирхоп</a></Link></li>
                         </ul>
                     </div>
                     <div className="col-m-4 col-t-2 col-1">
                         <ul>
-                            <li><a href="/">Направления</a></li>
-                            <li><a href="/">Цены</a></li>
-                            <li><a href="/">Расписание</a></li>
-                            <li><a href="/">Контакты</a></li>
+                            <li><Link href="/"><a >Направления</a></Link></li>
+                            <li><Link href="/"><a>Цены</a></Link></li>
+                            <li><Link href="/"><a >Расписание</a></Link></li>
+                            <li><Link href="/"><a>Контакты</a></Link></li>
                         </ul>
                     </div>
                     <div className="col-m-4 col-t-2 col-1 social">
-                        <a href='' style={{backgroundImage: 'url(\'/images/icon-facebook.svg\')'}}></a>
-                        <a href='' style={{backgroundImage: 'url(\'/images/icon-insta.svg\')'}}></a>
-                        <a href='' style={{backgroundImage: 'url(\'/images/icon-twitter.svg\')'}}></a>
-                        <a href='' style={{backgroundImage: 'url(\'/images/icon-youtube.svg\')'}}></a>
+                        <Link href='/'>
+                            <a style={{backgroundImage: 'url(\'/images/icon-facebook.svg\')'}}></a>                    
+                        </Link>
+                        <Link href='/'>
+                            <a style={{backgroundImage: 'url(\'/images/icon-insta.svg\')'}}></a>
+                        </Link>
+                        <Link href='/'>
+                            <a style={{backgroundImage: 'url(\'/images/icon-twitter.svg\')'}}></a>
+                        </Link>
+                        <Link href='/'>
+                            <a style={{backgroundImage: 'url(\'/images/icon-youtube.svg\')'}}></a>
+                        </Link>
                     </div>
                 </div>
             </div>
