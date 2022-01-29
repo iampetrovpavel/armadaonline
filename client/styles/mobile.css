@@ -1,0 +1,24 @@
+@media screen and (max-width: 600px){
+    .header .menu{
+      height: auto;
+    }
+    .header .menu li{
+      display: block;
+      float: none;
+      padding: 0 12px;
+      line-height: 40px;
+    }
+    .col-m-1 {
+      width: 24% !important;
+    }
+    .col-m-2 {
+      width: 48% !important;
+    }
+    .col-m-3 {
+      width: 74% !important;
+    }
+    .col-m-4 {
+      padding: 0 16px;
+      width: 100% !important;
+    }
+  }

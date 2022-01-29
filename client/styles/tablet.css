@@ -1,0 +1,15 @@
+@media screen and (max-width: 1200px) and (min-width: 600px) {
+    .col-t-1 {
+      width: 24% !important;
+    }
+    .col-t-2 {
+      width: 48% !important;
+    }
+    .col-t-3 {
+      width: 74% !important;
+    }
+    .col-t-4 {
+      padding: 0 16px;
+      width: 100% !important;
+    }
+  }

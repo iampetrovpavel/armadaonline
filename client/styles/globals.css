@@ -1,0 +1,179 @@
+:root {
+  --blue: #48357C;
+  --white: #FAF8EB;
+  --pink: #EF5DA8;
+  --pink-dark: #D7398A;
+  --gray: #B5B5B5;
+  --gray-light: #e5e5e5;
+  --yellow: #FFE600;
+  --yellow-dark: #FFDA1B;
+  --black: #333333;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  height: 100%;
+  background-color: var(--white);
+  color: var(--black);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+h1, h2, h3, h4 {
+  font-family: Ag;
+}
+
+#__next{
+  height: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+.container {
+  margin: 0 auto;;
+  max-width: 1200px;
+}
+
+/* ===========================================HEADER================================================= */
+.header {
+  color: white;
+  font-family: Ag;
+  position: relative;
+}
+
+.header .menu{
+  background-color: var(--blue);
+  text-transform: uppercase;
+  height: 40px;
+}
+
+.header .menu li{
+  display: block;
+  /* float: left; */
+  padding: 0 12px;
+  line-height: 40px;
+  font-size: 17px;
+}
+
+.header .menu li:hover{
+  background-color: var(--pink-dark);
+
+}
+
+.header .menu a{
+  text-decoration: none;
+}
+
+.header .menu .selected{
+  background-color: var(--pink);
+}
+
+
+/* =================================================SUB======================================== */
+
+.header .sub {
+  margin-top: 2px;
+  font-size: 15px;
+  height: 40px;
+}
+
+.header .sub li{
+  display: block;
+  padding: 0 12px;
+  line-height: 40px;
+  position: relative;
+  margin-right: 2px;
+  background-color: var(--gray);
+}
+
+.header .sub li:hover{
+  background-color: var(--yellow-dark);
+}
+
+.header .sub .selected{
+  background-color: var(--yellow);
+}
+
+/* =================================================CARD============================================= */
+
+.card {
+  display: inline-block;
+  height: 400px;
+  margin-bottom: 2em;
+}
+
+.card-header {
+  border-bottom: 2px solid var(--pink);
+  height: 27px;
+}
+
+.card-header span {
+  background-color: var(--pink);
+  color: white;
+  font-size: 14px;
+  float: right;
+  line-height: 27px;
+  padding: 0 8px;
+  font-family: Ag;
+}
+
+.card-img {
+  position: relative;
+  height: 40%;
+}
+
+.card-details {
+  padding: 1px 16px;
+  background-color: var(--gray-light);
+  height: calc(60% - 27px);
+}
+
+/* ============================================================FOOTER================================= */
+.footer {
+  padding: 1.5em;
+}
+
+.footer h4 {
+  margin-top: 0;
+}
+.footer a{
+  text-decoration: underline;
+}
+.footer a:hover{
+  color: var(--blue);
+}
+.footer li{
+  margin-bottom: 0.5em;
+}
+.bg-gray-light {
+  background-color: var(--gray-light);
+}
+.social {
+}
+.social a {
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: inline-block;
+  text-indent: -9999em;
+  order: 0;
+  text-decoration: none;
+}

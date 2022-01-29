@@ -4,8 +4,8 @@ import Router from 'next/router'
 import colors from "../../assets/colors";
 
 const SignIn = () => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('test@test.ru')
+    const [password, setPassword] = useState('dsfsdf!@#1223')
     const {doRequest, errors, loading} = useRequest({
         url: '/api/users/signin',
         method: 'post',
