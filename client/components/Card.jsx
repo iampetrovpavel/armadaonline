@@ -1,4 +1,4 @@
-import Image from 'next/Image'
+import Image from 'next/image'
 import balet from '../images/balet.png'
 
 const Card = ({className}) => {
