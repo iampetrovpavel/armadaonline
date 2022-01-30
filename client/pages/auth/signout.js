@@ -13,7 +13,7 @@ const Signout = () => {
     })
     useEffect(() => {
         doRequest()
-    }, [doRequest])
+    }, [])
     return <div>Досвидания...</div>
 }
 
