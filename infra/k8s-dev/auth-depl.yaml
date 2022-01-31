@@ -17,7 +17,9 @@ spec:
           image: iampetrovpavel/auth
           env:
             - name: MONGO_URI
-              value: mongodb://auth-mongo-srv:27017/auth
+              value: mongodb://auth-mongo-srv:27017
+            - name: MONGO_DB
+              value: /auth
             - name: JWT_KEY
               valueFrom:
                 secretKeyRef:

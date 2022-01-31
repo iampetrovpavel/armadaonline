@@ -10,7 +10,8 @@ const start = async () => {
         throw new Error('MONGO_URI undefined')
     }
     try {
-        await mongoose.connect(process.env.MONGO_URI+process.env.MONGO_DB);
+        const mongo_link = process.env.MONGO_URI+process.env.MONGO_DB
+        await mongoose.connect(mongo_link);
         console.log('Connected to MongoDb');
     } catch (err) {
         console.error(err);

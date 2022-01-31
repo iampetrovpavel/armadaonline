@@ -21,6 +21,8 @@ spec:
                 secretKeyRef:
                   name: secrets
                   key: MONGO_URI
+            - name: MONGO_DB
+              value: /ds_auth
             - name: JWT_KEY
               valueFrom:
                 secretKeyRef:
