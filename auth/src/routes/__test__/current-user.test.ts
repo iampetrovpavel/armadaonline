@@ -5,6 +5,7 @@ it('response with details about the current user', async () => {
     await request(app)
         .post('/api/users/signup')
         .send({
+            name: 'Петров Павел',
             email: 'test@test.com',
             password: 'password'
         })

@@ -1,27 +1,29 @@
 import mongoose from 'mongoose';
 import {Password} from "../services/password";
 
-// An interface that describes the properties
-// that are requried to create a new User
 interface UserAttrs {
+  name: string;
   email: string;
   password: string;
+  admin?: boolean;
 }
 
-// An interface that describes the properties
-// that a User Model has
 interface UserModel extends mongoose.Model<UserDoc> {
   build(attrs: UserAttrs): UserDoc;
 }
 
-// An interface that describes the properties
-// that a User Document has
 interface UserDoc extends mongoose.Document {
+  name: string;
   email: string;
   password: string;
+  admin?: boolean;
 }
 
 const userSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
   email: {
     type: String,
     required: true
@@ -29,6 +31,9 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  admin: {
+    type: Boolean,
   }
 },{
   toJSON: {
@@ -54,4 +59,4 @@ userSchema.pre('save', async function (done){
 
 const User = mongoose.model<UserDoc, UserModel>('User', userSchema);
 
-export { User };
+export { User, UserAttrs };

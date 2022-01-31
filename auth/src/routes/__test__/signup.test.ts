@@ -5,6 +5,7 @@ it('returns a 201 on successful signup ', async () => {
     return request(app)
         .post('/api/users/signup')
         .send({
+            name: 'Петров Павел',
             email: 'test@test.com',
             password: 'password'
         })
@@ -50,6 +51,7 @@ it('disallows duplicate emails ', async () => {
     await request(app)
         .post('/api/users/signup')
         .send({
+            name: 'Петров Павел',
             email: 'test@test.com',
             password: 'password'
         })
@@ -67,6 +69,7 @@ it('sets a cookies after successful signup', async () => {
     const response = await request(app)
         .post('/api/users/signup')
         .send({
+            name: 'Петров Павел',
             email: 'test@test.com',
             password: 'password'
         })
@@ -74,3 +77,26 @@ it('sets a cookies after successful signup', async () => {
 
     expect(response.get('Set-Cookie')).toBeDefined()
 }); 
+
+it('returns a 201 on successful create admin', async () => {
+    const firstResponse = await request(app)
+        .post('/api/users/signup')
+        .send({
+            name: 'Петров Павел',
+            email: 'test@test.com',
+            password: 'password',
+            admin: true
+        })
+        .expect(201)
+    expect(firstResponse.body.admin).toBeDefined()
+    const secondResponse = await request(app)
+        .post('/api/users/signup')
+        .send({
+            name: 'Петров Павел',
+            email: 'test1@test.com',
+            password: 'password',
+            admin: true
+        })
+        .expect(201)
+    expect(secondResponse.body.admin).not.toBeDefined()
+    })
