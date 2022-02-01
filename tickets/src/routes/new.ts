@@ -1,13 +1,13 @@
 import express , {Request, Response} from 'express'
 import { body } from 'express-validator'
-import { requireAuth, ValidateRequest } from '@dallasstudio/common'
+import { isAdmin, requireAuth, ValidateRequest } from '@dallasstudio/common'
 import { Ticket} from '../models/ticket'
 import { TicketCreatedPublisher } from '../events/publishers/ticket-created-publisher'
 import { natsWrapper } from '../nats-wrapper'
 
 const router = express.Router();
 
-router.post('/api/tickets', requireAuth, [
+router.post('/api/tickets', requireAuth, isAdmin, [
 	body('title').not().isEmpty().withMessage('Title is required'),
 	body('price').isFloat({ gt: 0 })
 		.withMessage('Price must be greater than 0'),

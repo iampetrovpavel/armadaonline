@@ -8,8 +8,10 @@ POST https://test.ru/api/users/signup
 Content-Type: application/json
 
 {
-    "email":"test2@mail.ru",
-    "password":"1212"
+    "name": "Petrov Pavel",
+    "email": "test2@test.ru",
+    "password": "1212",
+    "admin": true
 }
 
 ###
@@ -17,7 +19,7 @@ POST https://test.ru/api/users/signin
 Content-Type: application/json
 
 {
-    "email":"test1@mail.ru",
+    "email":"test@test.ru",
     "password":"1212"
 }
 

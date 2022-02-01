@@ -5,7 +5,8 @@ import {
 	NotFoundError,
 	requireAuth,
 	NotAuthorizedError,
-	BadRequestError
+	BadRequestError,
+	isAdmin
 } from '@dallasstudio/common'
 import {Ticket} from '../models/ticket'
 import { TicketUpdatedPublisher } from '../events/publishers/ticket-updated-publisher'
@@ -15,6 +16,7 @@ const router = express.Router()
 
 router.put('/api/tickets/:id', 
 	requireAuth,
+	isAdmin,
 	[
 		body('title')
 			.not()
