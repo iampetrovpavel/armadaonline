@@ -7,7 +7,9 @@ import { natsWrapper } from '../nats-wrapper'
 
 const router = express.Router();
 
-router.post('/api/tickets', requireAuth, (req:Request, res:Response, next:NextFunction)=>{console.log(req.currentUser); next()}, isAdmin, [
+router.post('/api/tickets', requireAuth, 
+	// (req:Request, res:Response, next:NextFunction)=>{console.log(req.body); next()}, 
+	isAdmin, [
 	body('title').not().isEmpty().withMessage('Title is required'),
 	body('directionId').isMongoId().withMessage('Direction must be valid'),
 	body('price').isFloat({ gt: 0 })
@@ -23,7 +25,9 @@ ValidateRequest,
 async (req: Request, res: Response) => {
 	const { title, directionId, price, count, month, year } = req.body
 	const ticket = Ticket.build({
-		title, directionId ,price, 
+		title, 
+		directionId,
+		price, 
 		userId: req.currentUser!.id,
 		count,
 		month,

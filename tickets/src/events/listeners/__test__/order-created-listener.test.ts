@@ -10,6 +10,10 @@ const setup = async () => {
 	const ticket = Ticket.build({
 		title: 'string',
 		price: 10,
+		directionId: new mongoose.Types.ObjectId().toHexString(),
+		count: 8,
+		month: 2,
+		year: 2022,
 		userId: new mongoose.Types.ObjectId().toHexString()
 	})
 	await ticket.save()

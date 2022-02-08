@@ -11,7 +11,12 @@ it('return 404 if provided id is not exist', async () => {
 		.set('Cookie', global.signin())
 		.send({
 			title: 'sdsdf',
-			price: 20
+			price: 20,
+			directionId: new mongoose.Types.ObjectId().toHexString(),
+			count: 8,
+			month: 2,
+			year: 2022,
+			userId: '123',
 		})
 		.expect(404)
 })
@@ -22,7 +27,12 @@ it('return 401 if the user is not authenticated', async () => {
 		.put(`/api/tickets/${id}`)
 		.send({
 			title: 'sdsdf',
-			price: 20
+			price: 20,
+			directionId: new mongoose.Types.ObjectId().toHexString(),
+			count: 8,
+			month: 2,
+			year: 2022,
+			userId: '123',
 		})
 		.expect(401)
 })
@@ -33,14 +43,19 @@ it('return 401 if user is not own the ticket', async () => {
 		.set('Cookie', global.signin())
 		.send({
 			title: 'asdasd',
-			price: 20
+			price: 20,
+			directionId: new mongoose.Types.ObjectId().toHexString(),
+			count: 8,
+			month: 2,
+			year: 2022,
+			userId: '123',
 		})
 	await request(app)
 		.put(`/api/tickets/${response.body.id}`)
 		.set('Cookie', global.signin())
 		.send({
 			title: '98989898',
-			price: 20000
+			price: 20000,
 		})
 		.expect(401)
 })
@@ -52,7 +67,12 @@ it('updates the ticket proveded invalid title or price', async () => {
 		.set('Cookie', cookie)
 		.send({
 			title: 'wwerwer',
-			price: 20
+			price: 20,
+			directionId: new mongoose.Types.ObjectId().toHexString(),
+			count: 8,
+			month: 2,
+			year: 2022,
+			userId: '123',
 		})
 	 await request(app)
 	 	.put(`/api/tickets/${response.body.id}`)
@@ -79,7 +99,12 @@ it('updates the ticket proveded valid inputs', async () => {
 		.set('Cookie', cookie)
 		.send({
 			title: 'wwerwer',
-			price: 20
+			price: 20,
+			directionId: new mongoose.Types.ObjectId().toHexString(),
+			count: 8,
+			month: 2,
+			year: 2022,
+			userId: '123',
 		})
 
 	await request(app)
@@ -106,7 +131,12 @@ it('publish an event', async () => {
 		.set('Cookie', cookie)
 		.send({
 			title: 'wwerwer',
-			price: 20
+			price: 20,
+			directionId: new mongoose.Types.ObjectId().toHexString(),
+			count: 8,
+			month: 2,
+			year: 2022,
+			userId: '123',
 		})
 
 	await request(app)
@@ -127,7 +157,12 @@ it('reject if the ticket is reserved', async () => {
 		.set('Cookie', cookie)
 		.send({
 			title: 'wwerwer',
-			price: 20
+			price: 20,
+			directionId: new mongoose.Types.ObjectId().toHexString(),
+			count: 8,
+			month: 2,
+			year: 2022,
+			userId: '123',
 		})
 
 	const ticket = await Ticket.findById(response.body.id)

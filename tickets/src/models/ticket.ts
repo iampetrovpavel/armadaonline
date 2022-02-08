@@ -3,8 +3,8 @@ import {updateIfCurrentPlugin } from 'mongoose-update-if-current'
 
 interface TicketAttrs {
 	title: string,
-	directionId: string,
 	price: number,
+	directionId: string,
 	userId: string
 	count: number,
 	month: number,
