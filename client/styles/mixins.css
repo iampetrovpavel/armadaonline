@@ -8,11 +8,12 @@
   .row {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: start;
   }
   
   .col-1 {
     width: 24%;
+    padding: 0 1%;
   }
   .col-2 {
     width: 48%;

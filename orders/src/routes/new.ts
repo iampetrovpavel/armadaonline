@@ -11,7 +11,7 @@ import { ukassa } from '../ukassa'
 
 const router = express.Router()
 
-const EXPIRATION_WINDOW_SECONDS = 60
+const EXPIRATION_WINDOW_SECONDS = 600000
 
 router.post('/api/orders', requireAuth, [
 		body('ticketId')

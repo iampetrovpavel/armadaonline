@@ -4,6 +4,9 @@ https://test.ru/api/users/currentuser
 http://dallasstudio.ru/api/users/currentuser
 
 ###
+https://test.ru/api/users?groups=teacher
+
+###
 POST https://test.ru/api/users/signup
 Content-Type: application/json
 
@@ -30,24 +33,28 @@ Content-Type: application/json
 {"title":"test", "price": 3}
 
 ###
+GET test.ru/api/tickets
+Content-Type: application/json
+
+###
 GET test.ru/api/orders
 
 ###
 POST test.ru/api/orders
 Content-Type: application/json
 
-{"ticketId":"61ee94bcdf1211aec2e0e5f9"}
+{"ticketId":"61fc74b0d8a6f58679c56e49"}
 
 
 ###
 POST test.ru/api/payments
 Content-Type: application/json
 
-{"orderId":"61ee98b5b7d3b51d610e1ded"}
+{"orderId":"61fc74c2e87e2288865eaa35"}
 
 
 ###
-GET test.ru/api/payments/61e34bb93de8cf3232abbafb
+GET test.ru/api/payments/61fc74c2e87e2288865eaa35
 Content-Type: application/json
 
 ###

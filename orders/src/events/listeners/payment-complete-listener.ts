@@ -7,6 +7,7 @@ import {
 import { Message } from 'node-nats-streaming';
 import { queueGroupName } from './queue-group-name';
 import { Order } from '../../models/order';
+import {OrderComplitePublisher} from '../publishers/order-complite-publisher'
 
 export class PaymentCompleteListener extends Listener<PaymentCompleteEvent> {
   subject: Subjects.PaymentComplete = Subjects.PaymentComplete;
@@ -14,6 +15,8 @@ export class PaymentCompleteListener extends Listener<PaymentCompleteEvent> {
 
   async onMessage(data: PaymentCompleteEvent['data'], msg: Message) {
     const order = await Order.findById(data.orderId);
+
+    console.log("ORDER ", order?.toObject())
 
     if (!order) {
       throw new Error('Order not found');
@@ -27,6 +30,12 @@ export class PaymentCompleteListener extends Listener<PaymentCompleteEvent> {
       status: OrderStatus.Complete,
     });
     await order.save();
+
+    await  new OrderComplitePublisher(this.client).publish({
+      id: order.id,
+      ticketId: order.ticket._id,
+      userId: order.userId
+  })
     msg.ack();
   }
 }

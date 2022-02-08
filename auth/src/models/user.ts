@@ -6,6 +6,7 @@ interface UserAttrs {
   email: string;
   password: string;
   admin?: boolean;
+  groups?: string[];
 }
 
 interface UserModel extends mongoose.Model<UserDoc> {
@@ -17,6 +18,7 @@ interface UserDoc extends mongoose.Document {
   email: string;
   password: string;
   admin?: boolean;
+  groups: string[];
 }
 
 const userSchema = new mongoose.Schema({
@@ -34,6 +36,10 @@ const userSchema = new mongoose.Schema({
   },
   admin: {
     type: Boolean,
+  },
+  groups: {
+    type: [String],
+    default: []
   }
 },{
   toJSON: {

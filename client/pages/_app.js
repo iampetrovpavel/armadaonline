@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import '../styles/admin.css'
 import '../styles/mobile.css'
 import '../styles/tablet.css'
 import '../styles/mixins.css'

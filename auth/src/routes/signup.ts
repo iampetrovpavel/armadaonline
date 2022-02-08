@@ -26,7 +26,7 @@ router.post('/api/users/signup',
 
         if(admin){
             const countUsers = await User.countDocuments({})
-            if(countUsers === 0) {userAttrs.admin = admin}
+            if(countUsers === 0) {userAttrs.groups = ['admin']}
         }
 
         const user = User.build(userAttrs)
@@ -35,7 +35,8 @@ router.post('/api/users/signup',
         const userJwt = jwt.sign({
             id: user.id,
             email: user.email,
-            name: user.name
+            name: user.name,
+            groups: user.groups
         }, process.env.JWT_KEY!)
 
         req.session = {

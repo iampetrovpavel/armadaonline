@@ -38,6 +38,20 @@ spec:
                 name: payments-clusterip-srv
                 port:
                   number: 3000
+          - path: /api/directions/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: tickets-clusterip-srv
+                port:
+                  number: 3000
+          - path: /api/schedule/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: tickets-clusterip-srv
+                port:
+                  number: 3000
           - path: /?(.*)
             pathType: Prefix
             backend:

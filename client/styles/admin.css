@@ -1,0 +1,8 @@
+.admin-direction-schedule-button {
+    display: none;
+}
+
+.admin-direction-title:hover .admin-direction-schedule-button{
+    display: inline-block;
+    cursor: pointer;
+}

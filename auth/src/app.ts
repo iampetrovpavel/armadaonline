@@ -7,6 +7,7 @@ import {signupRouter} from "./routes/signup";
 import {signinRouter} from "./routes/signin";
 import {errorHandler, NotFoundError} from "@dallasstudio/common";
 import cookieSession from 'cookie-session'
+import { usersRouter } from './routes/users';
 
 const app = express()
 app.set('trust proxy', true)
@@ -20,6 +21,8 @@ app.use(currentUserRouter)
 app.use(signoutRouter)
 app.use(signupRouter)
 app.use(signinRouter)
+
+app.use(usersRouter)
 
 app.all('*', (req, res)=>{
     throw new NotFoundError()
