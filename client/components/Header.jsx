@@ -2,13 +2,14 @@ import Image from 'next/image'
 import logo from '../images/logo.png'
 
 const Header = ({currentUser}) => {
+    console.log(currentUser)
     const selected = 1
     const menuItems = [
-        {id: 1, href: '/', label: 'Направления'},
+        {id: 1, href: '/', label: 'Направленияzzz'},
         {id: 2, href: '/', label: 'Цены'},
-        {id: 3, href: '/', label: 'Расписание'},
+        {id: 3, href: '/schedule', label: 'Расписание'},
         {id: 4, href: '/', label: 'Контакты'},
-        (currentUser && currentUser.admin) && {id: 8, href: '/admin', label: 'Настройки', right: true},
+        (currentUser && currentUser.groups && (currentUser.groups.indexOf('admin')!=-1)) && {id: 8, href: '/admin/tickets', label: 'Настройки', right: true},
         !currentUser && {id: 5, href: '/auth/signin', label: 'Вход', right: true},
         !currentUser && {id: 6, href: '/auth/signup', label: 'Регистрация', right: true},
         currentUser && {id: 7, href: '/auth/lk', label: 'Личный кабинет', right: true},

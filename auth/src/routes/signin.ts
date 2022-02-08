@@ -33,7 +33,8 @@ router.post('/api/users/signin', [
             id: existingUser.id,
             email: existingUser.email,
             name: existingUser.name,
-            admin: existingUser.admin?true: false
+            admin: existingUser.admin?true: false,
+            groups: existingUser.groups
         }, process.env.JWT_KEY!)
 
         req.session = {

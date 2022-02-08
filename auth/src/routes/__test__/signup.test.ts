@@ -88,7 +88,8 @@ it('returns a 201 on successful create admin', async () => {
             admin: true
         })
         .expect(201)
-    expect(firstResponse.body.admin).toBeDefined()
+    expect(firstResponse.body.groups).toBeDefined()
+    expect(firstResponse.body.groups.indexOf('admin')).not.toEqual(-1)
     const secondResponse = await request(app)
         .post('/api/users/signup')
         .send({

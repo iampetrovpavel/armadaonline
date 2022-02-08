@@ -17,7 +17,12 @@ it('return ticket if ticket  found', async () => {
 		.post('/api/tickets')
 		.set('Cookie', global.signin())
 		.send({
-			title, price
+			title, price,
+			directionId: new mongoose.Types.ObjectId().toHexString(),
+			count: 8,
+			month: 2,
+			year: 2022,
+			userId: new mongoose.Types.ObjectId().toHexString(),
 		})
 		.expect(201)
 	const ticketResponse = await request(app)

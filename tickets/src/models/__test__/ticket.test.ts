@@ -3,8 +3,13 @@ import { Ticket } from '../ticket'
 it('implements optimistic concurrency control', async () => {
 	const ticket = Ticket.build({
 		title: 'concert',
+		directionId: 'string',
+		count: 8,
+		month: 2,
+		year: 2022,
 		price: 5,
-		userId: '123'
+		userId: '123',
+		
 	})
 	await ticket.save()
 	const firstInstance = await Ticket.findById(ticket.id)
@@ -27,8 +32,12 @@ it('implements optimistic concurrency control', async () => {
 it('check increment', async () => {
 	const ticket = Ticket.build({
 		title: 'concert',
+		directionId: 'string',
+		count: 8,
+		month: 2,
+		year: 2022,
 		price: 5,
-		userId: '123'
+		userId: '123',
 	})
 	await ticket.save()
 	expect(ticket.version).toEqual(0)

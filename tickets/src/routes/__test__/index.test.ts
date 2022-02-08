@@ -1,5 +1,6 @@
 import request from 'supertest'
 import { app } from '../../app'
+import mongoose from 'mongoose'
 
 const createTicket = async () => {
 	await request(app)
@@ -7,7 +8,12 @@ const createTicket = async () => {
 		.set('Cookie', global.signin())
 		.send({
 			title: 'asdasd',
-			price: 20
+			price: 20,
+			directionId: new mongoose.Types.ObjectId().toHexString(),
+			count: 8,
+			month: 2,
+			year: 2022,
+			userId: new mongoose.Types.ObjectId().toHexString(),
 		})
 }
 

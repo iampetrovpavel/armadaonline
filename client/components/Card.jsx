@@ -1,21 +1,22 @@
 import Image from 'next/image'
-import balet from '../images/balet.png'
+// import balet from '../images/balet.png'
 
-const Card = ({className}) => {
+const Card = ({className, title, description, label, img}) => {
     return (
         <div className={"card " + className}>
             <div className="card-header">
-                <span>19 дек 2022</span>
+                <span>{label}</span>
             </div>
-            <div className='card-img'>
-                <Image alt='image' src={balet} className='cover' layout='fill'/>
+            <div className='card-img' style={{backgroundImage: `url(${img})`, backgroundSize: 'cover'}}>
+                {/* <Image alt='image' src={img} className='cover' layout='fill'/> */}
+                {/* <img src={img}/> */}
             </div>
             <div className='card-details'>
                 <h3>
-                    Бальные танцы
+                    {title}
                 </h3>
                 <p>
-                    Это красота, грация и изящество, это эмоции, которые никого не оставят равнодушными!
+                    {description}
                 </p>
             </div>
 

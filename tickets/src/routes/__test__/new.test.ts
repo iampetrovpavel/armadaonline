@@ -2,6 +2,7 @@ import request from 'supertest'
 import { app } from '../../app';
 import { Ticket } from '../../models/ticket'
 import { natsWrapper } from '../../nats-wrapper'
+import mongoose from 'mongoose'
 
 it('has route handler listening to /api/tickets for post request', async () => {
 	const response = await request(app)
@@ -32,7 +33,12 @@ it('return error if invalid title is provided', async () => {
 		.set('Cookie', global.signin())
 		.send({
 			title: '',
-			price: 10
+			price: 10,
+			directionId: '',
+			userId: 'string',
+			count: 12,
+			month: 1,
+			year: 2021,
 		})
 		.expect(400)
 
@@ -76,7 +82,12 @@ it('create tickets with valid inputs', async () => {
 		.set('Cookie', global.signin())
 		.send({
 			title,
-			price: 10
+			price: 10,
+			directionId: new mongoose.Types.ObjectId().toHexString(),
+			count: 8,
+			month: 2,
+			year: 2022,
+			userId: new mongoose.Types.ObjectId().toHexString(),
 		})
 		.expect(201)
 
@@ -94,7 +105,12 @@ it('publish new ticket', async () => {
 		.set('Cookie', global.signin())
 		.send({
 			title,
-			price: 10
+			price: 10,
+			directionId: new mongoose.Types.ObjectId().toHexString(),
+			count: 8,
+			month: 2,
+			year: 2022,
+			userId: new mongoose.Types.ObjectId().toHexString(),
 		})
 		.expect(201)
 

@@ -10,8 +10,8 @@ const useRequest = ({ url, method, body, onSuccess, onFail}) => {
                 <div className="spinner-border" role='status'/>
             )
             setErrors(null)
-            console.log(url, body)
-            const response = await axios[method](url, body)
+            console.log("REQUEST ", url + (props.params || '') + (props.query || ''), body, props.body)
+            const response = await axios[method](url + (props.params || '') + (props.query || ''), props.body || body)
             console.log("RESPONSE ",response.data)
             if(onSuccess){
                 onSuccess(response.data)

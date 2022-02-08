@@ -7,6 +7,8 @@ import { createTicketRouter } from './routes/new'
 import {showTicketRouter} from './routes/show'
 import {indexTicketRouter} from './routes/index'
 import {updateTicketRouter} from './routes/update'
+import { directionsRouter } from './routes/directions';
+import { scheduleRouter } from './routes/schedule';
 
 
 const app = express()
@@ -23,6 +25,9 @@ app.use(createTicketRouter)
 app.use(showTicketRouter)
 app.use(indexTicketRouter)
 app.use(updateTicketRouter)
+
+app.use(directionsRouter)
+app.use(scheduleRouter)
 
 app.all('*', (req, res)=>{
     throw new NotFoundError()
