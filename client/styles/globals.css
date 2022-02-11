@@ -274,3 +274,27 @@ a {
   color: var(--blue);
   font-weight: 900;
 }
+
+#header-top {
+  height: 95px;
+  position: relative;
+}
+#header-contacts {
+  /* right: 0; */
+  /* top: 0; */
+  float: right;
+  height: 100%;
+  /* position: absolute; */
+  align-items: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--blue);
+}
+
+#header-contacts span, img{
+  margin-right: 0.5em;
+}
+
+#header-contacts > img{
+  height: 24px;
+}

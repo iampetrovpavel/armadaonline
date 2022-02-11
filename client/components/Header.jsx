@@ -30,7 +30,25 @@ const Header = ({currentUser}) => {
     ))
     return (
         <div className='header-wrapper'>
-            <Image alt='logo' src={logo}/>
+            <div id='header-top'>
+                <Image alt='logo' src={logo}/>
+                <div id='header-contacts' className='row'>
+                    <div className='row' style={{alignItems: 'center'}}>
+                        <img src='images/phone.svg' alt='next' />
+                        <span>
+                            +79522486072
+                        </span>
+                    </div>
+                    <div className='row' style={{alignItems: 'center'}}>
+                        <img src='images/point.svg' alt='next' />
+                        <span>
+                            г. Пушкин, ул. Глинки д. 1
+                        </span>
+                    </div>
+                    <img src='images/vk.svg' alt='next' />
+                    <img src='images/instagram.svg' alt='next' />
+                </div>
+            </div>
             <div className="header">
                 <ul className='menu'>
                     {menuItems}
