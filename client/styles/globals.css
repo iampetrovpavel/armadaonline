@@ -104,18 +104,23 @@ a {
 /* =================================================SUB======================================== */
 
 .sub {
-  margin-top: 2px;
+  /* margin-top: 2px; */
   font-size: 15px;
-  height: 40px;
+  display: inline-block;
+  color: var(--blue);
+  /* height: 40px; */
 }
 
 .sub li{
   display: block;
   padding: 0 12px;
+  margin-top: 2px;
   line-height: 40px;
   position: relative;
   margin-right: 2px;
-  background-color: var(--gray);
+  /* font-weight: 600; */
+  background-color: var(--gray-light);
+  border-radius: 4px;
 }
 
 .sub li:hover{
