@@ -22,6 +22,16 @@ body {
   color: var(--black);
 }
 
+input {
+  padding: 0.5em;
+  outline: none;
+
+}
+
+input:focus {
+  border: 2px solid var(--blue-light)
+}
+
 ul {
   list-style: none;
   padding: 0;
@@ -30,6 +40,7 @@ ul {
 
 h1, h2, h3, h4 {
   font-family: Ag;
+  font-weight: 500;
 }
 
 #__next{
@@ -62,6 +73,7 @@ a {
   background-color: var(--blue);
   text-transform: uppercase;
   height: 40px;
+  transition: max-height 0.3s;
 }
 
 .header .menu li{
@@ -70,6 +82,8 @@ a {
   padding: 0 12px;
   line-height: 40px;
   font-size: 17px;
+  position: relative;
+  transition: top 0.3s;
 }
 
 .header .menu li:hover{
@@ -88,13 +102,13 @@ a {
 
 /* =================================================SUB======================================== */
 
-.header .sub {
+.sub {
   margin-top: 2px;
   font-size: 15px;
   height: 40px;
 }
 
-.header .sub li{
+.sub li{
   display: block;
   padding: 0 12px;
   line-height: 40px;
@@ -103,11 +117,11 @@ a {
   background-color: var(--gray);
 }
 
-.header .sub li:hover{
+.sub li:hover{
   background-color: var(--yellow-dark);
 }
 
-.header .sub .selected{
+.sub .selected{
   background-color: var(--yellow);
 }
 
@@ -193,10 +207,7 @@ a {
   bottom: 40px;
   left: -120px;
   cursor: pointer;
-  /* display: none; */
   transition: all 0.3s;
-
-  /* border: 2px solid var(--blue-light) */
 }
 
 .direction-cart-drawer {
@@ -267,12 +278,14 @@ a {
   cursor: pointer;
   border-radius: 4px;
   transition: all 0.3s;
+  font-size: 17px;
 }
 
 .direction-cart-trial button:hover{
   background-color: var(--yellow-dark);
   color: var(--blue);
-  font-weight: 900;
+  font-size: 22px;
+
 }
 
 #header-top {
@@ -282,13 +295,15 @@ a {
 #header-contacts {
   /* right: 0; */
   /* top: 0; */
-  float: right;
   height: 100%;
   /* position: absolute; */
   align-items: center;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--blue);
+  display: flex;
+  justify-content: flex-end;
+
 }
 
 #header-contacts span, img{
@@ -297,4 +312,8 @@ a {
 
 #header-contacts > img{
   height: 24px;
+}
+
+#burger {
+  display: none;
 }

@@ -1,12 +1,17 @@
 @media screen and (max-width: 600px){
     .header .menu{
-      height: auto;
+      height: auto !important;
     }
     .header .menu li{
       display: block;
       float: none;
       padding: 0 12px;
       line-height: 40px;
+    }
+    #burger {
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap;
     }
     .col-m-1 {
       width: 24% !important;
@@ -20,5 +25,11 @@
     .col-m-4 {
       padding: 0 16px;
       width: 100% !important;
+    }
+    .d-m-none {
+      display: none !important;
+    }
+    .d-m-block {
+      display: block !important;
     }
   }

@@ -1,4 +1,11 @@
 @media screen and (max-width: 1200px){
+    #header-contacts {
+      flex-direction: column;
+      justify-content: center;
+    }
+    #header-contacts > * {
+      padding: 0.2em;
+    }
     .col-t-1 {
       width: 24% !important;
     }
@@ -11,5 +18,8 @@
     .col-t-4 {
       padding: 0 16px;
       width: 100% !important;
+    }
+    .d-t-none {
+      display: none;
     }
   }

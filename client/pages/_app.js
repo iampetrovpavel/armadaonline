@@ -4,7 +4,9 @@ import '../styles/mobile.css'
 import '../styles/tablet.css'
 import '../styles/mixins.css'
 import '../styles/close.css'
+import '../styles/burger.css'
 import '../public/fonts/all.css'
+import 'animate.css'
 import buildClient from '../api/build-client'
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
@@ -21,7 +23,7 @@ function App({ Component, pageProps, currentUser }) {
         </Head>
         <div className="container">
           <Header currentUser={currentUser}/>
-          <main className='mt-2'>
+          <main>
             <Component {...pageProps} />
           </main>
         </div>

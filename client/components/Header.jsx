@@ -1,9 +1,12 @@
 import Image from 'next/image'
+import { useState } from 'react'
 import logo from '../images/logo.png'
 
 const Header = ({currentUser}) => {
-    console.log(currentUser)
-    const selected = 1
+    const selected = 4
+    const [burger, showBurger] = useState(true)
+    const [hide, setHide] = useState(false)
+    const [hide2, setHide2] = useState(false)
     const menuItems = [
         {id: 1, href: '/', label: 'Направления'},
         {id: 2, href: '/', label: 'Цены'},
@@ -13,49 +16,71 @@ const Header = ({currentUser}) => {
         !currentUser && {id: 5, href: '/auth/signin', label: 'Вход', right: true},
         !currentUser && {id: 6, href: '/auth/signup', label: 'Регистрация', right: true},
         currentUser && {id: 7, href: '/auth/lk', label: 'Личный кабинет', right: true},
-    ].filter(item=>item).map(item => (
-            <li key={item.id} className={'' + (item.id === selected? ' selected': '') + (item.right?' float-right': ' float-left')} >
-                <a href={item.href}>{item.label}</a>
+    ].filter(item=>item).map((item, i) => (
+            <li 
+                key={item.id}
+                className={'' + (item.id === selected? ' selected': '') 
+                    + (item.right?' float-right': ' float-left') 
+                    + (!burger && item.id !== selected?' animate__animated animate__backOutRight':' block')
+                } 
+                style={{display: (hide2 && item.id !== selected)?'none':'block',
+                        top: (item.id === selected && !burger && !hide2)?(`-${i*40}px`):'0',
+                        transition: (item.id === selected && !burger && hide2)?'none':'top 0.3s',
+
+                }}
+            >
+                    <a href={item.href}>{item.label}</a>
             </li>
     ))
-    const subMenuItems = [
-        {id: 1, href: '/', label: 'Любое'},
-        {id: 2, href: '/', label: 'Дети до 8 лет'},
-        {id: 3, href: '/', label: 'От 10 до 18 лет'},
-        {id: 4, href: '/', label: 'Взрослые'},
-    ].map(item => (
-            <li key={item.id} className={item.id === selected? 'selected': ''} style={{float: item.right?'right': 'left'}}>
-                <a href={item.href}>{item.label}</a>
-            </li>
-    ))
+    function toggleBurger() {
+        if(burger){
+            setTimeout(()=>{
+                setHide(true)
+            }, 500)
+            setTimeout(()=>{
+                setHide2(true)
+            }, 700)
+        } else {
+                setHide(false)
+                setHide2(false)
+        }
+        showBurger(!burger)
+    }
     return (
         <div className='header-wrapper'>
-            <div id='header-top'>
-                <Image alt='logo' src={logo}/>
-                <div id='header-contacts' className='row'>
-                    <div className='row' style={{alignItems: 'center'}}>
+            <div id='header-top' style={{display: 'flex', justifyContent: 'space-between'}}>
+                <div style={{minWidth: '231px'}}>
+                    <Image alt='logo' src={logo} width="231px" height="95px"/>
+                </div>
+                <div id='header-contacts' className='d-m-none' style={{flexWrap: 'wrap'}}>
+                    <div className='col col-t-4' style={{alignItems: 'center', display: 'flex', justifyContent: 'flex-end'}}>
                         <img src='images/phone.svg' alt='next' />
                         <span>
-                            +79522486072
+                            +7(952)248-60-72
                         </span>
                     </div>
-                    <div className='row' style={{alignItems: 'center'}}>
+                    <div className='col col-t-4' style={{alignItems: 'center', display: 'flex', justifyContent: 'flex-end'}}>
                         <img src='images/point.svg' alt='next' />
                         <span>
                             г. Пушкин, ул. Глинки д. 1
                         </span>
                     </div>
-                    <img src='images/vk.svg' alt='next' />
-                    <img src='images/instagram.svg' alt='next' />
+                    <div className='col col-t-1 d-t-none'>
+                        <img src='images/vk.svg' alt='next' />
+                        <img src='images/instagram.svg' alt='next' />
+                    </div>
+                </div>
+                <div id="burger">
+                    <input id="menu__toggle" type="checkbox" checked={burger} onChange={()=>{}}/>
+                    <label className="menu__btn" htmlFor="menu__toggle"  onClick={toggleBurger}>
+                        <span></span>
+                    </label>
                 </div>
             </div>
             <div className="header">
-                <ul className='menu'>
+                <ul className='menu' style={{maxHeight: hide?'40px':'200px',}}>
                     {menuItems}
                 </ul>
-                {/* <ul className='sub'>
-                    {subMenuItems}
-                </ul> */}
             </div>
         </div>
     )
