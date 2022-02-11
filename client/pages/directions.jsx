@@ -9,7 +9,7 @@ const Directions = () => {
     ]
     return (
         <div className="row">
-            {blocks.map(direction=><DirectionCart direction={direction}/>)}
+            {blocks.map(direction=>< DirectionCart key={direction.name} direction={direction}/>)}
         </div>
     )
 }
