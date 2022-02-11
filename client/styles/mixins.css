@@ -1,34 +1,38 @@
 .float-left {
-    float: left;
-  }
-  .float-right {
-    float: right;
-  }
-  
-  .row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: start;
-  }
-  
-  .col-1 {
-    width: 24%;
-    padding: 0 1%;
-  }
-  .col-2 {
-    width: 48%;
-  }
-  .col-3 {
-    width: 75%;
-  }
-  .col-4 {
-    width: 100%;
-  }
-  
-  .mt-2 {
-    margin-top: 2em;
-  }
+  float: left;
+}
+.float-right {
+  float: right;
+}
+.inline-block{
+  display: inline-block;
+}
 
-  .cover {
-      object-fit: cover;
-  }
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+
+.col-1 {
+  width: 24%;
+  padding: 0 1%;
+}
+.col-2 {
+  width: 48%;
+  padding: 0 1%;
+}
+.col-3 {
+  width: 75%;
+}
+.col-4 {
+  width: 100%;
+}
+
+.mt-2 {
+  margin-top: 2em;
+}
+
+.cover {
+    object-fit: cover;
+}

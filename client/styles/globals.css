@@ -1,5 +1,6 @@
 :root {
   --blue: #48357C;
+  --blue-light: #4464F6;
   --white: #FAF8EB;
   --pink: #EF5DA8;
   --pink-dark: #D7398A;
@@ -147,6 +148,7 @@ a {
 /* ============================================================FOOTER================================= */
 .footer {
   padding: 1.5em;
+  margin-top: 1em;
 }
 
 .footer h4 {
@@ -176,4 +178,99 @@ a {
   text-indent: -9999em;
   order: 0;
   text-decoration: none;
+}
+/* ==================================== */
+
+.direction-cart-button {
+  background-color: white;
+  color: var(--blue-light);
+  border-radius: 20px;
+  border: none;
+  font-size: 17px;
+  font-family: Ag;
+  padding: 0.5em 0.8em;
+  position: absolute;
+  bottom: 40px;
+  left: -120px;
+  cursor: pointer;
+  /* display: none; */
+  transition: all 0.3s;
+
+  /* border: 2px solid var(--blue-light) */
+}
+
+.direction-cart-drawer {
+  background-color: rgba(215, 57, 138, 0.7);
+  cursor: pointer;
+  transition: all 0.3s;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+}
+
+.direction-cart{
+  overflow: hidden;
+  height:400px;
+  position: relative;
+}
+
+
+.direction-cart:hover .direction-cart-drawer{
+  width: 100%;
+}
+
+.direction-cart:hover .direction-cart-button{
+  left: 2em;
+}
+
+.direction-cart:hover .direction-cart-drawer p{
+  left: 2em;
+}
+
+.direction-cart-button:hover{
+  background-color: var(--blue-light);
+  color: white;
+}
+
+.direction-cart-drawer-hide{
+  top: -100px;
+}
+
+.direction-cart-drawer p{
+  width: 450px;
+  position: absolute;
+  left: -450px;
+  transition: all 0.3s;
+}
+
+.direction-cart-trial{
+  background-color: rgba(72, 53, 124, 0.7);
+  height: 400px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 400px;
+  padding: 2em;
+  transition: all 0.3s;
+}
+
+.direction-cart-trial h3{
+  color: white;
+}
+
+.direction-cart-trial button{
+  border: none;
+  background-color: var(--yellow);
+  padding: 0.5em;
+  margin-top: 2em;
+  color: var(--blue);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.direction-cart-trial button:hover{
+  background-color: var(--yellow-dark);
+  color: var(--blue);
+  font-weight: 900;
 }

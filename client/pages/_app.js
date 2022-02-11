@@ -3,6 +3,7 @@ import '../styles/admin.css'
 import '../styles/mobile.css'
 import '../styles/tablet.css'
 import '../styles/mixins.css'
+import '../styles/close.css'
 import '../public/fonts/all.css'
 import buildClient from '../api/build-client'
 import Header from '../components/Header.jsx'
@@ -31,6 +32,7 @@ function App({ Component, pageProps, currentUser }) {
   )}
 
 App.getInitialProps = async (appContext) => {
+    // return {}
     const client = buildClient(appContext.ctx)
     const res = await client.get('/api/users/currentuser')
     const data = res.data

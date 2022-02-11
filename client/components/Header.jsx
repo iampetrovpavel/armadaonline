@@ -5,7 +5,7 @@ const Header = ({currentUser}) => {
     console.log(currentUser)
     const selected = 1
     const menuItems = [
-        {id: 1, href: '/', label: 'Направленияzzz'},
+        {id: 1, href: '/', label: 'Направления'},
         {id: 2, href: '/', label: 'Цены'},
         {id: 3, href: '/schedule', label: 'Расписание'},
         {id: 4, href: '/', label: 'Контакты'},
@@ -35,9 +35,9 @@ const Header = ({currentUser}) => {
                 <ul className='menu'>
                     {menuItems}
                 </ul>
-                <ul className='sub'>
+                {/* <ul className='sub'>
                     {subMenuItems}
-                </ul>
+                </ul> */}
             </div>
         </div>
     )

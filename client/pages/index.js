@@ -1,15 +1,8 @@
 import Card from '../components/Card.jsx'
-
+import Router from 'next/router'
+import Directions from './directions.jsx'
 
 export default function Home({currentUser}) {
-  console.log("Test deploy")
-  return (
-    <div className='row'>
-      <Card className='col-m-4 col-t-2 col-1'/>
-      <Card className='col-m-4 col-t-2 col-1'/>
-      <Card className='col-m-4 col-t-2 col-1'/>
-      <Card className='col-m-4 col-t-2 col-1'/>
-      <Card className='col-m-4 col-t-2 col-1'/>
-    </div>
-  )
+  if(typeof window !== 'undefined')Router.push('/directions')
+  return null
 }
