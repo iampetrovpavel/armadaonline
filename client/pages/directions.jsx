@@ -20,13 +20,15 @@ const Directions = () => {
     })
     return (
         <>
-            <ul className='sub'>
-                {subMenuItems.map((item, i) => (
-                        <li key={item.id} className={i === selected? 'selected': ''} style={{float: item.right?'right': 'left'}}>
-                            <a href="#" onClick={()=>Select(i)}>{item.label}</a>
-                        </li>
-                ))}
-            </ul>
+            <div>
+                <ul className='sub'>
+                    {subMenuItems.map((item, i) => (
+                            <li key={item.id} className={i === selected? 'selected': ''} style={{float: item.right?'right': 'left'}}>
+                                <a href="#" onClick={()=>Select(i)}>{item.label}</a>
+                            </li>
+                    ))}
+                </ul>
+            </div>
             <div className="row" style={{marginTop:'2px'}}>
                 {blocks.map(direction=>< DirectionCart key={direction.name} direction={direction}/>)}
             </div>

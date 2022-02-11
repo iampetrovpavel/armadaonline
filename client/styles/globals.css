@@ -74,6 +74,7 @@ a {
   text-transform: uppercase;
   height: 40px;
   transition: max-height 0.3s;
+  overflow: hidden;
 }
 
 .header .menu li{
