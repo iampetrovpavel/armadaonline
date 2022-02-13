@@ -3,9 +3,9 @@ import useRequest from '../../hooks/use-request'
 import Router from 'next/router'
 
 const SignUp = () => {
-    const [email, setEmail] = useState('test@test.ru')
+    const [email, setEmail] = useState('')
     const [name, setName] = useState('')
-    const [password, setPassword] = useState('1212')
+    const [password, setPassword] = useState('')
     const {doRequest, errors, loading} = useRequest({
         url: '/api/users/signup',
         method: 'post',
@@ -18,27 +18,33 @@ const SignUp = () => {
         doRequest()
     }
     return (
-        <div className="card my-3 shadow animate__animated animate__jackInTheBox" style={{maxWidth: '800px', margin: '0 auto'}}>
-            <div className="card-body">
-                <form onSubmit={onSubmit}>
-                    <h1>Регистрация</h1>
-                    <div className='mb-3'>
-                        <label className='form-label'>ФИО</label>
-                        <input type="text" value={name} onChange={e => setName(e.target.value)} className="form-control"/>
-                    </div>
-                    <div className='mb-3'>
-                        <label className='form-label'>Email</label>
-                        <input type="text" value={email} onChange={e => setEmail(e.target.value)} className="form-control"/>
-                    </div>
-                    <div className="mb-3">
-                        <label className='form-label'>Пароль</label>
-                        <input type='password' value={password} onChange={e => setPassword(e.target.value)} className='form-control'/>
-                    </div>
-                    {errors}
-                    <button className='btn btn-primary' 
-                        // style={{backgroundColor: colors.green, border: 'none'}}
-                    >{!loading && 'Зарегистрироваться'}{loading}</button>
-                </form>
+        <div style={{display: 'flex', justifyContent: 'center'}}>
+            <div className="card  mt-1 p-2">
+                    <form onSubmit={onSubmit}>
+                        <h1 className="mt-0">Регистрация</h1>
+                        <div className='mb-1'>
+                            <label className='form-label'>ФИО</label>
+                        </div>
+                        <div className='mb-1'>
+                            <input type="text" value={name} onChange={e => setName(e.target.value)} className="form-control"/>
+                        </div>
+                        <div className='mb-1'>
+                            <label className='form-label'>Email</label>
+                        </div>
+                        <div className='mb-1'>
+                            <input type="text" value={email} onChange={e => setEmail(e.target.value)} className="form-control"/>
+                        </div>
+                        <div className="mb-1">
+                            <label className='form-label'>Пароль</label>
+                        </div>
+                        <div className="mb-1">
+                            <input type='password' value={password} onChange={e => setPassword(e.target.value)} className='form-control'/>
+                        </div>
+                        {errors}
+                        <div className="mb-1">
+                            <button className='btn btn-primary'>{!loading && 'Зарегистрироваться'}{loading}</button>
+                        </div>
+                    </form>
             </div>
         </div>
     )

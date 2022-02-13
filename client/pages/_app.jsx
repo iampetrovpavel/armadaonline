@@ -13,7 +13,7 @@ import Footer from '../components/Footer.jsx'
 import Head from 'next/head'
 
 
-function App({ Component, pageProps, currentUser }) {
+function App({ Component, pageProps, currentUser, url }) {
   return(
       <>
         <Head>
@@ -22,10 +22,10 @@ function App({ Component, pageProps, currentUser }) {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <div className="container">
-          <Header currentUser={currentUser}/>
-          <main>
+          <Header currentUser={currentUser} url={url}/>
+          <div className='content'>
             <Component {...pageProps} />
-          </main>
+          </div>
         </div>
         <footer className='bg-gray-light'>
           <Footer/>
@@ -34,7 +34,7 @@ function App({ Component, pageProps, currentUser }) {
   )}
 
 App.getInitialProps = async (appContext) => {
-    // return {}
+    return {url: appContext.ctx.req.url}
     const client = buildClient(appContext.ctx)
     const res = await client.get('/api/users/currentuser')
     const data = res.data
@@ -44,7 +44,8 @@ App.getInitialProps = async (appContext) => {
     }
     return {
       pageProps,
-      ...data
+      ...data,
+      url: appContext.ctx.req.url
     }
 }
 

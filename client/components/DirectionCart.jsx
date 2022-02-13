@@ -16,7 +16,6 @@ const DirectionCart = ({direction}) => {
         setPhone(value)
     }
     return (
-            <div className="col-t-4 col-2" style={{padding: '0em', position: 'relative'}}>
                 <div className="direction-cart" style={{backgroundImage: `url(${img})`, backgroundSize: 'cover'}}>
                     <div className='inline-block col-2 float-right direction-cart-drawer'
                         style={{height: '100%', padding: '2em', top: trialForm?'-400px':'0'}}>
@@ -37,7 +36,6 @@ const DirectionCart = ({direction}) => {
                         </div>
                     </div>
                 </div>
-            </div>
     )
 }
 

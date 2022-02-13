@@ -1,17 +1,18 @@
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import logo from '../images/logo.png'
 
-const Header = ({currentUser}) => {
+const Header = ({currentUser, url}) => {
     const selected = 4
     const [burger, showBurger] = useState(true)
     const [hide, setHide] = useState(false)
     const [hide2, setHide2] = useState(false)
+
     const menuItems = [
         {id: 1, href: '/', label: 'Направления'},
-        {id: 2, href: '/', label: 'Цены'},
+        {id: 2, href: '/price', label: 'Цены'},
         {id: 3, href: '/schedule', label: 'Расписание'},
-        {id: 4, href: '/', label: 'Контакты'},
+        {id: 4, href: '/contacts', label: 'Контакты'},
         (currentUser && currentUser.groups && (currentUser.groups.indexOf('admin')!=-1)) && {id: 8, href: '/admin/tickets', label: 'Настройки', right: true},
         !currentUser && {id: 5, href: '/auth/signin', label: 'Вход', right: true},
         !currentUser && {id: 6, href: '/auth/signup', label: 'Регистрация', right: true},
@@ -19,7 +20,7 @@ const Header = ({currentUser}) => {
     ].filter(item=>item).map((item, i) => (
             <li 
                 key={item.id}
-                className={'' + (item.id === selected? ' selected': '') 
+                className={'' + (item.href === url? ' selected': '') 
                     + (item.right?' float-right': ' float-left') 
                     + (!burger && item.id !== selected?' animate__animated animate__backOutRight':' block')
                 } 
@@ -54,20 +55,20 @@ const Header = ({currentUser}) => {
                 </div>
                 <div id='header-contacts' className='d-m-none' style={{flexWrap: 'wrap'}}>
                     <div className='col col-t-4' style={{alignItems: 'center', display: 'flex', justifyContent: 'flex-end'}}>
-                        <img src='images/phone.svg' alt='next' />
+                        <img src='/images/phone.svg' alt='next' />
                         <span>
                             +7(952)248-60-72
                         </span>
                     </div>
                     <div className='col col-t-4' style={{alignItems: 'center', display: 'flex', justifyContent: 'flex-end'}}>
-                        <img src='images/point.svg' alt='next' />
+                        <img src='/images/point.svg' alt='next' />
                         <span>
                             г. Пушкин, ул. Глинки д. 1
                         </span>
                     </div>
                     <div className='col col-t-1 d-t-none'>
-                        <img src='images/vk.svg' alt='next' />
-                        <img src='images/instagram.svg' alt='next' />
+                        <img src='/images/vk.svg' alt='VK' height='25'/>
+                        <img src='/images/instagram.svg' alt='Instagram' height='25'/>
                     </div>
                 </div>
                 <div id="burger">

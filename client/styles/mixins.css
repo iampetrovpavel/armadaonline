@@ -33,6 +33,26 @@
   margin-top: 2em;
 }
 
+.mt-1{
+  margin-top: 1em;
+}
+
 .cover {
     object-fit: cover;
+}
+
+.mb-1 {
+  margin-bottom: 1em;
+}
+
+.p-1 {
+  padding: 1em;
+}
+
+.p-2 {
+  padding: 2em;
+}
+
+.mt-0 {
+  margin-top: 0;
 }
