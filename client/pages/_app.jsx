@@ -35,18 +35,25 @@ function App({ Component, pageProps, currentUser, url }) {
 
 App.getInitialProps = async (appContext) => {
     // return {url: appContext.ctx.req.url}
-    const client = buildClient(appContext.ctx)
-    const res = await client.get('/api/users/currentuser')
-    const data = res.data
-    let pageProps
-    if(appContext.Component.getInitialProps){
-      pageProps = await appContext.Component.getInitialProps(appContext.ctx, client, data.currentUser)
+    try{
+      const client = buildClient(appContext.ctx)
+      const res = await client.get('/api/users/currentuser')
+      const data = res.data
+      let pageProps
+      if(appContext.Component.getInitialProps){
+        pageProps = await appContext.Component.getInitialProps(appContext.ctx, client, data.currentUser)
+      }
+      return {
+        pageProps,
+        ...data,
+        url: appContext.ctx.req.url
+      }
     }
-    return {
-      pageProps,
-      ...data,
-      url: appContext.ctx.req.url
+    catch(e){
+      console.log(e)
+      return {url: appContext.ctx.req.url}
     }
+
 }
 
 export default App
