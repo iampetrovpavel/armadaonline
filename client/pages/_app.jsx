@@ -46,12 +46,12 @@ App.getInitialProps = async (appContext) => {
       return {
         pageProps,
         ...data,
-        url: appContext.ctx.req.url
+        url: appContext.ctx.req && appContext.ctx.req.url
       }
     }
     catch(e){
       console.log(e)
-      return {url: appContext.ctx.req.url}
+      return {url: appContext.ctx.req && appContext.ctx.req.url}
     }
 
 }
