@@ -17,6 +17,11 @@ app.use(cookieSession({
     // secure: process.env.NODE_ENV !== 'test'
 }))
 
+app.use((req, res, next)=>{
+    console.log("SESSION: ", req.session?.jwt)
+    next()
+})
+
 app.use(currentUserRouter)
 app.use(signoutRouter)
 app.use(signupRouter)

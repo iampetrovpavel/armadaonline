@@ -1,7 +1,7 @@
 https://test.ru/api/users/currentuser
 
 ###
-https://dallasstudio.ru/api/tickets
+https://dallasstudio.ru/api/directions
 
 ###
 https://test.ru/api/users?groups=teacher
