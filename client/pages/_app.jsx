@@ -37,7 +37,7 @@ function App({ Component, pageProps, currentUser, url }) {
 App.getInitialProps = async (appContext) => {
     // return {url: appContext.ctx.req.url}
     try{
-      console.log("HEADERS ", appContext.ctx.req || appContext.ctx.req.url)
+      console.log("HEADERS ", appContext.ctx.req && appContext.ctx.req.headers)
       const client = buildClient(appContext.ctx)
       const res = await client.get('/api/users/currentuser')
       console.log("GetInitProps client respinse", res.data)
