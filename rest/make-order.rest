@@ -1,13 +1,13 @@
 https://test.ru/api/users/currentuser
 
 ###
-https://dallasstudio.ru/api/directions
+https://dallasstudio.ru/api/users/currentuser
 
 ###
 https://test.ru/api/users?groups=teacher
 
 ###
-POST https://test.ru/api/users/signup
+POST https://dallasstudio.ru/api/users/signup
 Content-Type: application/json
 
 {
@@ -18,7 +18,7 @@ Content-Type: application/json
 }
 
 ###
-POST https://test.ru/api/users/signin
+POST https://dallasstudio.ru/api/users/signin
 Content-Type: application/json
 
 {
@@ -27,10 +27,10 @@ Content-Type: application/json
 }
 
 ###
-POST test.ru/api/tickets
+POST dallasstudio.ru/api/tickets
 Content-Type: application/json
 
-{"title":"test", "price": 3}
+{"title":"test", "price": 3, directionId: ''}
 
 ###
 GET test.ru/api/tickets
