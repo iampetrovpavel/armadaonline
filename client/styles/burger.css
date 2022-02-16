@@ -5,6 +5,7 @@
   }
   /* стилизуем кнопку */
   .menu__btn {
+    padding-left: 5px;
     display: flex; /* используем flex для центрирования содержимого */
     align-items: center;  /* центрируем содержимое кнопки */
     /* top: 24px; */

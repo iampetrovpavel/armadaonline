@@ -6,6 +6,7 @@ import '../styles/mixins.css'
 import '../styles/close.css'
 import '../styles/burger.css'
 import '../public/fonts/all.css'
+import '../public/fonts/Gilroy/style.css'
 import 'animate.css'
 import buildClient from '../api/build-client'
 import Header from '../components/Header.jsx'
@@ -34,7 +35,7 @@ function App({ Component, pageProps, currentUser, url }) {
   )}
 
 App.getInitialProps = async (appContext) => {
-    // return {url: appContext.ctx.req.url}
+    return {url: appContext.ctx.req.url}
     try{
       const client = buildClient(appContext.ctx)
       const res = await client.get('/api/users/currentuser', {withCredentials: true})

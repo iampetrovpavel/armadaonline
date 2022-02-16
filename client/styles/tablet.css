@@ -20,6 +20,6 @@
       width: 100% !important;
     }
     .d-t-none {
-      display: none;
+      display: none !important;
     }
   }

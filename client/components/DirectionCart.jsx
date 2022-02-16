@@ -23,7 +23,7 @@ const DirectionCart = ({direction}) => {
                         <p className="direction-cart-description" style={{color: 'white'}}>
                             {description}
                         </p>
-                        <button className="direction-cart-button" onClick={()=>showTrialForm(true)}>Записаться</button>
+                        <button className="button direction-cart-button" style={{bottom:40}} onClick={()=>showTrialForm(true)}>Записаться</button>
                     </div>
                     <div className="direction-cart-trial" style={{top: trialForm?'0px':'400px'}}>
                         <span onClick={()=>showTrialForm(false)} className="close"/>
@@ -32,7 +32,7 @@ const DirectionCart = ({direction}) => {
                         <h3>Номер телефона</h3>
                         <input value={phone} onChange={handlePhoneInput}></input>
                         <div>
-                            <button>Хочу танцевать</button>
+                            <button className="button" style={{bottom:40}}>Хочу танцевать</button>
                         </div>
                     </div>
                 </div>

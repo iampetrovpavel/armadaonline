@@ -45,6 +45,10 @@
   margin-bottom: 1em;
 }
 
+.mb-2 {
+  margin-bottom: 2em;
+}
+
 .p-1 {
   padding: 1em;
 }
@@ -55,4 +59,8 @@
 
 .mt-0 {
   margin-top: 0;
+}
+
+.mr-1 {
+  margin-right: 1em;
 }

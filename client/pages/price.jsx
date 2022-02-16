@@ -20,10 +20,10 @@ const Price = () => {
                 ))}
             </ul>
             <div className='row' style={{marginTop:'10px'}}>
-                <div className='col-2'>
+                <div className='col-2 col-m-4'>
                     <DirectionCart direction={directions[selected]}/>
                 </div>
-                <div className='col-2'>
+                <div className='col-2 col-m-4'>
                     <div className='row'>
                         {tickets.map(ticket =><div key={ticket.title} className='col-2 col-t-4 mb-1'><Ticket  ticket={ticket}/></div>)}
                     </div>

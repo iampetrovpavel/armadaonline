@@ -24,7 +24,7 @@ const useRequest = ({ url, method, body, onSuccess, onFail}) => {
                     <div className='alert alert-danger'>
                         <h4>Ooopsss...</h4>
                         <ul className='my-0'>
-                            <li>Что-то пошло не так...</li>
+                            <li style={{margin:'1em 0'}}>Что-то пошло не так...</li>
                         </ul>
                     </div>
                 )

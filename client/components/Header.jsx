@@ -1,38 +1,42 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import logo from '../images/logo.png'
+import Vk from '../public/images/vk.svg'
+import Instagram from '../public/images/instagram.svg'
 
 const Header = ({currentUser, url}) => {
-    const selected = 4
     const [burger, showBurger] = useState(true)
     const [hide, setHide] = useState(false)
     const [hide2, setHide2] = useState(false)
 
+    useEffect(()=>{
+        function handleResize() {
+            if (window.innerWidth > 600) {
+                setHide(false)
+                setHide2(false)
+                showBurger(true)
+            }
+        }
+        window.addEventListener("resize", handleResize);
+        return ()=>{
+            window.removeEventListener("resize", handleResize)
+        }
+    },[])
+
     const menuItems = [
-        {id: 1, href: '/', label: 'Направления'},
-        {id: 2, href: '/price', label: 'Цены'},
-        {id: 3, href: '/schedule', label: 'Расписание'},
-        {id: 4, href: '/contacts', label: 'Контакты'},
+        {id: 0, href: '/', label: 'Направления'},
+        {id: 1, href: '/price', label: 'Цены'},
+        {id: 2, href: '/schedule', label: 'Расписание'},
+        {id: 3, href: '/contacts', label: 'Контакты'},
         (currentUser && currentUser.groups && (currentUser.groups.indexOf('admin')!=-1)) && {id: 8, href: '/admin/tickets', label: 'Настройки', right: true},
         !currentUser && {id: 5, href: '/auth/signin', label: 'Вход', right: true},
         !currentUser && {id: 6, href: '/auth/signup', label: 'Регистрация', right: true},
         currentUser && {id: 7, href: '/auth/lk', label: 'Личный кабинет', right: true},
-    ].filter(item=>item).map((item, i) => (
-            <li 
-                key={item.id}
-                className={'' + (item.href === url? ' selected': '') 
-                    + (item.right?' float-right': ' float-left') 
-                    + (!burger && item.id !== selected?' animate__animated animate__backOutRight':' block')
-                } 
-                style={{display: (hide2 && item.id !== selected)?'none':'block',
-                        top: (item.id === selected && !burger && !hide2)?(`-${i*40}px`):'0',
-                        transition: (item.id === selected && !burger && hide2)?'none':'top 0.3s',
+    ]
 
-                }}
-            >
-                    <a href={item.href}>{item.label}</a>
-            </li>
-    ))
+    const item = menuItems.filter(item=>item).find((item, i) => url === item.href)
+    const selected = item && item.id
+
     function toggleBurger() {
         if(burger){
             setTimeout(()=>{
@@ -47,15 +51,27 @@ const Header = ({currentUser, url}) => {
         }
         showBurger(!burger)
     }
+
+    function getClass(item) {
+        return '' + (item.href === url? ' selected': '') 
+        + (item.right?' float-right': ' float-left') 
+        + (!burger && item.id !== selected?' animate__animated animate__backOutRight':' block')
+    }
+    function getStyle(item, i) {
+        return {display: (hide2 && item.id !== selected)?'none':'block',
+            top: (item.id === selected && !burger && !hide2)?(`-${i*40}px`):'0',
+            transition: (item.id === selected && !burger && hide2)?'none':'top 0.3s',
+        }
+    }
     return (
         <div className='header-wrapper'>
             <div id='header-top' style={{display: 'flex', justifyContent: 'space-between'}}>
                 <div style={{minWidth: '231px'}}>
-                    <Image alt='logo' src={logo} width="231px" height="95px"/>
+                    <Image alt='logo' src={logo} width="178px" height="95px"/>
                 </div>
-                <div id='header-contacts' className='d-m-none' style={{flexWrap: 'wrap'}}>
-                    <div className='col col-t-4' style={{alignItems: 'center', display: 'flex', justifyContent: 'flex-end'}}>
-                        <img src='/images/phone.svg' alt='next' />
+                <div id='header-contacts' className='' style={{flexWrap: 'wrap'}}>
+                    <div className='col col-t-4 mr-1' style={{alignItems: 'center', display: 'flex', justifyContent: 'flex-end'}}>
+                        <img src='/images/phone.svg' alt='next'/>
                         <span>
                             +7(952)248-60-72
                         </span>
@@ -66,10 +82,6 @@ const Header = ({currentUser, url}) => {
                             г. Пушкин, ул. Глинки д. 1
                         </span>
                     </div>
-                    <div className='col col-t-1 d-t-none'>
-                        <img src='/images/vk.svg' alt='VK' height='25'/>
-                        <img src='/images/instagram.svg' alt='Instagram' height='25'/>
-                    </div>
                 </div>
                 <div id="burger">
                     <input id="menu__toggle" type="checkbox" checked={burger} onChange={()=>{}}/>
@@ -79,8 +91,27 @@ const Header = ({currentUser, url}) => {
                 </div>
             </div>
             <div className="header">
-                <ul className='menu' style={{maxHeight: hide?'40px':'200px',}}>
-                    {menuItems}
+                <ul className='menu' style={{maxHeight: hide?'40px':'240px',}}>
+                    <li className='float-right block d-t-none'>
+                        <a href='https://vk.com/dallas_dance'>
+                            <Vk className='svg-white' style={{top:'3px'}}/>
+                        </a>
+                    </li>
+                    <li className='float-right block d-t-none'>
+                        <a href='https://www.instagram.com/dance_dallas'>
+                            <Instagram className='svg-white' style={{top:'5px'}}/>
+                        </a>
+                    </li>
+                    {menuItems.filter(item=>item).map((item, i) => (
+                            <li key={item.id}
+                                className={getClass(item)} 
+                                style={getStyle(item, i)}
+                            >
+                                    <a href={item.href} style={{display: 'block'}}>
+                                        {item.label}
+                                    </a>
+                            </li>
+                    ))}
                 </ul>
             </div>
         </div>

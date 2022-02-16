@@ -19,7 +19,7 @@ const SignUp = () => {
     }
     return (
         <div style={{display: 'flex', justifyContent: 'center'}}>
-            <div className="card  mt-1 p-2">
+            <div className="card">
                     <form onSubmit={onSubmit}>
                         <h1 className="mt-0">Регистрация</h1>
                         <div className='mb-1'>
@@ -41,8 +41,8 @@ const SignUp = () => {
                             <input type='password' value={password} onChange={e => setPassword(e.target.value)} className='form-control'/>
                         </div>
                         {errors}
-                        <div className="mb-1">
-                            <button className='btn btn-primary'>{!loading && 'Зарегистрироваться'}{loading}</button>
+                        <div className="mb-2 ">
+                            <button className='button button-filled'>{!loading && 'Зарегистрироваться'}{loading}</button>
                         </div>
                     </form>
             </div>

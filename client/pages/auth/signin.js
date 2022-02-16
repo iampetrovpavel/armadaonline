@@ -18,7 +18,7 @@ const SignIn = () => {
     }
     return (
         <div style={{display: 'flex', justifyContent: 'center'}}>
-            <div className="card mt-1 p-2">
+            <div className="card">
                     <form onSubmit={onSubmit}>
                         <h1 className="mt-0">Вход</h1>
                         <div className="mb-1">
@@ -34,9 +34,10 @@ const SignIn = () => {
                             <input type='password' value={password} onChange={e => setPassword(e.target.value)} className='form-control'/>
                         </div>
                         {errors}
-                        <button className='btn btn-primary' 
-                            // style={{backgroundColor: colors.green, border: 'none'}}
-                        >{!loading && 'Войти'}{loading}</button>
+                        <div className="mb-2">
+                            <button className='button button-filled' 
+                                >{!loading && 'Войти'}{loading}</button>
+                        </div>
                     </form>
             </div>
         </div>
