@@ -10,7 +10,7 @@ import cookieSession from 'cookie-session'
 import { usersRouter } from './routes/users';
 
 const app = express()
-// app.set('trust proxy', true)
+app.set('trust proxy', true)
 app.use(json())
 
 app.use((req, res, next)=>{
@@ -21,7 +21,8 @@ app.use((req, res, next)=>{
 
 app.use(cookieSession({
     signed: false,
-    secure: process.env.NODE_ENV !== 'test'
+    secure: false
+    // secure: process.env.NODE_ENV !== 'test'
 }))
 
 app.use(currentUser)
