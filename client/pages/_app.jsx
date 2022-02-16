@@ -39,7 +39,7 @@ App.getInitialProps = async (appContext) => {
     try{
       const client = buildClient(appContext.ctx)
       console.log("CLIENT BASE URL", client.defaults.baseURL, "CLIENT HEADERS", client.defaults.headers)
-      const res = await client.get('/api/users/currentuser')
+      const res = await client.get('/api/users/currentuser', {withCredentials: true})
       console.log("RESPONSE FROM SERVER", res.data)
       const data = res.data
       let pageProps
