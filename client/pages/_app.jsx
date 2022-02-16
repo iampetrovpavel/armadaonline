@@ -14,7 +14,6 @@ import Head from 'next/head'
 
 
 function App({ Component, pageProps, currentUser, url }) {
-  console.log("User: ", currentUser)
   return(
       <>
         <Head>
@@ -38,9 +37,7 @@ App.getInitialProps = async (appContext) => {
     // return {url: appContext.ctx.req.url}
     try{
       const client = buildClient(appContext.ctx)
-      console.log("CLIENT BASE URL", client.defaults.baseURL, "CLIENT HEADERS", client.defaults.headers)
       const res = await client.get('/api/users/currentuser', {withCredentials: true})
-      console.log("RESPONSE FROM SERVER", res.data)
       const data = res.data
       let pageProps
       if(appContext.Component.getInitialProps){

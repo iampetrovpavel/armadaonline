@@ -4,6 +4,9 @@ https://test.ru/api/users/currentuser
 https://dallasstudio.ru/api/users/currentuser
 
 ###
+https://test.ru/
+
+###
 https://test.ru/api/users?groups=teacher
 
 ###
