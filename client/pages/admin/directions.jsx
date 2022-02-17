@@ -6,10 +6,10 @@ import useDirections from '../../hooks/use-directions'
 import useUsers from '../../hooks/use-users'
 import useSchedule from '../../hooks/use-schedule'
 
-const Directions = () => {
+const Directions = ({url}) => {
     const {directions, updateDirections} = useDirections()
     return (
-        <AdminLayout>
+        <AdminLayout url = {url}>
             <div>
                 <CreateDirection updateDirections = {updateDirections}/>
                 <hr/>

@@ -12,6 +12,12 @@
   --black: #333333;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html,
 body {
   padding: 0;
@@ -23,15 +29,41 @@ body {
   color: var(--black);
 }
 
+td, th {
+  padding: 0.5em;
+  text-align: start;
+}
+
+a:hover {
+  cursor: pointer;
+}
 input {
   padding: 0.5em;
   outline: none;
   border-radius: 6px;
-  border: 2px solid white;
+  border: 1px solid var(--gray)
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+select {
+  border: 1px solid var(--gray);
+  border-radius: 6px;
+  padding: 0.5em;
+  /* font-size: 1.25rem; */
+  cursor: pointer;
+  /* line-height: 1.1; */
+  background-color: #fff;
+}
+
+select:hover {
+  border: 1px solid var(--blue-dark)
 }
 
 input:focus {
-  border: 2px solid var(--blue-light)
+  border: 1px solid var(--blue-light)
 }
 
 ul {

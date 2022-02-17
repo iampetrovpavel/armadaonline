@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import AdminLayout from '../../components/AdminLayout'
 import useRequest from '../../hooks/use-request'
 
-const Users = () => {
+const Users = ({url}) => {
     const [users, setUsers] = useState([])
     const {doRequest} = useRequest({
         url: '/api/users',
@@ -15,7 +15,7 @@ const Users = () => {
         doRequest()
     }, [])
     return (
-        <AdminLayout>
+        <AdminLayout url = {url}>
             <ul>
                 {users.map((user)=>(<li key={user.id}>
                         {user.name}

@@ -20,14 +20,14 @@ const Directions = () => {
                 <ul className='sub'>
                     {subMenuItems.map((item, i) => (
                             <li key={item.id} className={i === selected? 'selected': ''} style={{float: item.right?'right': 'left'}}>
-                                <a href="#" onClick={()=>Select(i)}>{item.label}</a>
+                                <a onClick={()=>Select(i)}>{item.label}</a>
                             </li>
                     ))}
                 </ul>
             </div>
             <div className="row" style={{marginTop:'2px'}}>
                 {blocks.map(direction=>(
-                    <div key={direction.name} className="col-m-4 col-2 p-0">
+                    <div key={direction.id} className="col-m-4 col-2 p-0 animate__animated animate__flipInY">
                         < DirectionCart direction={direction}/>
                     </div>
                 ))}
