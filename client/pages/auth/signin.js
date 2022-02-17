@@ -34,7 +34,7 @@ const SignIn = () => {
                             <input type='password' value={password} onChange={e => setPassword(e.target.value)} className='form-control'/>
                         </div>
                         {errors}
-                        <div className="mb-2">
+                        <div>
                             <button className='button button-filled' 
                                 >{!loading && 'Войти'}{loading}</button>
                         </div>

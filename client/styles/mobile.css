@@ -14,13 +14,13 @@
       flex-wrap: nowrap;
     }
     .col-m-1 {
-      width: 24% !important;
+      width: 25% !important;
     }
     .col-m-2 {
-      width: 48% !important;
+      width: 50% !important;
     }
     .col-m-3 {
-      width: 74% !important;
+      width: 75% !important;
     }
     .col-m-4 {
       padding: 0 16px;

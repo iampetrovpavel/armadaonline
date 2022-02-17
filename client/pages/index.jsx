@@ -27,7 +27,7 @@ const Directions = () => {
             </div>
             <div className="row" style={{marginTop:'2px'}}>
                 {blocks.map(direction=>(
-                    <div key={direction.name} className="col-m-4 col-2" style={{padding: '0em', position: 'relative'}}>
+                    <div key={direction.name} className="col-m-4 col-2 p-0">
                         < DirectionCart direction={direction}/>
                     </div>
                 ))}

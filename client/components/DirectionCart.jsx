@@ -17,13 +17,13 @@ const DirectionCart = ({direction}) => {
     }
     return (
                 <div className="direction-cart" style={{backgroundImage: `url(${img})`, backgroundSize: 'cover'}}>
-                    <div className='inline-block col-2 float-right direction-cart-drawer'
+                    <div className='relative inline-block col-2 float-right direction-cart-drawer'
                         style={{height: '100%', padding: '2em', top: trialForm?'-400px':'0'}}>
                         <h2 style={{color: 'white'}}>{directionName}</h2>
                         <p className="direction-cart-description" style={{color: 'white'}}>
                             {description}
                         </p>
-                        <button className="button direction-cart-button" style={{bottom:40}} onClick={()=>showTrialForm(true)}>Записаться</button>
+                        <button className="button direction-cart-button" style={{position: "absolute", bottom: '40px'}} onClick={()=>showTrialForm(true)}>Записаться</button>
                     </div>
                     <div className="direction-cart-trial" style={{top: trialForm?'0px':'400px'}}>
                         <span onClick={()=>showTrialForm(false)} className="close"/>
@@ -31,9 +31,7 @@ const DirectionCart = ({direction}) => {
                         <input value={name} onChange={handleNameInput}></input>
                         <h3>Номер телефона</h3>
                         <input value={phone} onChange={handlePhoneInput}></input>
-                        <div>
-                            <button className="button" style={{bottom:40}}>Хочу танцевать</button>
-                        </div>
+                        <button className="button" style={{position: 'absolute', bottom:'40px', left: '2em'}}>Хочу танцевать</button>
                     </div>
                 </div>
     )
