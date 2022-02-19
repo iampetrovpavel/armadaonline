@@ -22,4 +22,16 @@
     .d-t-none {
       display: none !important;
     }
+    .p-t-1 {
+      padding: 1em;
+    }
+
+    .px-t-1 {
+      padding-right: 1em;
+      padding-left: 1em;
+    }
+
+    .m-t-0 {
+      margin: 0 !important;
+    }
   }

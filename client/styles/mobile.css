@@ -13,6 +13,7 @@
       align-items: center;
       flex-wrap: nowrap;
     }
+
     .col-m-1 {
       width: 25% !important;
     }
@@ -34,5 +35,13 @@
     }
     .d-m-none {
       display: none !important;
+    }
+
+    .p-m-1 {
+      padding: 1em;
+    }
+
+    .p-m-0 {
+      padding: 0;
     }
   }

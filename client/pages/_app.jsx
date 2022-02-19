@@ -1,8 +1,8 @@
 import '../styles/reset.css'
 import '../styles/globals.css'
 import '../styles/admin.css'
-import '../styles/mobile.css'
 import '../styles/tablet.css'
+import '../styles/mobile.css'
 import '../styles/mixins.css'
 import '../styles/close.css'
 import '../styles/burger.css'
@@ -20,12 +20,13 @@ function App({ Component, pageProps, currentUser, url }) {
       <>
         <Head>
           <title>Dance Dallas Studio</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
           <meta name="description" content="Dance Dallas Studio Site" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <div className="container">
           <Header currentUser={currentUser} url={url}/>
-          <div className='content'>
+          <div className='content p-m-1'>
             <Component {...pageProps} url = {url}/>
           </div>
         </div>
@@ -36,7 +37,7 @@ function App({ Component, pageProps, currentUser, url }) {
   )}
 
 App.getInitialProps = async (appContext) => {
-    // return {url: appContext.ctx.req.url}
+    return {url: appContext.ctx.req.url}
     try{
       const client = buildClient(appContext.ctx)
       const res = await client.get('/api/users/currentuser', {withCredentials: true})

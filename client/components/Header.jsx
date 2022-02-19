@@ -65,19 +65,19 @@ const Header = ({currentUser, url}) => {
     }
     return (
         <div className='header-wrapper'>
-            <div id='header-top' style={{display: 'flex', justifyContent: 'space-between'}}>
-                <div style={{minWidth: '231px'}}>
+            <div id='header-top' className='px-t-1 p-m-0'  style={{display: 'flex', justifyContent: 'space-between'}}>
+                <div style={{minWidth: '178px'}}>
                     <Image alt='logo' src={logo} width="178px" height="95px"/>
                 </div>
-                <div id='header-contacts' className='' style={{flexWrap: 'wrap'}}>
-                    <div className='col col-t-4 mr-1' style={{alignItems: 'center', display: 'flex', justifyContent: 'flex-end'}}>
-                        <img src='/images/phone.svg' alt='next'/>
-                        <span>
+                <div id='header-contacts' className='' style={{flexWrap: 'wrap', alignItems:'center'}}>
+                    <div className='col col-t-4' style={{alignItems: 'center', display: 'flex', justifyContent: 'flex-start'}}>
+                        <img src='/images/phone.svg' className='mr-1' alt='next'/>
+                        <span className='mr-1 m-t-0'>
                             +7(952)248-60-72
                         </span>
                     </div>
                     <div className='col col-t-4' style={{alignItems: 'center', display: 'flex', justifyContent: 'flex-end'}}>
-                        <img src='/images/point.svg' alt='next' />
+                        <img className='mr-1' src='/images/point.svg' alt='next' />
                         <span>
                             г. Пушкин, ул. Глинки д. 1
                         </span>
