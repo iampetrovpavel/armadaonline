@@ -6,7 +6,7 @@ import useDirections from '../../hooks/use-directions'
 import useTickets from '../../hooks/use-tickets'
 
 const AdminMain = ({initTickets, url}) => {
-    const { tickets, createTicket, ticketsErrors } = useTickets(initTickets)
+    const { tickets, createTicket, ticketsErrors } = useTickets([])
     const { directions } = useDirections()
     const [newTicketForm, showNewTicketForm] = useState(false)
 

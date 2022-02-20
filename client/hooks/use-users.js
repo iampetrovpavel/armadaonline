@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import useRequest from './use-request'
 
 const useUsers = (filter) => {
-    const [users, setUsers] = useState()
+    const [users, setUsers] = useState([])
     let url = '/api/users'
     if(filter) url += `?${new URLSearchParams(filter).toString()}`
     const {doRequest, errors} = useRequest({

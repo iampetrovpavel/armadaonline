@@ -8,6 +8,7 @@ const AdminLayout = ({children, url}) => {
         {href: '/admin/tickets', label: 'Абонементы'},
         {href: '/admin/directions', label: 'Направления'},
         {href: '/admin/users', label: 'Пользователи'},
+        {href: '/admin/lessons', label: 'Занятия'},
     ].map(item=><li key={item.href} style={{display: 'inline-block', padding: '10px', color:item.href === url? 'blue': 'black'}}>
         <Link href={item.href} style={{color:'blue'}}>
             {item.label}

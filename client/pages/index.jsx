@@ -33,7 +33,6 @@ const Directions = () => {
                 ))}
             </div>
         </>
-
     )
 }
 

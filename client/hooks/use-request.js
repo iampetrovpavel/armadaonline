@@ -16,6 +16,9 @@ const useRequest = ({ url, method, body, onSuccess, onFail}) => {
             if(onSuccess){
                 onSuccess(response.data)
             }
+            if(props.onSuccess){
+                props.onSuccess(response.data)
+            }
             return response.data
         }
         catch(error){

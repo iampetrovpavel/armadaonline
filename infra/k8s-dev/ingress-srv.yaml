@@ -52,6 +52,13 @@ spec:
                 name: tickets-clusterip-srv
                 port:
                   number: 3000
+          - path: /api/lessons/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: tickets-clusterip-srv
+                port:
+                  number: 3000
           - path: /?(.*)
             pathType: Prefix
             backend:

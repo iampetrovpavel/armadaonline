@@ -3,15 +3,15 @@ import Image from 'next/image'
 
 const Card = ({className, title, description, label, img}) => {
     return (
-        <div className={"card " + className}>
-            <div className="card-header">
+        <div className={"schedule " + className}>
+            <div className="schedule-header">
                 <span>{label}</span>
             </div>
-            <div className='card-img' style={{backgroundImage: `url(${img})`, backgroundSize: 'cover'}}>
+            <div className='schedule-img' style={{backgroundImage: `url(${img})`, backgroundSize: 'cover'}}>
                 {/* <Image alt='image' src={img} className='cover' layout='fill'/> */}
                 {/* <img src={img}/> */}
             </div>
-            <div className='card-details'>
+            <div className='schedule-details'>
                 <h3>
                     {title}
                 </h3>

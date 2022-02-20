@@ -9,6 +9,7 @@ import {indexTicketRouter} from './routes/index'
 import {updateTicketRouter} from './routes/update'
 import { directionsRouter } from './routes/directions';
 import { scheduleRouter } from './routes/schedule';
+import { lessonsRouter } from './routes/lessons';
 
 
 const app = express()
@@ -28,6 +29,7 @@ app.use(updateTicketRouter)
 
 app.use(directionsRouter)
 app.use(scheduleRouter)
+app.use(lessonsRouter)
 
 app.all('*', (req, res)=>{
     throw new NotFoundError()

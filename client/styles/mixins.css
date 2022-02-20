@@ -6,6 +6,10 @@
   justify-content: flex-start;
 }
 
+.grow-2{
+  flex-grow: 2;
+}
+
 .col-1 {
   width: 25%;
   padding: 0 1%;
@@ -64,6 +68,10 @@
 
 .inline-block{
   display: inline-block;
+}
+
+.block {
+  display: blockS;
 }
 
 .relative {

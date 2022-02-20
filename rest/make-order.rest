@@ -4,18 +4,18 @@ https://test.ru/api/users/currentuser
 https://dallasstudio.ru/api/users/currentuser
 
 ###
-https://test.ru/
+https://test.ru/api/tickets
 
 ###
 https://test.ru/api/users?groups=teacher
 
 ###
-POST https://dallasstudio.ru/api/users/signup
+POST https://test.ru/api/users/signup
 Content-Type: application/json
 
 {
     "name": "Petrov Pavel",
-    "email": "test2@test.ru",
+    "email": "t@t.ru",
     "password": "1212",
     "admin": true
 }

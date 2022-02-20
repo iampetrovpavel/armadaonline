@@ -21,10 +21,10 @@ app.use(cookieSession({
 
 app.use(currentUser)
 
-app.use((req, res, next)=>{
-    console.log("SESSION: ", req.session?.jwt)
-    next()
-})
+// app.use((req, res, next)=>{
+//     console.log("SESSION: ", req.session?.jwt)
+//     next()
+// })
 
 app.use(currentUserRouter)
 app.use(signoutRouter)
