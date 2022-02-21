@@ -5,7 +5,6 @@ import {weekDaysShort} from '@iampetrovpavel/time'
 import useDirections from '../../hooks/use-directions'
 import useUsers from '../../hooks/use-users'
 import useSchedule from '../../hooks/use-schedule'
-import {dayList} from '@iampetrovpavel/time'
 
 const Directions = ({url}) => {
     const {directions, updateDirections} = useDirections()
@@ -52,7 +51,7 @@ const Schedule = ({directionId, updateDirections}) => {
             <div>
                 <ul>
                     {schedule.map(s=><li key={s.id} className='mt-1'>
-                        <span className="mr-1">{dayList[s.day]}</span> 
+                        <span className="mr-1">{weekDaysShort[s.day]}</span> 
                         <span className="">{s.hour}:</span>
                         <span className="mr-1">{s.minutes}</span>
                         <a className="inline-block" onClick={()=>{deleteSchedule({params:'/'+s.id})}}>Удалить</a>
@@ -91,18 +90,6 @@ const Schedule = ({directionId, updateDirections}) => {
                     </tr>
                 </tbody>
             </table>
-            {/* <div>
-                <span>День недели</span>
-                <select value={day} onChange={(e)=>setDay(e.target.value)}>
-                    {weekDaysShort.map((day, i)=><option key={day} value={i}>{day}</option>)}
-                </select>
-                <span>Время</span>
-                <input value={hour} onChange={(e)=>setHour(e.target.value)}></input>
-                <span>ч</span>
-                <input value={minutes} onChange={(e)=>setMinutes(e.target.value)}></input>
-                <span>мин</span>
-                <button onClick={()=>{createSchedule({body: {day, hour, minutes, directionId}})}}>Добавить</button>
-            </div> */}
         </div>
     )
 }
@@ -157,7 +144,7 @@ const CreateDirection = ({updateDirections}) => {
                     <th></th>
                     <td>
                         <select value={img} onChange={(e)=>setImg(e.target.value)}>
-                            {imgs.map(img=><option value={img}>{img}</option>)}
+                            {imgs.map(img=><option key={img} value={img}>{img}</option>)}
                         </select>
                     </td>            
                 </tr>

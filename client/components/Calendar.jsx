@@ -36,7 +36,7 @@ const Calendar = ({selected = new Date(), setSelected, marks}) => {
                         }}
                         key={date + Math.random().toString()}
                         data-value = {date?date.toISOString():null}
-                        onClick = {handleSelect}
+                        onClick = {date?handleSelect:null}
                     >
                         {date?date.getDate():''}
                     </div>

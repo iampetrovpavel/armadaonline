@@ -13,11 +13,12 @@ const useRequest = ({ url, method, body, onSuccess, onFail}) => {
             console.log("REQUEST ", url + (props.params || '') + (props.query || ''), body, props.body)
             const response = await axios[method](url + (props.params || '') + (props.query || ''), props.body || body)
             console.log("RESPONSE ",response.data)
-            if(onSuccess){
-                onSuccess(response.data)
-            }
             if(props.onSuccess){
                 props.onSuccess(response.data)
+                return response.data
+            }
+            if(onSuccess){
+                onSuccess(response.data)
             }
             return response.data
         }

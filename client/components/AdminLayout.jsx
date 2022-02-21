@@ -3,7 +3,7 @@ import Router from 'next/router'
 
 const AdminLayout = ({children, url}) => {
     if (typeof window !== 'undefined') url = Router.pathname
-    console.log(url)
+    console.log("URL: ", url)
     const menu = [
         {href: '/admin/tickets', label: 'Абонементы'},
         {href: '/admin/directions', label: 'Направления'},

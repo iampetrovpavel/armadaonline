@@ -1,23 +1,36 @@
 import { useEffect, useState } from 'react'
 import Calendar from '../../components/Calendar'
 import useLessons from  '../../hooks/use-lessons'
+import useRequest from '../../hooks/use-request'
 
 import useDirections from '../../hooks/use-directions'
 import useUsers from '../../hooks/use-users'
 import useSchedule from '../../hooks/use-schedule'
 import AdminLayout from '../../components/AdminLayout'
 
-import {addZero, formatTime} from '@iampetrovpavel/time'
+import {addZero, formatDate, formatTime} from '@iampetrovpavel/time'
 
-const Lessons = () => {
+const Lessons = ({url}) => {
     const [selected, setSelected] = useState(new Date())
     const [newLessonForm, showNewLessonForm] = useState(false)
     const [marks, setMarks] = useState([
        {date: new Date(), color: 'red'}
     ])
+
+    const [tickets, setTickets] = useState([])
+    const {doRequest: fetchTickets, errors: errorsTickets} = useRequest({
+        url: '/api/tickets',
+        method: 'get',
+        onSuccess: (tickets) => {
+            setTickets(tickets)
+        }
+    })
+
     useEffect(()=>{
         updateLessons(getFilter())
+        fetchTickets({query:{month: selected.getMonth()}})
     }, [selected])
+
     function getFilter() {
         const min = new Date(selected.getFullYear(), selected.getMonth(), selected.getDate(), selected.getHours()+3)
         const max = new Date(selected.getFullYear(), selected.getMonth(), selected.getDate()+1, selected.getHours()+3)
@@ -27,12 +40,13 @@ const Lessons = () => {
     const { directions } = useDirections([])
     const { users } = useUsers([])
     const { schedule } = useSchedule([])
+
     const {lessons, updateLessons, createLesson, toggleStudent} = useLessons({manualFetch: true})
     function toggleShowNewForm(){
         showNewLessonForm(!newLessonForm)
     }
     return (
-        <AdminLayout>
+        <AdminLayout url={url}>
             <div className='row mt-1'>
                 <div className='mr-1'>
                     <Calendar selected = {selected} setSelected = {setSelected} marks = {marks}/>
@@ -60,7 +74,9 @@ const Lessons = () => {
                             updateLessons = {()=>{
                                 updateLessons(getFilter())
                             }}
-                            toggleStudent = {toggleStudent}
+                            toggleStudent = { toggleStudent }
+                            tickets = { tickets }
+                            users = { users }
                         />
                     ))}
                 </div>
@@ -71,7 +87,7 @@ const Lessons = () => {
 
 export default Lessons
 
-const Lesson = ({lessonId, updateLessons, toggleStudent, teacher = 'Неизвестный пользователь', date, direction = 'Неизвестно', students = []}) => {
+const Lesson = ({users, tickets, lessonId, updateLessons, toggleStudent, teacher = 'Неизвестный пользователь', date, direction = 'Неизвестно', students = []}) => {
     return (
         <div className='card row mb-1'>
             <div className='mr-1' 
@@ -98,12 +114,19 @@ const Lesson = ({lessonId, updateLessons, toggleStudent, teacher = 'Неизве
                     </tr>
                     <tr>
                         <th>Время</th>
-                        <td>{formatTime(date)}</td>
+                        <td>{formatDate(date)}</td>
                     </tr>
                     <tr>
                         <th>Ученики</th>
                         <td>
-                            <EditStudents toggleStudent = {toggleStudent} updateLessons={updateLessons} lessonId = {lessonId} students = {students}/>
+                            <EditStudents 
+                                toggleStudent = {toggleStudent} 
+                                updateLessons={updateLessons} 
+                                lessonId = {lessonId} 
+                                students = {students}
+                                users = {users}
+                                tickets = {tickets}
+                            />
                         </td>
                     </tr>
                 </tbody>
@@ -112,10 +135,10 @@ const Lesson = ({lessonId, updateLessons, toggleStudent, teacher = 'Неизве
     )
 }
 
-const EditStudents = ({students, toggleStudent, lesson, updateLessons, lessonId}) => {
-    const { users } = useUsers([])
+const EditStudents = ({tickets, users, students, toggleStudent, lesson, updateLessons, lessonId}) => {
+    // const { users } = useUsers([])
     const [usersList, showUsersList] = useState(false)
-    console.log("STUDENTS ", students)
+    console.log("PAYED USERS ", users.filter(u => tickets.find(t => t.users === u.id)))
     function toggleShowUsersList(){showUsersList(!usersList)}
     function addStudent(e) {
         console.log("DATASET ", e.target.dataset)
