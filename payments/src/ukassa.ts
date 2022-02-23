@@ -7,7 +7,7 @@ export class Ukassa {
     data = {
         "amount":{"value": "0.00","currency":"RUB"},
         "payment_method_data": {"type": "bank_card"},
-        "confirmation": {"type": "redirect","return_url": "dallasstudio.ru/payments"},
+        "confirmation": {"type": "redirect","return_url": "dallasstudio.ru/auth/lk"},
         "capture": true,
     }
     headers = {
