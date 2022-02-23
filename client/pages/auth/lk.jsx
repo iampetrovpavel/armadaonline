@@ -55,7 +55,7 @@ const Lk = ({currentUser}) => {
 const Orders = ({orders = [], pay, check}) => {
     return orders.map(({id, status, ticket}) => {
 
-        return <Order id={id} status={status} ticket={ticket} check={check} pay={pay}/>
+        return <Order key={id} id={id} status={status} ticket={ticket} check={check} pay={pay}/>
     })
 }
 
@@ -66,7 +66,7 @@ const Order = ({id, status, ticket, check, pay}) => {
         }
     }, [])
     return (
-    <tr key={id}>
+    <tr>
         <td>{status === 'created'?'Создан': status === 'cancelled'?'Отменен': status === 'complete'?'Оплачен': status === 'awaiting:payment'?'Ожидает оплаты':''}</td>
         <td>{ticket.title}</td>
         <td>{ticket.price} руб</td>
