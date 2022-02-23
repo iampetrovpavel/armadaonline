@@ -27,10 +27,10 @@ router.post('/api/orders', requireAuth, [
 		if(!ticket) {
 			throw new NotFoundError()
 		}
-		const isReserved = await ticket.isReserved()
-		if (isReserved){
-			throw new BadRequestError('Ticket is already reserved')
-		}
+		// const isReserved = await ticket.isReserved()
+		// if (isReserved){
+		// 	throw new BadRequestError('Ticket is already reserved')
+		// }
 		const expiration = new Date()
 		expiration.setSeconds(expiration.getSeconds() + EXPIRATION_WINDOW_SECONDS)
 		
@@ -42,6 +42,14 @@ router.post('/api/orders', requireAuth, [
 	    // if(!payment || !payment.confirmation || !payment.confirmation.confirmation_url){
 	    //   throw new BadRequestError('Ukassa confirmation error!');
 	    // }
+
+		const sameOrder = await Order.find({
+			userId: req.currentUser!.id,
+			$or: [{status: OrderStatus.Created}, {status: OrderStatus.AwaitingPayment}],
+			ticket: ticketId
+		})
+
+		if(sameOrder.length > 0)return res.status(201).send(sameOrder)
 
 		const order = Order.build({
 			userId: req.currentUser!.id,

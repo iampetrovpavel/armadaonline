@@ -27,7 +27,7 @@ function App({ Component, pageProps, currentUser, url }) {
         <div className="container">
           <Header currentUser={currentUser} url={url}/>
           <div className='content p-m-1'>
-            <Component {...pageProps} url = {url}/>
+            <Component {...pageProps} url = {url} currentUser = {currentUser}/>
           </div>
         </div>
         <footer className='bg-gray-light'>
@@ -42,6 +42,7 @@ App.getInitialProps = async (appContext) => {
       const client = buildClient(appContext.ctx)
       const res = await client.get('/api/users/currentuser', {withCredentials: true})
       const data = res.data
+      console.log(data)
       let pageProps
       if(appContext.Component.getInitialProps){
         pageProps = await appContext.Component.getInitialProps(appContext.ctx, client, data.currentUser)

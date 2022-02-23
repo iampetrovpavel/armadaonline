@@ -82,6 +82,10 @@ a {
   display: block;
 }
 
+table td, th{
+  padding: 1em;
+}
+
 .button{
   background-color: white;
   color: var(--blue-light);
