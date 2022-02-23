@@ -39,8 +39,8 @@ const start = async () => {
         new OrderCancelledListener(natsWrapper.client).listen()
         new OrderCompliteListener(natsWrapper.client).listen()
 
-        await mongoose.connect(process.env.MONGO_URI);
-        console.log('Connected to MongoDb');
+        const mongo_link = process.env.MONGO_URI+process.env.MONGO_DB
+        await mongoose.connect(mongo_link);
     } catch (err) {
         console.error(err);
     }
