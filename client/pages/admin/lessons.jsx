@@ -180,14 +180,14 @@ const EditStudents = ({tickets, users, students, toggleStudent, lesson, updateLe
                     </div>
                     {students.length === 0 && <div>Ни одного</div>}
                     <ul>
-                        {students.map(student=><li onClick={removeStudent}><a data-id={student.id}>{student.name}</a></li>)}
+                        {students.map(student=><li key={student.id} onClick={removeStudent}><a data-id={student.id}>{student.name}</a></li>)}
                     </ul>
                     <div className='mt-1'>
                         Имеют абонемент:
                     </div>
                     {users.filter(u=>students.findIndex(s=>s.id===u.id)==-1).length === 0 && <div>Ни одного</div>}
                     <ul>
-                        {users.filter(u=>students.findIndex(s=>s.id===u.id)==-1).map(user=><li onClick={addStudent}><a data-id={user.id}>{user.name}</a></li>)}
+                        {users.filter(u=>students.findIndex(s=>s.id===u.id)==-1).map(user=><li key={user.id} onClick={addStudent}><a data-id={user.id}>{user.name}</a></li>)}
                     </ul>
                     <hr/>
                     <a onClick={toggleShowUsersList} className='mt-1'>Закрыть</a>
@@ -240,7 +240,7 @@ const NewLesson = ({date, createLesson, updateLessons, directions, users, schedu
                             <select value={directionId} onChange={handleChangeDirection}>
                                 <option value={''}>Выбрать</option>
                                 {directions.map(direction => (
-                                    <option value={direction.id}>{direction.name}</option>
+                                    <option key={direction.id} value={direction.id}>{direction.name}</option>
                                 ))}
                             </select>
                         </td>

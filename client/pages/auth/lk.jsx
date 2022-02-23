@@ -44,7 +44,7 @@ const Lk = ({currentUser}) => {
 }
 
 const Orders = ({orders = [], pay}) => orders.map(({id, status, ticket}) => (
-    <tr>
+    <tr key={id}>
         <td>{status === 'created'?'Создан': status === 'cancelled'?'Отменен': status === 'complete'?'Завершен': status === 'awaiting:payment'?'Ожидает оплаты':''}</td>
         <td>{ticket.title}</td>
         <td>{ticket.price} руб</td>
