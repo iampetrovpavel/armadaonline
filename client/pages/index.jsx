@@ -17,9 +17,9 @@ const Directions = () => {
     return (
         <>
             <div>
-                <ul className='sub'>
+                <ul className='sub mb-1'>
                     {subMenuItems.map((item, i) => (
-                            <li key={item.id} className={i === selected? 'selected': ''} style={{float: item.right?'right': 'left'}}>
+                            <li key={item.id} className={i === selected? 'selected shadow': 'shadow'} style={{float: item.right?'right': 'left'}}>
                                 <a onClick={()=>Select(i)}>{item.label}</a>
                             </li>
                     ))}

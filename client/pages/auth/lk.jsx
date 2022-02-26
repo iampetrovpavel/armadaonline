@@ -33,8 +33,9 @@ const Lk = ({currentUser}) => {
         fetch()
     }, [])
     return (
-        <div className='p-1'>
-            <table className='card'>
+        <>
+            {orders.length === 0? <h2>Сдесь будут ваши заказы :)</h2>:
+                <table className='card mt-1 fs-m-05 br-1'>
                 <thead>
                     <tr>
                         <th>Статус</th>
@@ -46,9 +47,9 @@ const Lk = ({currentUser}) => {
                 <tbody>
                     <Orders orders = {orders} pay = {pay} check = {check}/>
                 </tbody>
-            </table>
+            </table>}
             <button className='button button-filled mt-1' onClick={()=>Router.push('/auth/signout')}>Выход</button>
-        </div>
+        </>
     )
 }
 
@@ -71,7 +72,7 @@ const Order = ({id, status, ticket, check, pay}) => {
         <td>{ticket.title}</td>
         <td>{ticket.price} руб</td>
         <td>{(status === 'created' || status === 'awaiting:payment') && 
-        <button className='button button-filled' onClick={() => {pay({body:{orderId: id}})}}>Оплатить</button>}</td>
+        <button className='button' onClick={() => {pay({body:{orderId: id}})}}>Оплатить</button>}</td>
     </tr>
 )}
 

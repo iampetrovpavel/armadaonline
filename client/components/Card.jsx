@@ -1,7 +1,6 @@
-import Image from 'next/image'
-// import balet from '../images/balet.png'
+import Router from 'next/router'
 
-const Card = ({className, title, description, label, img}) => {
+const Card = ({className, title, description, label, img, directionId}) => {
     return (
         <div className={"schedule " + className}>
             <div className="schedule-header">
@@ -11,16 +10,19 @@ const Card = ({className, title, description, label, img}) => {
                 {/* <Image alt='image' src={img} className='cover' layout='fill'/> */}
                 {/* <img src={img}/> */}
             </div>
-            <div className='schedule-details'>
-                <h3>
+            <div className='schedule-details relative'>
+                <h2>
                     {title}
-                </h3>
+                </h2>
                 <p>
                     {description}
                 </p>
+                <div style={{paddingBottom: '200px'}}>
+                    <button className='button absolute' style={{bottom: '20px'}}
+                        onClick={()=>Router.push(`/price/${directionId}`)}
+                    >Записаться</button>
+                </div>
             </div>
-
-
         </div>
     )
 }

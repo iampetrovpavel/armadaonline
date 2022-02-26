@@ -26,6 +26,7 @@ interface OrderDoc extends mongoose.Document {
   ticket: TicketDoc;
   version: number;
   payment?: Payment;
+  date?: string;
 }
 
 interface OrderModel extends mongoose.Model<OrderDoc> {
@@ -50,6 +51,10 @@ const orderSchema = new mongoose.Schema(
     ticket: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Ticket',
+    },
+    date: {
+        type: Date,
+        default: Date.now
     },
     payment: {
       type: {

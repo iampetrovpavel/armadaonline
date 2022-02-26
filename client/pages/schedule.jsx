@@ -52,6 +52,7 @@ const Direction = ({date, directionId}) => {
                 img={direction.img}
                 description={direction.description}
                 label={labelDate(date)}
+                directionId={directionId}
             />
 }
 

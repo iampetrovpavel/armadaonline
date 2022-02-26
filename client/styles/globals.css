@@ -17,9 +17,19 @@ body {
   font-size: 16px;
 }
 
+p {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
 td, th {
   padding: 0.5em;
   text-align: start;
+  text-align: center;
+}
+
+thead {
+  border-bottom: 1px solid var(--gray-light);
 }
 
 a:hover {
@@ -176,8 +186,32 @@ a {
 
 
 /* =================================================SUB======================================== */
-
 .sub {
+  font-size: 16px;
+  display: inline-block;
+  color: var(--black);
+  /* margin-top: 1em; */
+}
+
+.sub li{
+  display: block;
+  background-color: white;
+  line-height: 40px;
+  padding: 0 1em;
+  /* border-radius: 62px; */
+  /* margin-right: 0.8em; */
+  /* margin-bottom: 1em; */
+}
+
+.sub li:not(.selected):hover{
+  background-color: #f9f7f7;
+}
+
+.sub .selected{
+  background-color: #F7FF00;
+}
+
+/* .sub {
   font-size: 16px;
   display: inline-block;
   color: var(--black);
@@ -200,7 +234,7 @@ a {
 
 .sub .selected{
   background-color: #F7FF00;
-}
+} */
 
 /* =================================================SCHEDULE============================================= */
 
@@ -236,7 +270,9 @@ a {
 .schedule-details {
   padding: 1px 16px;
   background-color: var(--gray-light);
+  /* background-color: white; */
   height: calc(60% - 27px);
+  color: var(--blue)
 }
 .schedule input {
   border: 1px solid var(--gray);
@@ -412,6 +448,8 @@ a {
 
 .content {
   position: relative;
+  overflow-x: scroll;
+  overflow-y: hidden;
 }
 
 .svg-white path{

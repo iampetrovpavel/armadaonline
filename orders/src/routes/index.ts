@@ -7,7 +7,7 @@ const router = express.Router()
 router.get('/api/orders', requireAuth, async (req: Request, res: Response) => {
 	const orders = await Order.find({
 		userId: req.currentUser!.id
-	}).populate('ticket')
+	}).sort({date: -1}).populate('ticket')
 
 	return res.send(orders)
 })

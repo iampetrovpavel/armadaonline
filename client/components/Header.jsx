@@ -3,12 +3,13 @@ import { useEffect, useState } from 'react'
 import logo from '../images/logo.png'
 import Vk from '../public/images/vk.svg'
 import Instagram from '../public/images/instagram.svg'
+import useDirections from '../hooks/use-directions'
 
 const Header = ({currentUser, url}) => {
     const [burger, showBurger] = useState(true)
     const [hide, setHide] = useState(false)
     const [hide2, setHide2] = useState(false)
-
+    const {directions} = useDirections()
     useEffect(()=>{
         function handleResize() {
             if (window.innerWidth > 600) {
@@ -25,7 +26,7 @@ const Header = ({currentUser, url}) => {
 
     const menuItems = [
         {id: 0, href: '/', label: 'Направления'},
-        {id: 1, href: '/price', label: 'Цены'},
+        {id: 1, href: `/price/${(directions.length>0?directions[0].id:'')}`, label: 'Цены'},
         {id: 2, href: '/schedule', label: 'Расписание'},
         {id: 3, href: '/contacts', label: 'Контакты'},
         (currentUser && currentUser.groups && (currentUser.groups.indexOf('admin')!=-1)) && {id: 8, href: '/admin/tickets', label: 'Настройки', right: true},

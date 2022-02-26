@@ -44,4 +44,10 @@
     .p-m-0 {
       padding: 0;
     }
+    .fs-m-05{
+      font-size: 0.6em;
+    }
+    .mt-m-1{
+      margin-top: 1em;
+    }
   }

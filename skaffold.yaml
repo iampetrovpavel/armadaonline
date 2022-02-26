@@ -25,6 +25,8 @@ build:
         manual:
           - src: "**/*.jsx"
             dest: .
+          - src: "**/*.css"
+            dest: .
     - image: iampetrovpavel/tickets
       context: tickets
       docker:
