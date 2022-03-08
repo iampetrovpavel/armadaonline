@@ -9,7 +9,7 @@ const SignIn = () => {
         url: '/api/users/signin',
         method: 'post',
         body: {email, password},
-        onSuccess: () => Router.push('/auth/lk')
+        onSuccess: () => Router.push('/')
     })
 
     const onSubmit = async e => {
@@ -18,7 +18,7 @@ const SignIn = () => {
     }
     return (
         <div style={{display: 'flex', justifyContent: 'center'}}>
-            <div className="card mt-1 mb-1">
+            <div className="card mt-1 mb-1 px-3 py-2">
                     <form onSubmit={onSubmit}>
                         <h1 className="mt-0">Вход</h1>
                         <div className="mb-1">

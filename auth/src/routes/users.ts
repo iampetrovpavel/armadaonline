@@ -12,6 +12,11 @@ router.get('/api/users', currentUser, requireAuth, isAdmin, async (req, res)=>{
     res.send(users)
 })
 
+router.get('/api/users/teachers', async (req, res)=>{
+    const teachers = await User.find({groups: 'teacher'})
+    res.send(teachers)
+})
+
 router.put('/api/users', currentUser, requireAuth, isAdmin,
     [
         body('userId').custom(value=>mongoose.isValidObjectId(value)).withMessage('User Id must be defined.'),

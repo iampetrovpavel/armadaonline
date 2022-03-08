@@ -6,7 +6,7 @@ import useRequest from '../../hooks/use-request'
 import useDirections from '../../hooks/use-directions'
 import Router, {useRouter} from 'next/router'
 
-const Price = () => {
+const Price = ({currentUser}) => {
     const router = useRouter()
     const { directionId } = router.query
     // const [selected, Select] = useState(directionId)
@@ -40,7 +40,7 @@ const Price = () => {
                 </div>
                 <div className='col-2 col-m-4 mt-m-1'>
                     <div className='row'>
-                        {tickets.map(ticket =><div key={ticket.id} className='col-2 col-t-4 mb-1'><Ticket  ticket={ticket}/></div>)}
+                        {tickets.map(ticket =><div key={ticket.id} className='col-4 col-t-4 mb-1'><Ticket currentUser = {currentUser} ticket={ticket}/></div>)}
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@ const Price = () => {
 
 export default Price
 
-const Ticket = ({ticket}) => {
+const Ticket = ({ticket, currentUser}) => {
     const { doRequest, errors } = useRequest({
         url: '/api/orders',
         method: 'post',
@@ -62,10 +62,14 @@ const Ticket = ({ticket}) => {
             Router.push(`/auth/lk`)
         }
     })
+    function handlePay() {
+        if (!currentUser) Router.push('/auth/signup')
+        doRequest()
+    }
     return (
         <div className=''>
             <div className='card br-1 p-0'>
-                <h2 className='m-0 back-blue p-1 brt-1 white'>{ticket.title}</h2>
+                <h3 className='m-0 back-blue p-1 brt-1 white'>{ticket.title}</h3>
                 <div className='p-1'>
                     <p>{monthList[ticket.month]}</p>
                     Количество занятий: {ticket.count}
@@ -73,7 +77,7 @@ const Ticket = ({ticket}) => {
                         Стоимость: {ticket.price} руб
                     </h3>
                     <div className='flex jce'>
-                        <button className='button' onClick={doRequest}>Купить</button>
+                        <button className='button' onClick={handlePay}>Купить</button>
                     </div>
                 </div>
             </div>
