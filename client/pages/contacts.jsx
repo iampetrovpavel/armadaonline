@@ -2,17 +2,15 @@ const Contacts = () => {
     return (
         <div className="contacts">
             <div className="row">
-                <div className="col-1 col-m-4 mb-2">
-                    <div>
-                        <h2 className="contacts-header">Контакты</h2>
-                        <ul className="contacts-list">
-                            <li>
-                                <a href="tel:+79522486072">тел. +7(952)2486072</a>
-                            </li>
-                            <li>г. Пушкин, ул. Глинки, д. 1</li>
-                            <li>email: hello@dallasstudio.ru</li>
-                        </ul>
-                    </div>            
+                <div className="col-1 col-m-4 mb-2 p-1">
+                    <h2 className="contacts-header">Контакты</h2>
+                    <ul className="contacts-list">
+                        <li>
+                            <a href="tel:+79522486072">тел. +7(952)2486072</a>
+                        </li>
+                        <li>г. Пушкин, ул. Глинки, д. 1</li>
+                        <li>email: hello@dallasstudio.ru</li>
+                    </ul>
                 </div>
                 <div className="col-3 col-m-4">
                     <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Af128b0e20ae2ab7ee63cfeb7848c07983e102c2bb92161b09ecdc7f88799eeeb&amp;source=constructor" width="100%" height="500" frameBorder="0"></iframe>

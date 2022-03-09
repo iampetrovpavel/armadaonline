@@ -4,6 +4,7 @@ import logo from '../images/logo.png'
 import Vk from '../public/images/vk.svg'
 import Instagram from '../public/images/instagram.svg'
 import useDirections from '../hooks/use-directions'
+import Router from 'next/router'
 
 const Header = ({currentUser, url}) => {
     const [burger, showBurger] = useState(true)
@@ -24,9 +25,13 @@ const Header = ({currentUser, url}) => {
         }
     },[])
 
+    if (directions.length === 0) return 'Loading...'
+
     const menuItems = [
+        // ...(directions.length > 0 ? directions.map(d => ({id: d.id, href: `/price/${d.id}`, label: 'Цены'})): []),
         {id: 0, href: '/', label: 'Направления'},
-        {id: 1, href: `/price/${(directions.length>0?directions[0].id:'')}`, label: 'Цены'},
+        // {id: 1, href: `/price`, label: 'Цены'},
+        {id: 1, href: `/price/${directions[0].id}`, label: 'Цены'},
         {id: 2, href: '/schedule', label: 'Расписание'},
         {id: 3, href: '/contacts', label: 'Контакты'},
         (currentUser && currentUser.groups && (currentUser.groups.indexOf('admin')!=-1)) && {id: 8, href: '/admin/tickets', label: 'Настройки', right: true},
@@ -35,7 +40,9 @@ const Header = ({currentUser, url}) => {
         currentUser && {id: 7, href: '/auth/lk', label: 'Личный кабинет', right: true},
     ]
 
-    const item = menuItems.filter(item=>item).find((item, i) => url === item.href)
+    console.log("MENU ITEMS ", menuItems, menuItems.filter(item=>item))
+
+    const item = menuItems.filter(item=>item).find((item, i) => (Router.asPath || url) === item.href)
     const selected = item && item.id
 
     function toggleBurger() {
@@ -54,10 +61,13 @@ const Header = ({currentUser, url}) => {
     }
 
     function getClass(item) {
-        return '' + (item.href === url? ' selected': '') 
-        // return '' + (url.indexOf(item.href, 1) !== -1? ' selected': '') 
-        + (item.right?' float-right': ' float-left') 
-        + (!burger && item.id !== selected?' animate__animated animate__backOutRight':' block')
+        const {href, right, id} = item;
+        let link = Router.asPath || url;
+        console.log("DEBUG  ", selected, item.id)
+        return '' + ((item.href === `/price/${selected}`) || (item.href === link)? ' selected': '')
+        // return '' + (href === link? ' selected': '')
+        + (right?' float-right': ' float-left') 
+        + (!burger && id !== selected?' animate__animated animate__backOutRight':' block')
     }
     function getStyle(item, i) {
         return {display: (hide2 && item.id !== selected)?'none':'block',
@@ -106,6 +116,9 @@ const Header = ({currentUser, url}) => {
                     </li>
                     {menuItems.filter(item=>item).map((item, i) => (
                             <li key={item.id}
+                                data-right = {item.right}
+                                data-id = {item.id}
+                                data-href = {item.href}
                                 className={getClass(item)} 
                                 style={getStyle(item, i)}
                             >

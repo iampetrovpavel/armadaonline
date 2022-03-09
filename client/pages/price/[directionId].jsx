@@ -36,7 +36,7 @@ const Price = ({currentUser}) => {
                 ))}
             </ul>
             <div className='row'>
-                <div className='col-2 col-m-4'>
+                <div className='col-2 col-m-4 p-0'>
                     <DirectionCart direction={directions.find(d=>d.id === directionId)}/>
                 </div>
                 <div className='col-2 col-m-4 mt-m-1'>

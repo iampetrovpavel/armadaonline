@@ -26,7 +26,7 @@ function App({ Component, pageProps, currentUser, url }) {
         </Head>
         <div className="container">
           <Header currentUser={currentUser} url={url}/>
-          <div className='content px-t-1'>
+          <div className='content '>
             <Component {...pageProps} url = {url} currentUser = {currentUser}/>
           </div>
         </div>
