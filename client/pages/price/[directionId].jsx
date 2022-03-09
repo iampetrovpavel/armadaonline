@@ -28,9 +28,10 @@ const Price = ({currentUser}) => {
     return (
         <>
             <ul className='sub mb-1 blue' style={{width:'100%'}}>
-                {directions.map((directions, i) => (
-                        <li style={{display: 'inline-block'}} key={directions.id} className={directions.id === directionId? 'selected shadow': 'shadow'}>
-                            <a href="#" className='blue' onClick={()=>Router.push(`/price/${directions.id}`)}>{directions.name}</a>
+                {directions.map((direction, i) => (
+                        <li style={{display: 'inline-block'}} key={directions.id} 
+                            className={direction.id === directionId? 'selected shadow': 'shadow'}>
+                            <a href="#" className='blue' onClick={()=>Router.push(`/price/${direction.id}`)}>{direction.name}</a>
                         </li>
                 ))}
             </ul>

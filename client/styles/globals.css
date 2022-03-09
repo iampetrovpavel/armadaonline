@@ -240,7 +240,7 @@ a {
 
 .schedule {
   display: inline-block;
-  height: 400px;
+  height: 450px;
   margin-bottom: 2em;
   margin-top: 1em;
   padding: 2em;
@@ -496,4 +496,13 @@ svg {
 .calendar-selected {
   background-color: var(--blue-dark);
   color: white;
+}
+
+.contacts-list li{
+  margin: 1em 0;
+  color: var(--blue);
+}
+
+.contacts-header {
+  color: var(--blue);
 }

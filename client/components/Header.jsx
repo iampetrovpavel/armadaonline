@@ -55,6 +55,7 @@ const Header = ({currentUser, url}) => {
 
     function getClass(item) {
         return '' + (item.href === url? ' selected': '') 
+        // return '' + (url.indexOf(item.href, 1) !== -1? ' selected': '') 
         + (item.right?' float-right': ' float-left') 
         + (!burger && item.id !== selected?' animate__animated animate__backOutRight':' block')
     }

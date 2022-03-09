@@ -5,6 +5,8 @@ import useRequest from '../hooks/use-request'
 import { useEffect, useState } from 'react'
 import useTeachers from '../hooks/use-teachers'
 import useDirections from '../hooks/use-directions'
+import { addZero } from '@iampetrovpavel/time'
+import Router from 'next/router'
 
 const Schedule = () => {
     const { schedule } = useSchedule()
@@ -25,7 +27,6 @@ const Schedule = () => {
         return schedule.filter(s=>s.day === day)
     }
 
-    console.log("DEBUG ", teachers, schedule, directions)
     if(teachers.length === 0 || schedule.length === 0 || directions.length === 0) return 'Loading...'
     
     return (
@@ -33,6 +34,7 @@ const Schedule = () => {
             {getSevenDates(now).map((date) => {
                 return filterScheduleByDay(date.getDay()).map(schedule => {
                     const direction = directions.find(d=>d.id === schedule.directionId)
+                    if (!direction) return ''
                     return <Direction 
                             key={schedule.id} 
                             date={date} 
@@ -53,18 +55,30 @@ const Direction = ({date, direction, hour, minutes, teacher}) => {
             + monthList[date.getMonth()].substr(0,3).toLowerCase() + ' ' 
             + date.getFullYear()
     }
-    return direction && <Card 
-                key={direction.id} 
-                className='col-m-4 col-t-2 col-1' 
-                title={direction.name}
-                img={direction.img}
-                description={direction.description}
-                label={labelDate(date)}
-                directionId={direction.id}
-                hour = { hour }
-                minutes = { minutes }
-                teacher = {teacher}
-            />
+    if (!direction) return 'Loading...'
+    return (
+        <div className={"schedule col-m-4 col-t-2 col-1"}>
+            <div className="schedule-header">
+                <span>{labelDate(date)}</span>
+            </div>
+            <div className='schedule-img' style={{backgroundImage: `url(${direction.img})`, backgroundSize: 'cover'}}/>
+            <div className='schedule-details relative'>
+                <h2>
+                    {direction.name}
+                </h2>
+                <h2 className='pink'>
+                    {addZero(hour)}:{addZero(minutes)}
+                </h2>
+                <p>
+                    Преподаватель: { teacher?teacher.name: '' }
+                </p>
+                <div style={{paddingBottom: '200px'}}>
+                    <button className='button absolute' style={{bottom: '20px'}}
+                        onClick={()=>Router.push(`/price/${direction.id}`)}
+                    >Записаться</button>
+                </div>
+            </div>
+        </div>)
 }
 
 export default Schedule

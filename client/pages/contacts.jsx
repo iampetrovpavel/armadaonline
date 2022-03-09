@@ -4,8 +4,8 @@ const Contacts = () => {
             <div className="row">
                 <div className="col-1 col-m-4 mb-2">
                     <div>
-                        <h2>Контакты</h2>
-                        <ul>
+                        <h2 className="contacts-header">Контакты</h2>
+                        <ul className="contacts-list">
                             <li>
                                 <a href="tel:+79522486072">тел. +7(952)2486072</a>
                             </li>
