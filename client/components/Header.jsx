@@ -5,12 +5,14 @@ import Vk from '../public/images/vk.svg'
 import Instagram from '../public/images/instagram.svg'
 import useDirections from '../hooks/use-directions'
 import Router from 'next/router'
+import Phone from '../images/phone.svg'
+import Point from '../images/point.svg'
 
-const Header = ({currentUser, url}) => {
+const Header = ({currentUser, url, directions}) => {
     const [burger, showBurger] = useState(true)
     const [hide, setHide] = useState(false)
     const [hide2, setHide2] = useState(false)
-    const {directions} = useDirections()
+    // const {directions} = useDirections()
     useEffect(()=>{
         function handleResize() {
             if (window.innerWidth > 600) {
@@ -25,13 +27,13 @@ const Header = ({currentUser, url}) => {
         }
     },[])
 
-    if (directions.length === 0) return 'Loading...'
+    if (!directions) return 'Loading header...'
 
     const menuItems = [
         // ...(directions.length > 0 ? directions.map(d => ({id: d.id, href: `/price/${d.id}`, label: 'Цены'})): []),
         {id: 0, href: '/', label: 'Направления'},
         // {id: 1, href: `/price`, label: 'Цены'},
-        {id: 1, href: `/price/${directions[0].id}`, label: 'Цены'},
+        (directions.length > 0 && {id: 1, href: `/price/${directions[0].id}`, label: 'Цены'}),
         {id: 2, href: '/schedule', label: 'Расписание'},
         {id: 3, href: '/contacts', label: 'Контакты'},
         (currentUser && currentUser.groups && (currentUser.groups.indexOf('admin')!=-1)) && {id: 8, href: '/admin/tickets', label: 'Настройки', right: true},
@@ -40,9 +42,9 @@ const Header = ({currentUser, url}) => {
         currentUser && {id: 7, href: '/auth/lk', label: 'Личный кабинет', right: true},
     ]
 
-    console.log("MENU ITEMS ", menuItems, menuItems.filter(item=>item))
+    // console.log("MENU ITEMS ", menuItems, menuItems.filter(item=>item))
 
-    const item = menuItems.filter(item=>item).find((item, i) => (Router.asPath || url) === item.href)
+    const item = menuItems.filter(item=>item).find((item, i) => (url || Router.asPath) === item.href)
     const selected = item && item.id
 
     function toggleBurger() {
@@ -62,8 +64,7 @@ const Header = ({currentUser, url}) => {
 
     function getClass(item) {
         const {href, right, id} = item;
-        let link = Router.asPath || url;
-        console.log("DEBUG  ", selected, item.id)
+        let link = url || Router.asPath;
         return '' + ((item.href === `/price/${selected}`) || (item.href === link)? ' selected': '')
         // return '' + (href === link? ' selected': '')
         + (right?' float-right': ' float-left') 
@@ -78,18 +79,18 @@ const Header = ({currentUser, url}) => {
     return (
         <div className='header-wrapper'>
             <div id='header-top' className='px-t-1 p-m-0'  style={{display: 'flex', justifyContent: 'space-between'}}>
-                <div style={{minWidth: '178px'}}>
-                    <Image alt='logo' src={logo} width="178px" height="95px"/>
-                </div>
+                <Image placeholder="blur" alt='logo' src={logo} width={178} height={95}/>
                 <div id='header-contacts' className='' style={{flexWrap: 'wrap', alignItems:'center'}}>
                     <div className='col col-t-4' style={{alignItems: 'center', display: 'flex', justifyContent: 'flex-start'}}>
-                        <img src='/images/phone.svg' className='mr-1' alt='next'/>
+                        <Phone className='mr-1'/>
+                        {/* <img src={`${require('../images/phone.svg')}`} className='mr-1' alt='next'/> */}
                         <span className='mr-1 m-t-0'>
                             +7(952)248-60-72
                         </span>
                     </div>
                     <div className='col col-t-4' style={{alignItems: 'center', display: 'flex', justifyContent: 'flex-end'}}>
-                        <img className='mr-1' src='/images/point.svg' alt='next' />
+                        <Point className='mr-1'/>
+                        {/* <img className='mr-1' src={`${require('../images/point.svg')}`} alt='next' /> */}
                         <span>
                             г. Пушкин, ул. Глинки д. 1
                         </span>

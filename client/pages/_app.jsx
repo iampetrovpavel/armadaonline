@@ -15,7 +15,7 @@ import Footer from '../components/Footer.jsx'
 import Head from 'next/head'
 
 
-function App({ Component, pageProps, currentUser, url }) {
+function App({ Component, pageProps, currentUser, url, directions }) {
   return(
       <>
         <Head>
@@ -25,9 +25,9 @@ function App({ Component, pageProps, currentUser, url }) {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <div className="container">
-          <Header currentUser={currentUser} url={url}/>
+          <Header currentUser={currentUser} url={url} directions = {directions}/>
           <div className='content '>
-            <Component {...pageProps} url = {url} currentUser = {currentUser}/>
+            <Component {...pageProps} url = {url} currentUser = {currentUser} directions = {directions}/>
           </div>
         </div>
         <footer className='bg-gray-light'>
@@ -37,19 +37,20 @@ function App({ Component, pageProps, currentUser, url }) {
   )}
 
 App.getInitialProps = async (appContext) => {
-    // return {url: appContext.ctx.req.url, currentUser: {name: 'admin', groups:['admin']}}
     try{
       const client = buildClient(appContext.ctx)
       const res = await client.get('/api/users/currentuser', {withCredentials: true})
-      const data = res.data
-      console.log(data)
+      const currentUser = res.data.currentUser
+      const {data: directions} = await client.get('/api/directions');
+      console.log("APP:DEBUG", directions)
       let pageProps
       if(appContext.Component.getInitialProps){
-        pageProps = await appContext.Component.getInitialProps(appContext.ctx, client, data.currentUser)
+        pageProps = await appContext.Component.getInitialProps(appContext.ctx, client, currentUser)
       }
       return {
-        pageProps,
-        ...data,
+        ...pageProps,
+        currentUser,
+        directions,
         url: appContext.ctx.req && appContext.ctx.req.url
       }
     }

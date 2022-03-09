@@ -27,10 +27,16 @@ const DirectionCart = ({direction}) => {
         }
     })
     return (
-                <div className="direction-cart" style={{backgroundImage: `url(${img})`, backgroundSize: 'cover'}}>
+                <div className="direction-cart" 
+                    style={{
+                        // backgroundImage: `url(${require('/images/sobaka.jpg')})`, 
+                        backgroundImage: `url(${img})`, 
+                        backgroundSize: 'cover'
+                    }}>
                     <div className="absolute" 
                         style={{
-                            backgroundImage: 'url(/images/sobaka.jpg)', 
+                            // backgroundImage: 'url(/images/sobaka.jpg)', 
+                            backgroundImage: `url(${require('/images/sobaka.jpg')})`, 
                             backgroundSize: 'cover',
                             top: successForm?'0px':'400px',
                             height:'400px',
